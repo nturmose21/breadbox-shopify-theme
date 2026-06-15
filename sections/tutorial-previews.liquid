@@ -1,0 +1,75 @@
+<section class="tutorial-previews full-width section-shell--compact" data-motion-section>
+  <div class="tutorial-previews__inner">
+    <div class="section-heading">
+      <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h2>{{ section.settings.heading | escape }}</h2>
+      <div class="rte">{{ section.settings.text }}</div>
+    </div>
+    <div class="tutorial-previews__grid">
+      {% for block in section.blocks %}
+        <article class="tutorial-card" data-reveal="up" style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
+          <div class="tutorial-card__media">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 1000 | image_tag: widths: '360, 600, 800, 1000', sizes: '(min-width: 800px) 31vw, 92vw', loading: 'lazy', alt: block.settings.title }}
+            {% else %}
+              <div class="tutorial-placeholder" aria-label="Project image placeholder">
+                <span class="tutorial-placeholder__number">0{{ forloop.index }}</span>
+                <div class="tutorial-placeholder__screen"><span></span><span></span><span></span><span></span></div>
+                <small>Add project image</small>
+              </div>
+            {% endif %}
+          </div>
+          <div class="tutorial-card__copy"><span>{{ block.settings.level | escape }}</span><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.text | escape }}</p></div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .tutorial-previews { border-block: 4px solid var(--ink); background: var(--blue); color: white; }
+  .tutorial-previews__inner { width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin: auto; }
+  .tutorial-previews .eyebrow { color: var(--yellow); }
+  .tutorial-previews .section-heading { margin-bottom: 1.6rem; }
+  .tutorial-previews__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .tutorial-card { overflow: hidden; border: 3px solid var(--ink); border-radius: var(--radius); background: var(--paper-bright); color: var(--ink); box-shadow: 4px 5px 0 var(--ink); transition: transform .22s ease, box-shadow .22s ease; }
+  .tutorial-card:hover { transform: translateY(-6px); box-shadow: 7px 9px 0 var(--ink); }
+  .tutorial-card__media { aspect-ratio: 16 / 10; border-bottom: 3px solid var(--ink); background: #0b1116; }
+  .tutorial-card__media > img { width: 100%; height: 100%; object-fit: cover; }
+  .tutorial-placeholder { position: relative; width: 100%; height: 100%; display: grid; place-items: center; overflow: hidden; background-image: linear-gradient(rgba(34,200,194,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(34,200,194,.18) 1px, transparent 1px); background-size: 18px 18px; }
+  .tutorial-placeholder__number { position: absolute; top: .65rem; left: .75rem; color: var(--teal); font-family: var(--font-display-family); font-size: 1.1rem; font-weight: 900; }
+  .tutorial-placeholder__screen { width: 48%; aspect-ratio: 2 / 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; border: 3px solid white; border-radius: 5px; padding: 8px; transform: rotate(-2deg); }
+  .tutorial-placeholder__screen span { background: var(--teal); animation: placeholder-pulse 2.6s ease-in-out infinite alternate; }
+  .tutorial-placeholder__screen span:nth-child(2) { animation-delay: .2s; }.tutorial-placeholder__screen span:nth-child(3) { animation-delay: .4s; }.tutorial-placeholder__screen span:nth-child(4) { animation-delay: .6s; }
+  .tutorial-placeholder small { position: absolute; right: .75rem; bottom: .65rem; color: white; font-weight: 900; text-transform: uppercase; }
+  .tutorial-card__copy { padding: .9rem 1rem 1rem; }
+  .tutorial-card__copy > span { color: var(--teal-dark); font-size: .7rem; font-weight: 900; text-transform: uppercase; }
+  .tutorial-card__copy h3 { margin: .2rem 0 .3rem; font-size: 1.25rem; }
+  .tutorial-card__copy p { margin: 0; color: var(--muted); font-size: .82rem; }
+  @keyframes placeholder-pulse { from { opacity: .3; transform: scaleY(.55); } to { opacity: 1; transform: scaleY(1); } }
+  @media (max-width: 760px) { .tutorial-previews__grid { grid-template-columns: 1fr; } .tutorial-card { display: grid; grid-template-columns: 42% 1fr; } .tutorial-card__media { aspect-ratio: auto; border-right: 3px solid var(--ink); border-bottom: 0; } }
+  @media (max-width: 480px) { .tutorial-card { grid-template-columns: 1fr; } .tutorial-card__media { aspect-ratio: 16 / 9; border-right: 0; border-bottom: 3px solid var(--ink); } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Tutorial previews",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Guided projects" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Build something real" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Clear tutorials take you from loose parts to a finished project.</p>" }
+  ],
+  "blocks": [{ "type": "tutorial", "name": "Tutorial", "settings": [
+    { "type": "image_picker", "id": "image", "label": "Project image" },
+    { "type": "text", "id": "level", "label": "Label", "default": "Start here" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Your first OLED game" },
+    { "type": "text", "id": "text", "label": "Short description", "default": "Wire it, upload it, play it." }
+  ] }],
+  "presets": [{ "name": "Tutorial previews", "blocks": [
+    { "type": "tutorial", "settings": { "level": "Start here", "title": "Your first OLED game", "text": "Wire it, upload it, play it." } },
+    { "type": "tutorial", "settings": { "level": "Build next", "title": "Motion-controlled racer", "text": "Turn movement into input." } },
+    { "type": "tutorial", "settings": { "level": "Explore more", "title": "Mini measurement tool", "text": "See electronics in action." } }
+  ] }]
+}
+{% endschema %}
