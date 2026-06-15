@@ -7,14 +7,248 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "sections": {
+    "hero_product_mhmcri": {
+      "type": "hero-product",
+      "blocks": {
+        "component_jC67WJ": {
+          "type": "component",
+          "settings": {
+            "asset": "component-arduino-uno.png",
+            "label": "Arduino UNO R3",
+            "position": "uno",
+            "float_range": 7,
+            "parallax": 4
+          }
+        },
+        "component_FQMpbB": {
+          "type": "component",
+          "settings": {
+            "asset": "component-breadboard.png",
+            "label": "170 point mini breadboard",
+            "position": "breadboard",
+            "float_range": 9,
+            "parallax": -5
+          }
+        },
+        "component_UFt7ta": {
+          "type": "component",
+          "settings": {
+            "asset": "component-oled.png",
+            "label": "SSD1306 OLED display",
+            "position": "oled",
+            "float_range": 11,
+            "parallax": 7
+          }
+        },
+        "component_F7xbXT": {
+          "type": "component",
+          "settings": {
+            "asset": "component-joystick.png",
+            "label": "Joystick module",
+            "position": "joystick",
+            "float_range": 6,
+            "parallax": -4
+          }
+        },
+        "component_9zGzTy": {
+          "type": "component",
+          "settings": {
+            "asset": "component-mpu6050.png",
+            "label": "MPU6050 motion sensor",
+            "position": "sensor",
+            "float_range": 10,
+            "parallax": 8
+          }
+        },
+        "component_YCNpVp": {
+          "type": "component",
+          "settings": {
+            "asset": "component-servo.png",
+            "label": "SG90 servo",
+            "position": "servo",
+            "float_range": 8,
+            "parallax": -6
+          }
+        }
+      },
+      "block_order": [
+        "component_jC67WJ",
+        "component_FQMpbB",
+        "component_UFt7ta",
+        "component_F7xbXT",
+        "component_9zGzTy",
+        "component_YCNpVp"
+      ],
+      "name": "Product hero",
+      "settings": {
+        "product": "",
+        "eyebrow": "Arduino starter kit",
+        "heading": "Build more. Start here.",
+        "text": "<p>One compact kit. Real components. Guided projects that make Arduino click.</p>",
+        "button_label": "Shop BREADBOX",
+        "button_link": ""
+      }
+    },
+    "featured_collection_hKTjtA": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "collection": "",
+        "eyebrow": "Start building",
+        "heading": "Choose your BREADBOX",
+        "text": "<p>The core kit is ready to build. Add-ons let you take the next project further.</p>",
+        "products_to_show": 3
+      }
+    },
     "main": {
       "type": "404",
+      "disabled": true,
       "settings": {}
+    },
+    "how_it_works_nyK9da": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_QfPBer": {
+          "type": "step",
+          "settings": {
+            "heading": "Open the kit",
+            "text": "Everything starts in one compact box."
+          }
+        },
+        "step_dPjTpj": {
+          "type": "step",
+          "settings": {
+            "heading": "Follow the tutorials",
+            "text": "Clear steps guide every wire and upload."
+          }
+        },
+        "step_RiwqcV": {
+          "type": "step",
+          "settings": {
+            "heading": "Build real projects",
+            "text": "Play, learn, then make the code your own."
+          }
+        }
+      },
+      "block_order": [
+        "step_QfPBer",
+        "step_dPjTpj",
+        "step_RiwqcV"
+      ],
+      "name": "How it works",
+      "settings": {
+        "eyebrow": "No guesswork",
+        "heading": "Open. Follow. Build."
+      }
+    },
+    "final_cta_kEwWGE": {
+      "type": "final-cta",
+      "name": "Final call to action",
+      "settings": {
+        "product": "",
+        "eyebrow": "Your first build starts here",
+        "heading": "Ready to make something?",
+        "text": "Open BREADBOX and turn a handful of parts into a project you built yourself.",
+        "button_label": "Get BREADBOX"
+      }
+    },
+    "reviews_gRMzyG": {
+      "type": "reviews",
+      "blocks": {
+        "review_WG3rzF": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "It felt like opening a game console, except we got to understand how every piece worked.",
+            "name": "Jamie R.",
+            "detail": "First Arduino project"
+          }
+        },
+        "review_7YAz88": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "The compact setup is brilliant. My son can finish a project without losing half the parts across the desk.",
+            "name": "Priya M.",
+            "detail": "Parent and co-builder"
+          }
+        },
+        "review_GHezUf": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "I bought it for the games and ended up learning enough to start making my own little tools.",
+            "name": "Alex T.",
+            "detail": "Verified customer"
+          }
+        }
+      },
+      "block_order": [
+        "review_WG3rzF",
+        "review_7YAz88",
+        "review_GHezUf"
+      ],
+      "name": "Reviews",
+      "settings": {
+        "eyebrow": "Made for the curious",
+        "heading": "The kind of screen time that builds something"
+      }
+    },
+    "faq_3WLYCK": {
+      "type": "faq",
+      "blocks": {
+        "question_bQrazk": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need any coding experience?",
+            "answer": "<p>No. The projects include ready-to-upload code and step-by-step guidance. You can build first, then explore how the code works when you are ready.</p>"
+          }
+        },
+        "question_mhNYKC": {
+          "type": "question",
+          "settings": {
+            "question": "What computer do I need?",
+            "answer": "<p>A laptop or desktop with a USB port and a modern Chromium-based browser is the simplest setup for the BREADBOX web uploader.</p>"
+          }
+        },
+        "question_QEHiBJ": {
+          "type": "question",
+          "settings": {
+            "question": "Can I reuse the parts?",
+            "answer": "<p>Yes. Reuse the same Arduino UNO, OLED, mini breadboard and controls across the included builds, then use them for your own projects.</p>"
+          }
+        },
+        "question_zg8NzP": {
+          "type": "question",
+          "settings": {
+            "question": "Is this suitable as a gift?",
+            "answer": "<p>Absolutely. It is designed to feel exciting straight out of the box while still teaching real electronics and programming skills.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_bQrazk",
+        "question_mhNYKC",
+        "question_QEHiBJ",
+        "question_zg8NzP"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "eyebrow": "Good questions",
+        "heading": "Before your first build",
+        "text": "<p>Still wondering whether BREADBOX is the right first step? Here are the answers builders usually need.</p>"
+      }
     }
   },
   "order": [
-    "main"
+    "hero_product_mhmcri",
+    "featured_collection_hKTjtA",
+    "main",
+    "how_it_works_nyK9da",
+    "final_cta_kEwWGE",
+    "reviews_gRMzyG",
+    "faq_3WLYCK"
   ]
 }
