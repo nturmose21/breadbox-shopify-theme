@@ -1,20 +1,72 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "hero": {
+      "type": "hero-product",
+      "settings": {
+        "overlay_opacity": 60,
+        "eyebrow": "Arduino starter kit",
+        "heading": "Build it. Learn it. Make it yours.",
+        "text": "<p>One compact kit turns an Arduino UNO into games, tools and tiny inventions, with every part and tutorial ready to go.</p>",
+        "button_label": "Shop BREADBOX",
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "trust": {
+      "type": "trust-strip",
+      "blocks": {
+        "complete": {"type":"item","settings":{"icon":"box","heading":"Everything included","text":"Open the box and start building"}},
+        "guided": {"type":"item","settings":{"icon":"book","heading":"Guided tutorials","text":"Clear steps for every project"}},
+        "beginner": {"type":"item","settings":{"icon":"shield","heading":"Beginner tested","text":"No experience needed"}},
+        "reusable": {"type":"item","settings":{"icon":"spark","heading":"Built to reuse","text":"One kit, endless experiments"}}
+      },
+      "block_order": ["complete","guided","beginner","reusable"],
+      "settings": {"background":"#22C8C2"}
+    },
+    "breakdown": {
+      "type": "kit-breakdown",
+      "blocks": {
+        "core": {"type":"item","settings":{"heading":"A complete core setup","text":"Arduino UNO, mini breadboard, OLED, controls and the parts your builds need."}},
+        "projects": {"type":"item","settings":{"heading":"Projects that feel like products","text":"Build tiny games, useful tools and interactive gadgets you can actually show off."}},
+        "guides": {"type":"item","settings":{"heading":"Guides made for first-timers","text":"Follow clear wiring and upload steps, then start changing the code yourself."}}
+      },
+      "block_order": ["core","projects","guides"],
+      "settings": {"eyebrow":"A proper first electronics kit","heading":"Less hunting for parts. More making things.","text":"<p>BREADBOX is designed around one repeatable setup, so every new project feels exciting instead of overwhelming.</p>","button_label":"See the full kit","button_link":"shopify://collections/all"}
+    },
+    "projects": {
+      "type": "project-gallery",
+      "blocks": {
+        "flappy": {"type":"project","settings":{"asset":"project-flappy-bird.svg","category":"Game","title":"Flappy Bird","text":"Build a pocket-sized arcade game with real buttons."}},
+        "tetris": {"type":"project","settings":{"asset":"project-tiny-tetris.svg","category":"Game","title":"Tiny Tetris","text":"Stack blocks on a crisp vertical OLED display."}},
+        "doom": {"type":"project","settings":{"asset":"project-doom.svg","category":"Game","title":"Doom Raycaster","text":"Learn how 3D-style worlds can run on tiny hardware."}},
+        "minipc": {"type":"project","settings":{"asset":"project-mini-pc.svg","category":"Tool","title":"Mini PC","text":"Turn your kit into a calculator, timer and pocket utility."}},
+        "scope": {"type":"project","settings":{"asset":"project-oscilloscope.svg","category":"Tool","title":"Oscilloscope","text":"Visualise signals and explore what circuits are doing."}},
+        "racer": {"type":"project","settings":{"asset":"project-gyro-racer.svg","category":"Motion","title":"Gyro Racer","text":"Steer a racing game by moving the controller itself."}}
+      },
+      "block_order": ["flappy","tetris","doom","minipc","scope","racer"],
+      "settings": {"eyebrow":"What will you build first?","heading":"A box full of tiny adventures","text":"<p>Every project uses the same compact BREADBOX setup, so you spend less time rebuilding and more time experimenting.</p>","button_label":"Get the kit","button_link":"shopify://collections/all"}
+    },
+    "collection": {"type":"featured-collection","settings":{"eyebrow":"Start building","heading":"Choose your BREADBOX","text":"<p>The core kit is ready to build. Add-ons let you take the next project further.</p>","products_to_show":3}},
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "one": {"type":"review","settings":{"rating":5,"quote":"It felt like opening a game console, except we got to understand how every piece worked.","name":"Jamie R.","detail":"First Arduino project"}},
+        "two": {"type":"review","settings":{"rating":5,"quote":"The compact setup is brilliant. My son can finish a project without losing half the parts across the desk.","name":"Priya M.","detail":"Parent and co-builder"}},
+        "three": {"type":"review","settings":{"rating":5,"quote":"I bought it for the games and ended up learning enough to start making my own little tools.","name":"Alex T.","detail":"Verified customer"}}
+      },
+      "block_order": ["one","two","three"],
+      "settings": {"eyebrow":"Made for the curious","heading":"The kind of screen time that builds something"}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "experience": {"type":"question","settings":{"question":"Do I need any coding experience?","answer":"<p>No. The projects include ready-to-upload code and step-by-step guidance. You can build first, then explore how the code works when you are ready.</p>"}},
+        "computer": {"type":"question","settings":{"question":"What computer do I need?","answer":"<p>A laptop or desktop with a USB port and a modern Chromium-based browser is the simplest setup for the BREADBOX web uploader.</p>"}},
+        "reuse": {"type":"question","settings":{"question":"Can I reuse the parts?","answer":"<p>Yes. Reuse the same Arduino UNO, OLED, mini breadboard and controls across the included builds, then use them for your own projects.</p>"}},
+        "gift": {"type":"question","settings":{"question":"Is this suitable as a gift?","answer":"<p>Absolutely. It is designed to feel exciting straight out of the box while still teaching real electronics and programming skills.</p>"}}
+      },
+      "block_order": ["experience","computer","reuse","gift"],
+      "settings": {"eyebrow":"Good questions","heading":"Before your first build","text":"<p>Still wondering whether BREADBOX is the right first step? Here are the answers builders usually need.</p>"}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["hero","trust","breakdown","projects","collection","reviews","faq"]
 }

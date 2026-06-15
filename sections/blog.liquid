@@ -1,35 +1,27 @@
-{% comment %}
-  This section is used in the blog template to render the blog page listing all
-  articles within a blog.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/blog
-{% endcomment %}
-
-<h1>{{ blog.title }}</h1>
-
-{% paginate blog.articles by 5 %}
-  {% for article in blog.articles %}
-    <div>
-      {% if article.image %}
-        {{ article.image | image_url: width: 1000 | image_tag }}
-      {% endif %}
-      <h2>
-        {{ article.title | link_to: article.url }}
-      </h2>
-      {% assign date = article.published_at | time_tag: format: 'date' %}
-      <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-      <p>{{ article.excerpt }}</p>
+<section class="blog-page section-shell">
+  <div class="section-heading"><p class="eyebrow">Build notes and ideas</p><h1>{{ blog.title | escape }}</h1></div>
+  {% paginate blog.articles by 9 %}
+    <div class="blog-grid">
+      {% for article in blog.articles %}
+        <article class="blog-card card">
+          {% if article.image %}<a href="{{ article.url }}">{{ article.image | image_url: width: 1000 | image_tag: widths: '400, 700, 1000', sizes: '(min-width: 900px) 30vw, 92vw', loading: 'lazy', alt: article.image.alt | default: article.title }}</a>{% endif %}
+          <div><p class="eyebrow">{{ article.published_at | date: '%b %d, %Y' }}</p><h2><a href="{{ article.url }}">{{ article.title | escape }}</a></h2><p>{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p><a href="{{ article.url }}"><strong>Read build note →</strong></a></div>
+        </article>
+      {% endfor %}
     </div>
-  {% endfor %}
+    <div class="pagination">{{ paginate | default_pagination }}</div>
+  {% endpaginate %}
+</section>
 
-  {%- if paginate.pages > 1 -%}
-    {{- paginate | default_pagination -}}
-  {%- endif -%}
-{% endpaginate %}
-
-{% schema %}
-{
-  "name": "t:general.blog",
-  "settings": []
-}
-{% endschema %}
+{% stylesheet %}
+  .blog-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; }
+  .blog-card { overflow: hidden; }
+  .blog-card > a { display: block; aspect-ratio: 4 / 3; border-bottom: var(--line); }
+  .blog-card img { width: 100%; height: 100%; object-fit: cover; }
+  .blog-card > div { padding: 1.2rem; }
+  .blog-card h2 { font-size: 1.35rem; }
+  .blog-card h2 a { text-decoration: none; }
+  @media (max-width: 850px) { .blog-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+{% schema %}{ "name": "Main blog", "settings": [] }{% endschema %}

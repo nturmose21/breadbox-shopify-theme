@@ -1,12 +1,28 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "current": {}
+  "current": {
+    "type_body_font": "work_sans_n4",
+    "type_display_font": "work_sans_n7",
+    "max_page_width": "92rem",
+    "min_page_margin": 20,
+    "color_ink": "#070A0D",
+    "color_paper": "#FFF6DC",
+    "color_surface": "#FFFDF6",
+    "color_teal": "#22C8C2",
+    "color_yellow": "#FFBF18",
+    "color_blue": "#0964A5"
+  },
+  "presets": {
+    "BREADBOX Workshop": {
+      "type_body_font": "work_sans_n4",
+      "type_display_font": "work_sans_n7",
+      "max_page_width": "92rem",
+      "min_page_margin": 20,
+      "color_ink": "#070A0D",
+      "color_paper": "#FFF6DC",
+      "color_surface": "#FFFDF6",
+      "color_teal": "#22C8C2",
+      "color_yellow": "#FFBF18",
+      "color_blue": "#0964A5"
+    }
+  }
 }

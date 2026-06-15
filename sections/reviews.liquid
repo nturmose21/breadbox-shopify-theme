@@ -1,0 +1,36 @@
+<section class="reviews section-shell" id="reviews">
+  <div class="section-heading section-heading--center">
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h2>{{ section.settings.heading | escape }}</h2>
+  </div>
+  <div class="reviews__grid">
+    {% for block in section.blocks %}
+      <figure class="review-card card" {{ block.shopify_attributes }}>
+        <div class="review-card__stars" aria-label="{{ block.settings.rating }} out of 5 stars">{% for i in (1..5) %}<span class="{% if i > block.settings.rating %}is-empty{% endif %}">★</span>{% endfor %}</div>
+        <blockquote>“{{ block.settings.quote | escape }}”</blockquote>
+        <figcaption><strong>{{ block.settings.name | escape }}</strong><span>{{ block.settings.detail | escape }}</span></figcaption>
+      </figure>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .reviews__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
+  .review-card { margin: 0; padding: 1.5rem; }
+  .review-card:nth-child(2) { transform: translateY(-12px); }
+  .review-card__stars { color: var(--orange); letter-spacing: .08em; }
+  .review-card__stars .is-empty { color: #c9c7bf; }
+  .review-card blockquote { margin: 1rem 0 1.3rem; font-size: 1.05rem; font-weight: 750; }
+  .review-card figcaption strong, .review-card figcaption span { display: block; }
+  .review-card figcaption span { color: var(--muted); font-size: .82rem; }
+  @media (max-width: 760px) { .reviews__grid { grid-template-columns: 1fr; } .review-card:nth-child(2) { transform: none; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Made for the curious"},{"type":"text","id":"heading","label":"Heading","default":"The kind of screen time that builds something"}],
+  "blocks": [{"type":"review","name":"Review","settings":[{"type":"range","id":"rating","label":"Rating","min":1,"max":5,"step":1,"default":5},{"type":"textarea","id":"quote","label":"Quote","default":"The instructions made the first build feel possible, and then we spent the weekend changing it."},{"type":"text","id":"name","label":"Name","default":"A BREADBOX builder"},{"type":"text","id":"detail","label":"Detail","default":"Verified customer"}]}],
+  "presets": [{"name":"Reviews","blocks":[{"type":"review","settings":{"quote":"It felt like opening a game console, except we got to understand how every piece worked.","name":"Jamie R.","detail":"First Arduino project"}},{"type":"review","settings":{"quote":"The compact setup is brilliant. My son can finish a project without losing half the parts across the desk.","name":"Priya M.","detail":"Parent and co-builder"}},{"type":"review","settings":{"quote":"I bought it for the games and ended up learning enough to start making my own little tools.","name":"Alex T.","detail":"Verified customer"}}]}]
+}
+{% endschema %}

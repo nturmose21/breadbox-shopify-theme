@@ -1,0 +1,32 @@
+{% assign chosen_collection = section.settings.collection %}
+<section class="featured-collection section-shell">
+  <div class="section-heading">
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h2>{{ section.settings.heading | escape }}</h2>
+    <div class="rte">{{ section.settings.text }}</div>
+  </div>
+  {% if chosen_collection != blank and chosen_collection.products_count > 0 %}
+    <div class="product-grid">{% for product in chosen_collection.products limit: section.settings.products_to_show %}{% render 'product-card', product: product %}{% endfor %}</div>
+  {% else %}
+    <div class="empty-state"><h3>Add your collection</h3><p>Select the collection you want to feature in the theme editor.</p></div>
+  {% endif %}
+  {% if chosen_collection != blank %}<div class="featured-collection__action"><a class="button button--white" href="{{ chosen_collection.url }}">View all products →</a></div>{% endif %}
+</section>
+
+{% stylesheet %}
+  .featured-collection__action { display: flex; justify-content: center; margin-top: 2.2rem; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Start building" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose your BREADBOX" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>The core kit is ready to build. Add-ons let you take the next project further.</p>" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 6, "step": 1, "default": 3 }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

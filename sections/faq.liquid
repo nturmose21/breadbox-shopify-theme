@@ -1,0 +1,36 @@
+<section class="faq section-shell">
+  <div class="faq__intro">
+    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h2>{{ section.settings.heading | escape }}</h2>
+    <div class="rte">{{ section.settings.text }}</div>
+  </div>
+  <div class="faq__items">
+    {% for block in section.blocks %}
+      <details class="faq__item" {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+        <summary>{{ block.settings.question | escape }}<span aria-hidden="true">+</span></summary>
+        <div class="rte">{{ block.settings.answer }}</div>
+      </details>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .faq { display: grid; grid-template-columns: minmax(260px, .75fr) minmax(320px, 1.25fr); gap: clamp(2rem, 7vw, 6rem); align-items: start; }
+  .faq__items { border-top: var(--line); }
+  .faq__item { border-bottom: var(--line); }
+  .faq__item summary { display: flex; justify-content: space-between; gap: 1rem; padding: 1.2rem .3rem; list-style: none; font-family: var(--font-display-family); font-size: 1.2rem; font-weight: 800; }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary span { transition: transform .2s ease; }
+  .faq__item[open] summary span { transform: rotate(45deg); }
+  .faq__item .rte { padding: 0 .3rem 1.3rem; color: var(--muted); }
+  @media (max-width: 760px) { .faq { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Good questions"},{"type":"text","id":"heading","label":"Heading","default":"Before your first build"},{"type":"richtext","id":"text","label":"Text","default":"<p>Still wondering whether BREADBOX is the right first step? Here are the answers builders usually need.</p>"}],
+  "blocks": [{"type":"question","name":"Question","settings":[{"type":"text","id":"question","label":"Question","default":"Do I need any coding experience?"},{"type":"richtext","id":"answer","label":"Answer","default":"<p>No. The projects include ready-to-upload code and step-by-step guidance. You can build first, then explore how the code works when you are ready.</p>"}]}],
+  "presets": [{"name":"FAQ","blocks":[{"type":"question","settings":{"question":"Do I need any coding experience?","answer":"<p>No. The projects include ready-to-upload code and step-by-step guidance. You can build first, then explore how the code works when you are ready.</p>"}},{"type":"question","settings":{"question":"What computer do I need?","answer":"<p>A laptop or desktop with a USB port and a modern Chromium-based browser is the simplest setup for the BREADBOX web uploader.</p>"}},{"type":"question","settings":{"question":"Can I reuse the parts?","answer":"<p>Yes. Reuse the same Arduino UNO, OLED, mini breadboard and controls across the included builds, then use them for your own projects.</p>"}},{"type":"question","settings":{"question":"Is this suitable as a gift?","answer":"<p>Absolutely. It is designed to feel exciting straight out of the box while still teaching real electronics and programming skills.</p>"}}]}]
+}
+{% endschema %}

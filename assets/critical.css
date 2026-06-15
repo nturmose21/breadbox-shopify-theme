@@ -1,117 +1,159 @@
-/** Critical CSS for the theme. This file is included on every page. */
+* { box-sizing: border-box; }
 
-/* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
-* {
-  box-sizing: border-box;
-  margin: 0;
+:root {
+  color-scheme: light;
+  --ink: #070a0d;
+  --paper: #fff6dc;
+  --paper-bright: #fffdf6;
+  --teal: #22c8c2;
+  --teal-dark: #087a77;
+  --yellow: #ffbf18;
+  --orange: #ff8b18;
+  --blue: #0964a5;
+  --blue-dark: #064777;
+  --muted: #5e615f;
+  --line: 3px solid var(--ink);
+  --shadow-sm: 3px 4px 0 var(--ink);
+  --shadow: 6px 7px 0 var(--ink);
+  --radius: 8px;
+  --section-space: clamp(3.5rem, 8vw, 7rem);
 }
 
+html { scroll-behavior: smooth; }
 body {
+  min-width: 320px;
+  min-height: 100svh;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  min-height: 100svh;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(7, 10, 13, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7, 10, 13, .045) 1px, transparent 1px),
+    var(--paper);
+  background-size: 28px 28px;
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  line-height: 1.55;
 }
 
-html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
-  overflow: hidden;
+main { flex: 1; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+button, input, textarea, select { font: inherit; }
+button, [role="button"], summary, select, label, a { cursor: pointer; }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--orange); }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+  outline: 4px solid var(--orange);
+  outline-offset: 4px;
 }
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+p { margin: 0 0 1rem; text-wrap: pretty; }
+h1, h2, h3, h4 { margin: 0 0 .75rem; font-family: var(--font-display-family); font-style: var(--font-display-style); font-weight: var(--font-display-weight); line-height: .98; letter-spacing: 0; }
+h1 { font-size: clamp(2.7rem, 7vw, 5.8rem); }
+h2 { font-size: clamp(2rem, 4.5vw, 4rem); }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; z-index: 1000; top: 1rem; left: 1rem; transform: translateY(-200%); padding: .75rem 1rem; border: var(--line); background: white; box-shadow: var(--shadow-sm); }
+.skip-link:focus { transform: translateY(0); }
 
-input,
-textarea,
-select {
-  font: inherit;
-  border-radius: var(--style-border-radius-inputs);
-}
-
-select {
-  background-color: var(--color-background);
-  color: currentcolor;
-}
-
-dialog {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-}
-
-p {
-  text-wrap: pretty;
-}
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-p:empty {
-  display: none;
-}
-
-:is(p, h1, h2, h3, h4, h5, h6):first-child,
-:empty:first-child + :where(p, h1, h2, h3, h4, h5, h6) {
-  margin-block-start: 0;
-}
-
-:is(p, h1, h2, h3, h4, h5, h6):last-child,
-:where(p, h1, h2, h3, h4, h5, h6) + :has(+ :empty:last-child) {
-  margin-block-end: 0;
-}
-
-/** Theme styles below */
-body {
-  font-family: var(--font-primary--family);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-}
-
-/** Section layout utilities */
-
-/**
- * Setup a grid that enables both full-width and constrained layouts
- * depending on the class of the child elements.
- *
- * By default, a minimum content margin is set on the left and right
- * sides of the section and the content is centered in the viewport to
- * not exceed the maximum page width.
- *
- * When a child element is given the `full-width` class, it will span
- * the entire viewport.
- */
 .shopify-section {
-  --content-width: min(
-    calc(var(--page-width) - var(--page-margin) * 2),
-    calc(100% - var(--page-margin) * 2)
-  );
+  --content-width: min(calc(var(--page-width) - var(--page-margin) * 2), calc(100% - var(--page-margin) * 2));
   --content-margin: minmax(var(--page-margin), 1fr);
-  --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
-
-  /* This is required to make <img> elements work as background images */
-  position: relative;
-  grid-template-columns: var(--content-grid);
   display: grid;
+  grid-template-columns: var(--content-margin) var(--content-width) var(--content-margin);
   width: 100%;
+  position: relative;
+}
+.shopify-section > * { grid-column: 2; }
+.shopify-section > .full-width { grid-column: 1 / -1; }
+.section-shell { padding-block: var(--section-space); }
+.section-shell--compact { padding-block: clamp(2rem, 5vw, 4rem); }
+.section-heading { max-width: 720px; margin-bottom: clamp(1.75rem, 4vw, 3rem); }
+.section-heading--center { margin-inline: auto; text-align: center; }
+.eyebrow { margin: 0 0 .6rem; color: var(--teal-dark); font-size: .77rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+.rte > *:last-child { margin-bottom: 0; }
+.muted { color: var(--muted); }
+
+.button, button.button, input.button, .shopify-payment-button__button--unbranded {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  border: var(--line);
+  border-radius: var(--radius);
+  padding: .75rem 1.25rem;
+  background: var(--teal);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.button:hover, button.button:hover, input.button:hover { transform: translate(-1px, -1px); box-shadow: 5px 6px 0 var(--ink); }
+.button:active, button.button:active, input.button:active { transform: translate(2px, 2px); box-shadow: 1px 2px 0 var(--ink); }
+.button--yellow, button.button--yellow, input.button--yellow { background: var(--yellow); }
+.button--white, button.button--white, input.button--white { background: white; }
+.button--blue, button.button--blue, input.button--blue { background: var(--blue); color: white; }
+.button--full { width: 100%; }
+.button[disabled], button[disabled], input[disabled] { opacity: .52; cursor: not-allowed; transform: none; }
+
+.field, select, input[type="number"], input[type="email"], input[type="search"], input[type="text"], textarea {
+  width: 100%;
+  min-height: 48px;
+  border: var(--line);
+  border-radius: var(--radius);
+  padding: .7rem .85rem;
+  background: white;
+  color: var(--ink);
 }
 
-/* Child elements, by default, are constrained to the central column of the grid. */
-.shopify-section > * {
-  grid-column: 2;
+.card {
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-bright);
+  box-shadow: var(--shadow-sm);
+}
+.price { display: flex; flex-wrap: wrap; align-items: baseline; gap: .55rem; font-family: var(--font-display-family); font-weight: 800; font-size: 1.4rem; }
+.price s { color: var(--muted); font-size: 1rem; }
+.sale-badge, .pill { display: inline-flex; align-items: center; min-height: 28px; border: 2px solid var(--ink); border-radius: 999px; padding: .2rem .6rem; background: var(--yellow); font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+
+.product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
+.product-card { overflow: hidden; }
+.product-card__media { display: block; aspect-ratio: 1 / 1; overflow: hidden; border-bottom: var(--line); background: #dff7f6; }
+.product-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
+.product-card:hover .product-card__media img { transform: scale(1.025); }
+.product-card__content { padding: 1.1rem; }
+.product-card__title { font-size: 1.25rem; }
+.product-card__title a { text-decoration: none; }
+
+.empty-state { padding: 3rem 1.25rem; text-align: center; border: var(--line); border-radius: var(--radius); background: white; }
+.pagination { display: flex; justify-content: center; gap: .5rem; margin-top: 2rem; }
+
+.customer-page { width: min(760px, 100%); }
+.customer-page--wide { width: min(1100px, 100%); }
+.customer-form, .customer-card { display: grid; gap: .8rem; border: var(--line); border-radius: var(--radius); padding: clamp(1.2rem, 4vw, 2rem); background: white; box-shadow: var(--shadow-sm); }
+.customer-form label { font-size: .78rem; font-weight: 900; text-transform: uppercase; }
+.customer-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+.customer-table { width: 100%; border-collapse: collapse; border: var(--line); background: white; }
+.customer-table th, .customer-table td { padding: .8rem; border-bottom: 2px solid var(--ink); text-align: left; }
+.customer-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+@media (max-width: 650px) { .customer-table { display: block; overflow-x: auto; } .customer-grid { grid-template-columns: 1fr; } }
+
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  :root { --page-margin: 14px; --shadow: 4px 5px 0 var(--ink); }
+  .product-grid { grid-template-columns: 1fr; }
+  .button { min-height: 48px; }
 }
 
-/* Child elements that use the full-width utility class span the entire viewport. */
-.shopify-section > .full-width {
-  grid-column: 1 / -1;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

@@ -1,0 +1,77 @@
+<section class="project-gallery full-width section-shell">
+  <div class="project-gallery__inner">
+    <div class="section-heading section-heading--center">
+      <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h2>{{ section.settings.heading | escape }}</h2>
+      <div class="rte">{{ section.settings.text }}</div>
+    </div>
+    <div class="project-gallery__grid">
+      {% for block in section.blocks %}
+        <article class="project-tile" {{ block.shopify_attributes }}>
+          <div class="project-tile__screen">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 30vw, 92vw', loading: 'lazy', alt: block.settings.title }}
+            {% else %}
+              <img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.title | escape }} OLED screen" width="128" height="64" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="project-tile__copy">
+            <span>{{ block.settings.category | escape }}</span>
+            <h3>{{ block.settings.title | escape }}</h3>
+            <p>{{ block.settings.text | escape }}</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+    {% if section.settings.button_label != blank %}<div class="project-gallery__action"><a class="button button--yellow" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }} →</a></div>{% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .project-gallery { background: var(--blue); color: white; border-block: 4px solid var(--ink); }
+  .project-gallery__inner { width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin: auto; }
+  .project-gallery .eyebrow { color: var(--yellow); }
+  .project-gallery__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .project-tile { overflow: hidden; border: 3px solid var(--ink); border-radius: var(--radius); background: var(--paper-bright); color: var(--ink); box-shadow: 4px 5px 0 var(--ink); }
+  .project-tile__screen { min-height: 190px; display: grid; place-items: center; padding: 1.3rem; border-bottom: 3px solid var(--ink); background: #0b1014; }
+  .project-tile__screen img { width: 100%; max-height: 170px; object-fit: contain; image-rendering: pixelated; }
+  .project-tile__copy { padding: 1.1rem; }
+  .project-tile__copy > span { color: var(--teal-dark); font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+  .project-tile__copy h3 { margin: .25rem 0 .45rem; }
+  .project-tile__copy p { margin: 0; color: var(--muted); }
+  .project-gallery__action { display: flex; justify-content: center; margin-top: 2.25rem; }
+  @media (max-width: 900px) { .project-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .project-gallery__grid { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Project gallery",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What will you build first?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A box full of tiny adventures" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Every project uses the same compact BREADBOX setup, so you spend less time rebuilding and more time experimenting.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Get the kit" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "blocks": [{
+    "type": "project", "name": "Project",
+    "settings": [
+      { "type": "image_picker", "id": "image", "label": "Custom screen image" },
+      { "type": "select", "id": "asset", "label": "Built-in screen", "options": [{"value":"project-flappy-bird.svg","label":"Flappy Bird"},{"value":"project-tiny-tetris.svg","label":"Tiny Tetris"},{"value":"project-doom.svg","label":"Doom"},{"value":"project-mini-pc.svg","label":"Mini PC"},{"value":"project-oscilloscope.svg","label":"Oscilloscope"},{"value":"project-gyro-racer.svg","label":"Gyro Racer"}], "default": "project-flappy-bird.svg" },
+      { "type": "text", "id": "category", "label": "Category", "default": "Game" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Flappy Bird" },
+      { "type": "text", "id": "text", "label": "Description", "default": "Wire the controls, flash the sketch and chase your high score." }
+    ]
+  }],
+  "presets": [{ "name": "Project gallery", "blocks": [
+    {"type":"project","settings":{"asset":"project-flappy-bird.svg","category":"Game","title":"Flappy Bird","text":"Build a pocket-sized arcade game with real buttons."}},
+    {"type":"project","settings":{"asset":"project-tiny-tetris.svg","category":"Game","title":"Tiny Tetris","text":"Stack blocks on a crisp vertical OLED display."}},
+    {"type":"project","settings":{"asset":"project-doom.svg","category":"Game","title":"Doom Raycaster","text":"Learn how 3D-style worlds can run on tiny hardware."}},
+    {"type":"project","settings":{"asset":"project-mini-pc.svg","category":"Tool","title":"Mini PC","text":"Turn your kit into a calculator, timer and pocket utility."}},
+    {"type":"project","settings":{"asset":"project-oscilloscope.svg","category":"Tool","title":"Oscilloscope","text":"Visualise signals and explore what circuits are doing."}},
+    {"type":"project","settings":{"asset":"project-gyro-racer.svg","category":"Motion","title":"Gyro Racer","text":"Steer a racing game by moving the controller itself."}}
+  ] }]
+}
+{% endschema %}

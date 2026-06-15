@@ -1,0 +1,11 @@
+<section class="customer-page section-shell">
+  <p class="eyebrow">Welcome back</p><h1>Account login</h1>
+  {% form 'customer_login', class: 'customer-form' %}
+    {{ form.errors | default_errors }}
+    <label for="CustomerEmail">Email</label><input id="CustomerEmail" type="email" name="customer[email]" autocomplete="email" required>
+    <label for="CustomerPassword">Password</label><input id="CustomerPassword" type="password" name="customer[password]" autocomplete="current-password" required>
+    <div class="customer-actions"><button class="button button--yellow" type="submit">Sign in</button><a href="{{ routes.account_register_url }}">Create account</a></div>
+  {% endform %}
+  <details style="margin-top: 1.5rem"><summary><strong>Forgot your password?</strong></summary>{% form 'recover_customer_password', class: 'customer-form' %}{{ form.errors | default_errors }}<label for="RecoverEmail">Email</label><input id="RecoverEmail" type="email" name="email" required><button class="button" type="submit">Send reset link</button>{% endform %}</details>
+</section>
+{% schema %}{"name":"Customer login","settings":[]}{% endschema %}

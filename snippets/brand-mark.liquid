@@ -1,0 +1,27 @@
+{% liquid
+  assign mark_tag = tag | default: 'div'
+  assign mark_text = text | default: shop.name | default: 'BREADBOX'
+%}
+<{{ mark_tag }} class="brand-mark{% if compact %} brand-mark--compact{% endif %}">
+  {{ mark_text | escape }}
+</{{ mark_tag }}>
+
+{% stylesheet %}
+  .brand-mark {
+    width: fit-content;
+    border: 3px solid var(--ink);
+    border-radius: 8px;
+    padding: .24em .45em .14em;
+    background: #fff9e8;
+    color: var(--ink);
+    box-shadow: 3px 4px 0 var(--ink);
+    font-family: var(--font-display-family);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    line-height: .9;
+    text-transform: uppercase;
+    text-shadow: .045em .055em 0 var(--yellow);
+    transform: rotate(-.6deg);
+  }
+  .brand-mark--compact { font-size: clamp(1.45rem, 3vw, 2.15rem); box-shadow: 2px 3px 0 var(--ink); }
+{% endstylesheet %}

@@ -1,0 +1,10 @@
+<section class="customer-page customer-page--wide section-shell">
+  <p class="eyebrow">Builder account</p><h1>Hello, {{ customer.first_name | default: customer.name | escape }}</h1>
+  <div class="customer-actions" style="margin-bottom: 2rem"><a class="button button--white" href="{{ routes.account_addresses_url }}">Manage addresses</a><a href="{{ routes.account_logout_url }}">Sign out</a></div>
+  <h2>Order history</h2>
+  {% paginate customer.orders by 20 %}
+    {% if customer.orders.size > 0 %}<table class="customer-table"><thead><tr><th>Order</th><th>Date</th><th>Payment</th><th>Fulfilment</th><th>Total</th></tr></thead><tbody>{% for order in customer.orders %}<tr><td><a href="{{ order.customer_url }}">{{ order.name }}</a></td><td>{{ order.created_at | date: '%b %d, %Y' }}</td><td>{{ order.financial_status_label }}</td><td>{{ order.fulfillment_status_label }}</td><td>{{ order.total_net_amount | money_with_currency }}</td></tr>{% endfor %}</tbody></table>{% else %}<div class="empty-state"><h3>No orders yet</h3><a class="button button--yellow" href="{{ routes.all_products_collection_url }}">Shop BREADBOX</a></div>{% endif %}
+    <div class="pagination">{{ paginate | default_pagination }}</div>
+  {% endpaginate %}
+</section>
+{% schema %}{"name":"Customer account","settings":[]}{% endschema %}

@@ -1,47 +1,26 @@
-{% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
-{% endcomment %}
-
-<h1>{{ collection.title }}</h1>
-
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
-    {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
-        </div>
-      </div>
-    {% endfor %}
-
-    {{ paginate | default_pagination }}
+<section class="collection-page section-shell">
+  <header class="collection-page__header">
+    <p class="eyebrow">Shop BREADBOX</p>
+    <h1>{{ collection.title | escape }}</h1>
+    {% if collection.description != blank %}<div class="rte">{{ collection.description }}</div>{% endif %}
+  </header>
+  <form class="collection-sort" method="get">
+    <label for="SortBy">Sort by</label>
+    <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+      {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+      {% for option in collection.sort_options %}<option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>{% endfor %}
+    </select>
+  </form>
+  {% paginate collection.products by 24 %}
+    {% if collection.products_count > 0 %}<div class="product-grid">{% for product in collection.products %}{% render 'product-card', product: product %}{% endfor %}</div>{% else %}<div class="empty-state"><h2>Nothing here yet</h2><p>This collection is ready for its first product.</p></div>{% endif %}
+    <div class="pagination">{{ paginate | default_pagination }}</div>
   {% endpaginate %}
-</div>
+</section>
 
 {% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  }
+  .collection-page__header { max-width: 760px; margin-bottom: 2rem; }
+  .collection-sort { width: min(280px, 100%); display: grid; gap: .35rem; margin: 0 0 1.5rem auto; }
+  .collection-sort label { font-size: .75rem; font-weight: 900; text-transform: uppercase; }
 {% endstylesheet %}
 
-{% schema %}
-{
-  "name": "t:general.collection",
-  "settings": []
-}
-{% endschema %}
+{% schema %}{ "name": "Main collection", "settings": [] }{% endschema %}

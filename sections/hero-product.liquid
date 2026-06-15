@@ -1,0 +1,84 @@
+{% liquid
+  assign featured_product = section.settings.product
+  if featured_product == blank
+    assign featured_product = collections.all.products.first
+  endif
+  assign current_variant = featured_product.selected_or_first_available_variant
+  assign hero_image = section.settings.image | default: featured_product.featured_image
+%}
+
+<section class="hero-product full-width{% if hero_image == blank %} hero-product--fallback{% endif %}" style="--hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};">
+  <div class="hero-product__media" aria-hidden="true">
+    {% if hero_image != blank %}
+      {{ hero_image | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: '' }}
+    {% else %}
+      <img src="{{ 'breadbox-kit-hero.jpg' | asset_url }}" alt="" width="1458" height="1080" loading="eager" fetchpriority="high">
+    {% endif %}
+  </div>
+  <div class="hero-product__shade" aria-hidden="true"></div>
+  <div class="hero-product__content">
+    <p class="hero-product__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h1>{{ section.settings.heading | escape }}</h1>
+    <div class="hero-product__copy rte">{{ section.settings.text }}</div>
+    {% if featured_product != blank %}
+      <div class="hero-product__buy" data-product-root>
+        {% render 'price', product: featured_product %}
+        {% form 'product', featured_product, data-product-form: '' %}
+          {% if featured_product.has_only_default_variant %}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {% else %}
+            <label for="HeroVariant-{{ section.id }}">Choose your kit</label>
+            <select id="HeroVariant-{{ section.id }}" name="id">
+              {% for variant in featured_product.variants %}
+                <option value="{{ variant.id }}" data-price="{{ variant.price | money }}" data-available="{{ variant.available }}" {% if variant == current_variant %}selected{% endif %}>{{ variant.title }} — {{ variant.price | money }}</option>
+              {% endfor %}
+            </select>
+          {% endif %}
+          <button class="button button--yellow" type="submit" name="add" {% unless current_variant.available %}disabled{% endunless %}><span>{% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}</span> →</button>
+          <a class="hero-product__details" href="{{ featured_product.url }}">See everything inside</a>
+        {% endform %}
+      </div>
+    {% else %}
+      <a class="button button--yellow" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
+    {% endif %}
+    <ul class="hero-product__promises" role="list">
+      <li>✓ Beginner friendly</li><li>✓ 10+ guided builds</li><li>✓ Reusable hardware</li>
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .hero-product { min-height: clamp(620px, 82vh, 860px); position: relative; display: grid; grid-template-columns: minmax(var(--page-margin), 1fr) minmax(0, calc(var(--page-width) - var(--page-margin) * 2)) minmax(var(--page-margin), 1fr); align-items: center; overflow: hidden; border-bottom: 4px solid var(--ink); background: var(--blue); color: white; }
+  .hero-product__media, .hero-product__shade { position: absolute; inset: 0; }
+  .hero-product__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .hero-product__shade { background: rgba(4, 28, 45, var(--hero-overlay)); }
+  .hero-product__content { position: relative; z-index: 2; grid-column: 2; width: min(680px, 100%); padding-block: clamp(4rem, 9vw, 8rem); }
+  .hero-product__eyebrow { width: fit-content; margin-bottom: 1rem; border: 2px solid var(--ink); border-radius: 999px; padding: .35rem .75rem; background: var(--teal); color: var(--ink); font-size: .8rem; font-weight: 900; text-transform: uppercase; }
+  .hero-product h1 { max-width: 10ch; text-shadow: 4px 5px 0 var(--ink); }
+  .hero-product__copy { max-width: 56ch; font-size: clamp(1.05rem, 1.8vw, 1.3rem); font-weight: 700; }
+  .hero-product__buy { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.25rem; margin-top: 1.6rem; }
+  .hero-product__buy .price { color: white; font-size: 1.8rem; }
+  .hero-product__buy form { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
+  .hero-product__buy label { font-weight: 900; }
+  .hero-product__buy select { width: auto; min-width: 160px; }
+  .hero-product__details { color: white; font-weight: 900; }
+  .hero-product__promises { display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; margin: 1.5rem 0 0; padding: 0; list-style: none; font-size: .86rem; font-weight: 900; text-transform: uppercase; }
+  @media (max-width: 680px) { .hero-product { min-height: 720px; align-items: end; } .hero-product__shade { background: rgba(4, 28, 45, .72); } .hero-product__content { padding-bottom: 3.5rem; } .hero-product__buy, .hero-product__buy form { align-items: stretch; flex-direction: column; } .hero-product__buy select, .hero-product__buy .button { width: 100%; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product hero",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Featured product" },
+    { "type": "image_picker", "id": "image", "label": "Override hero image" },
+    { "type": "range", "id": "overlay_opacity", "label": "Image overlay", "min": 20, "max": 85, "step": 5, "unit": "%", "default": 55 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Arduino starter kit" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Build it. Learn it. Make it yours." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>One compact kit turns an Arduino UNO into games, tools and tiny inventions, with every part and tutorial ready to go.</p>" },
+    { "type": "text", "id": "button_label", "label": "Fallback button label", "default": "Shop BREADBOX" },
+    { "type": "url", "id": "button_link", "label": "Fallback button link" }
+  ],
+  "presets": [{ "name": "Product hero" }]
+}
+{% endschema %}

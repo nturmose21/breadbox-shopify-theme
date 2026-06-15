@@ -1,17 +1,13 @@
-{% comment %}
-  This section is used in the page template to render store pages like About us
-  or Contact us.
+<article class="content-page section-shell">
+  <p class="eyebrow">BREADBOX</p>
+  <h1>{{ page.title | escape }}</h1>
+  <div class="rte content-page__body">{{ page.content }}</div>
+</article>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/page
-{% endcomment %}
-
-<h1>{{ page.title }}</h1>
-
-{{ page.content }}
-
-{% schema %}
-{
-  "name": "t:general.page",
-  "settings": []
-}
-{% endschema %}
+{% stylesheet %}
+  .content-page { width: min(820px, 100%); }
+  .content-page__body { font-size: 1.03rem; }
+  .content-page__body :is(h2,h3) { margin-top: 2rem; }
+  .content-page__body img { border: var(--line); border-radius: var(--radius); }
+{% endstylesheet %}
+{% schema %}{ "name": "Main page", "settings": [] }{% endschema %}

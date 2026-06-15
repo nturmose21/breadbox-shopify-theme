@@ -1,83 +1,35 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Skeleton",
-    "theme_version": "0.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_name": "BREADBOX Workshop",
+    "theme_version": "1.0.0",
+    "theme_author": "BREADBOX",
+    "theme_documentation_url": "https://github.com/nturmose21/breadbox-shopify-theme",
+    "theme_support_url": "https://github.com/nturmose21/breadbox-shopify-theme/issues"
   },
   {
-    "name": "t:general.typography",
+    "name": "Typography",
     "settings": [
-      {
-        "type": "header",
-        "content": "t:general.fonts"
-      },
-      {
-        "type": "font_picker",
-        "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
-      }
+      { "type": "font_picker", "id": "type_body_font", "default": "work_sans_n4", "label": "Body font" },
+      { "type": "font_picker", "id": "type_display_font", "default": "work_sans_n7", "label": "Display font" }
     ]
   },
   {
-    "name": "t:general.layout",
+    "name": "Layout",
     "settings": [
-      {
-        "type": "select",
-        "id": "max_page_width",
-        "label": "t:labels.page_width",
-        "options": [
-          {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
-          },
-          {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
-          }
-        ],
-        "default": "90rem"
-      },
-      {
-        "type": "range",
-        "id": "min_page_margin",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.page_margin",
-        "default": 20
-      }
+      { "type": "select", "id": "max_page_width", "label": "Page width", "options": [{"value":"78rem","label":"Narrow"},{"value":"92rem","label":"Wide"}], "default": "92rem" },
+      { "type": "range", "id": "min_page_margin", "min": 12, "max": 48, "step": 2, "unit": "px", "label": "Page margin", "default": 20 }
     ]
   },
   {
-    "name": "t:general.colors",
+    "name": "BREADBOX colors",
     "settings": [
-      {
-        "type": "color",
-        "id": "background_color",
-        "default": "#FFFFFF",
-        "label": "t:labels.background"
-      },
-      {
-        "type": "color",
-        "id": "foreground_color",
-        "default": "#333333",
-        "label": "t:labels.foreground"
-      },
-      {
-        "type": "range",
-        "id": "input_corner_radius",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.input_corner_radius",
-        "default": 4
-      }
+      { "type": "color", "id": "color_ink", "default": "#070A0D", "label": "Ink" },
+      { "type": "color", "id": "color_paper", "default": "#FFF6DC", "label": "Paper" },
+      { "type": "color", "id": "color_surface", "default": "#FFFDF6", "label": "Surface" },
+      { "type": "color", "id": "color_teal", "default": "#22C8C2", "label": "Teal" },
+      { "type": "color", "id": "color_yellow", "default": "#FFBF18", "label": "Yellow" },
+      { "type": "color", "id": "color_blue", "default": "#0964A5", "label": "Blue" }
     ]
   }
 ]

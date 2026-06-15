@@ -1,52 +1,124 @@
-{% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
-{% endcomment %}
-
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
-
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
-
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign first_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+%}
+<section class="main-product section-shell" data-product-root>
+  <div class="product-gallery" data-product-gallery>
+    <div class="product-gallery__stage card">
+      {% for media in product.media %}
+        <div class="product-gallery__media" data-media-id="{{ media.id }}" {% unless media.id == first_media.id %}hidden{% endunless %}>
+          {% case media.media_type %}
+            {% when 'image' %}
+              {{ media | image_url: width: 1800 | image_tag: widths: '560, 800, 1100, 1500, 1800', sizes: '(min-width: 900px) 55vw, 92vw', loading: 'eager', alt: media.alt | default: product.title }}
+            {% when 'video' %}{{ media | media_tag: controls: true, image_size: '1200x' }}
+            {% when 'external_video' %}{{ media | external_video_tag }}
+            {% when 'model' %}{{ media | model_viewer_tag }}
+          {% endcase %}
+        </div>
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag }}
       {% endfor %}
-    </select>
+    </div>
+    {% if product.media.size > 1 %}
+      <div class="product-gallery__thumbs" aria-label="Product media">
+        {% for media in product.media %}
+          <button type="button" data-gallery-thumb="{{ media.id }}" aria-current="{% if media.id == first_media.id %}true{% else %}false{% endif %}" aria-label="View {{ media.alt | default: product.title | escape }}">
+            {{ media.preview_image | image_url: width: 180 | image_tag: widths: '90, 140, 180', sizes: '78px', loading: 'lazy', alt: '' }}
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
 
-    <input type="text" name="quantity" min="1" value="1">
+  <div class="product-details">
+    {% if product.vendor != blank %}<p class="eyebrow">{{ product.vendor | escape }}</p>{% endif %}
+    <h1>{{ product.title | escape }}</h1>
+    {% render 'price', product: product %}
+    {% if section.settings.show_rating_placeholder %}<div class="product-rating" aria-label="Customer rating">★★★★★ <a href="#reviews">Read reviews</a></div>{% endif %}
+    <div class="product-details__description rte">{{ product.description }}</div>
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
-</div>
+    <div class="product-buybox card">
+      {% form 'product', product, data-product-form: '' %}
+        {% unless product.has_only_default_variant %}
+          <label for="ProductVariant-{{ section.id }}">Choose an option</label>
+          <select id="ProductVariant-{{ section.id }}" name="id">
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}" data-price="{{ variant.price | money }}" data-available="{{ variant.available }}" {% if variant == current_variant %}selected{% endif %}>{{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} — Sold out{% endunless %}</option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {% endunless %}
+
+        <div class="product-buybox__row">
+          <div><label for="Quantity-{{ section.id }}">Quantity</label><input id="Quantity-{{ section.id }}" type="number" name="quantity" min="1" value="1"></div>
+          {% if section.settings.show_builder_name %}<div><label for="BuilderName-{{ section.id }}">Builder name <span>(optional)</span></label><input id="BuilderName-{{ section.id }}" type="text" name="properties[Builder name]"></div>{% endif %}
+        </div>
+        <button class="button button--yellow button--full" type="submit" name="add" {% unless current_variant.available %}disabled{% endunless %}><span>{% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}</span> →</button>
+        {% if section.settings.show_dynamic_checkout %}<div class="dynamic-checkout">{{ form | payment_button }}</div>{% endif %}
+      {% endform %}
+      <div class="buybox-promises"><span>✓ Secure checkout</span><span>✓ Tracked delivery</span><span>✓ Friendly support</span></div>
+    </div>
+
+    <div class="product-accordions">
+      {% if section.settings.includes != blank %}<details open><summary>What is included <span>+</span></summary><div class="rte">{{ section.settings.includes }}</div></details>{% endif %}
+      {% if section.settings.shipping != blank %}<details><summary>Shipping and returns <span>+</span></summary><div class="rte">{{ section.settings.shipping }}</div></details>{% endif %}
+    </div>
+
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when '@app' %}{% render block %}
+        {% when 'custom_liquid' %}<div {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .main-product { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+  .product-gallery { min-width: 0; position: sticky; top: 1.5rem; }
+  .product-gallery__stage { overflow: hidden; background: white; }
+  .product-gallery__media { aspect-ratio: 1 / 1; }
+  .product-gallery__media > img, .product-gallery__media > video, .product-gallery__media > iframe, .product-gallery__media > model-viewer { width: 100%; height: 100%; object-fit: contain; }
+  .product-gallery__thumbs { display: flex; gap: .7rem; overflow-x: auto; padding: 1rem .2rem .4rem; }
+  .product-gallery__thumbs button { flex: 0 0 78px; aspect-ratio: 1; overflow: hidden; border: 2px solid var(--ink); border-radius: 6px; padding: 0; background: white; }
+  .product-gallery__thumbs button[aria-current="true"] { box-shadow: 0 0 0 4px var(--yellow); }
+  .product-gallery__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+  .product-details h1 { font-size: clamp(2.5rem, 5vw, 4.7rem); }
+  .product-rating { display: flex; gap: .7rem; margin: 1rem 0; color: var(--orange); font-weight: 900; }
+  .product-rating a { color: var(--ink); font-size: .85rem; }
+  .product-details__description { margin: 1.3rem 0; color: #343734; font-size: 1.04rem; }
+  .product-buybox { padding: 1.25rem; margin-block: 1.5rem; background: #e1f8f7; }
+  .product-buybox form { display: grid; gap: .85rem; }
+  .product-buybox label { font-size: .8rem; font-weight: 900; text-transform: uppercase; }
+  .product-buybox label span { color: var(--muted); text-transform: none; }
+  .product-buybox__row { display: grid; grid-template-columns: 100px 1fr; gap: .8rem; }
+  .dynamic-checkout { --shopify-accelerated-checkout-button-block-size: 50px; --shopify-accelerated-checkout-button-border-radius: 8px; }
+  .buybox-promises { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1rem; margin-top: 1rem; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+  .product-accordions { border-top: var(--line); }
+  .product-accordions details { border-bottom: var(--line); }
+  .product-accordions summary { display: flex; justify-content: space-between; padding: 1rem .25rem; list-style: none; font-weight: 900; text-transform: uppercase; }
+  .product-accordions summary::-webkit-details-marker { display: none; }
+  .product-accordions details[open] summary span { transform: rotate(45deg); }
+  .product-accordions .rte { padding: 0 .25rem 1rem; }
+  @media (max-width: 840px) { .main-product { grid-template-columns: 1fr; } .product-gallery { position: static; } }
+  @media (max-width: 480px) { .product-buybox__row { grid-template-columns: 1fr; } }
+{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.product",
-  "settings": [],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "name": "Main product",
+  "settings": [
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout", "default": true },
+    { "type": "checkbox", "id": "show_rating_placeholder", "label": "Show rating link", "default": true },
+    { "type": "checkbox", "id": "show_builder_name", "label": "Show optional builder name field", "default": false },
+    { "type": "richtext", "id": "includes", "label": "What is included", "default": "<p>Arduino UNO, mini breadboard, OLED display, controls, connecting parts and access to guided BREADBOX projects.</p>" },
+    { "type": "richtext", "id": "shipping", "label": "Shipping and returns", "default": "<p>Orders are carefully packed and sent with tracking. Add your exact delivery and return policy here.</p>" }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "custom_liquid", "name": "Custom Liquid", "settings": [{ "type": "liquid", "id": "custom_liquid", "label": "Custom Liquid" }] }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
 }
 {% endschema %}

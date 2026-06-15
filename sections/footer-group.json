@@ -1,25 +1,17 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "footer",
-  "name": "t:general.footer",
+  "name": "Footer group",
   "sections": {
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
+        "tagline": "One small box. A whole shelf of things to build.",
+        "menu": "footer",
+        "support_heading": "Real human support",
+        "support_text": "Questions before or after your build? We are here to help.",
         "show_payment_icons": true
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }

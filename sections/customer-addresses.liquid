@@ -1,0 +1,20 @@
+<section class="customer-page customer-page--wide section-shell">
+  <p class="eyebrow">Builder account</p><h1>Your addresses</h1><p><a href="{{ routes.account_url }}">← Back to account</a></p>
+  <details class="customer-card" style="margin-bottom: 1.5rem"><summary><strong>Add a new address</strong></summary>
+    {% form 'customer_address', customer.new_address, class: 'customer-form' %}
+      <label for="AddressFirstNameNew">First name</label><input id="AddressFirstNameNew" type="text" name="address[first_name]">
+      <label for="AddressLastNameNew">Last name</label><input id="AddressLastNameNew" type="text" name="address[last_name]">
+      <label for="AddressCompanyNew">Company</label><input id="AddressCompanyNew" type="text" name="address[company]">
+      <label for="Address1New">Address</label><input id="Address1New" type="text" name="address[address1]" required>
+      <label for="Address2New">Apartment, suite, etc.</label><input id="Address2New" type="text" name="address[address2]">
+      <label for="AddressCityNew">City</label><input id="AddressCityNew" type="text" name="address[city]" required>
+      <label for="AddressCountryNew">Country</label><select id="AddressCountryNew" name="address[country]">{{ all_country_option_tags }}</select>
+      <label for="AddressZipNew">Postal code</label><input id="AddressZipNew" type="text" name="address[zip]" required>
+      <label for="AddressPhoneNew">Phone</label><input id="AddressPhoneNew" type="tel" name="address[phone]">
+      <label><input type="checkbox" name="address[default]" value="1"> Set as default</label>
+      <button class="button button--yellow" type="submit">Add address</button>
+    {% endform %}
+  </details>
+  <div class="customer-grid">{% for address in customer.addresses %}<article class="customer-card">{% if address == customer.default_address %}<span class="pill">Default</span>{% endif %}{{ address | format_address }}<form method="post" action="{{ routes.account_addresses_url }}/{{ address.id }}"><input type="hidden" name="_method" value="delete"><button class="button button--white" type="submit">Delete</button></form></article>{% endfor %}</div>
+</section>
+{% schema %}{"name":"Customer addresses","settings":[]}{% endschema %}
