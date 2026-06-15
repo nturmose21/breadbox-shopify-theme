@@ -10,7 +10,7 @@ A buyer-focused Shopify Online Store 2.0 theme for the BREADBOX Arduino starter 
 - Responsive product gallery, variants, quantity and accelerated checkout
 - Discount-aware cart and responsive collection pages
 - Editable colors, fonts, menus, content, images and products in the theme editor
-- Shopify Theme Check on every GitHub push and pull request
+- Shopify Theme Check configuration for local and Shopify validation
 
 ## Connect to Shopify
 
