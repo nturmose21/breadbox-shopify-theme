@@ -10,21 +10,19 @@
 </section>
 
 {% stylesheet %}
-  .final-cta { min-height: 380px; position: relative; display: grid; place-items: center; overflow: clip; border-block: 4px solid var(--ink); background: var(--teal); isolation: isolate; }
+  .final-cta { min-height: 280px; position: relative; display: grid; place-items: center; overflow: clip; border-block: 4px solid var(--ink); background: var(--teal); isolation: isolate; }
   .final-cta__grid { position: absolute; inset: 0; opacity: .22; background-image: linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px); background-size: 30px 30px; }
-  .final-cta__content { position: relative; z-index: 3; width: min(700px, calc(100% - 2rem)); padding: 3rem 1rem; text-align: center; }
+  .final-cta__content { position: relative; z-index: 3; width: min(640px, calc(100% - 2rem)); padding: 2.25rem 1rem; text-align: center; }
   .final-cta .eyebrow { color: var(--blue-dark); }
-  .final-cta h2 { font-size: 4.6rem; }
-  .final-cta__content > p:not(.eyebrow) { margin-inline: auto; max-width: 46ch; font-weight: 750; }
-  .final-cta__part { position: absolute; z-index: 2; width: min(28vw, 330px); height: 82%; object-fit: contain; filter: drop-shadow(7px 9px 0 rgba(7,10,13,.65)); transform: translate3d(0, var(--parallax-y, 0), 0); }
+  .final-cta h2 { font-size: clamp(2.45rem, 5vw, 4rem); }
+  .final-cta__content > p:not(.eyebrow) { margin-inline: auto; max-width: 38ch; font-weight: 800; line-height: 1.35; }
+  .final-cta__part { position: absolute; z-index: 2; width: min(22vw, 240px); height: 72%; object-fit: contain; opacity: .72; filter: drop-shadow(5px 7px 0 rgba(7,10,13,.55)); transform: translate3d(0, var(--parallax-y, 0), 0); }
   .final-cta__part--left { left: -1%; bottom: -16%; rotate: 13deg; }
   .final-cta__part--right { right: 0; top: -10%; rotate: -11deg; }
-  @media (max-width: 900px) { .final-cta h2 { font-size: 3.5rem; } }
   @media (max-width: 680px) {
-    .final-cta { min-height: 350px; }
-    .final-cta__content { padding-block: 2.5rem; }
-    .final-cta h2 { font-size: 2.75rem; }
-    .final-cta__part { width: 40%; height: 40%; opacity: .46; filter: drop-shadow(4px 5px 0 rgba(7,10,13,.45)); }
+    .final-cta { min-height: 290px; }
+    .final-cta__content { padding-block: 2rem; }
+    .final-cta__part { width: 34%; height: 34%; opacity: .34; filter: drop-shadow(4px 5px 0 rgba(7,10,13,.38)); }
     .final-cta__part--left { left: -5%; bottom: -5%; }
     .final-cta__part--right { right: -4%; top: -3%; }
   }
@@ -35,9 +33,9 @@
   "name": "Final call to action",
   "settings": [
     { "type": "product", "id": "product", "label": "Product" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your first build starts here" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready to make something?" },
-    { "type": "text", "id": "text", "label": "Text", "default": "Open BREADBOX and turn a handful of parts into a project you built yourself." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Start small. Build real." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get the kit." },
+    { "type": "text", "id": "text", "label": "Text", "default": "One box. Real Arduino projects. Beginner friendly." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Get BREADBOX" }
   ],
   "presets": [{ "name": "Final call to action" }]

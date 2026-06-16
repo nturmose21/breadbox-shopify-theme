@@ -16,7 +16,7 @@
   --shadow-sm: 3px 4px 0 var(--ink);
   --shadow: 6px 7px 0 var(--ink);
   --radius: 8px;
-  --section-space: clamp(3.5rem, 8vw, 7rem);
+  --section-space: clamp(2.5rem, 6vw, 5.25rem);
 }
 
 html { scroll-behavior: smooth; overflow-x: clip; }
@@ -72,8 +72,8 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
 .shopify-section > * { min-width: 0; grid-column: 2; }
 .shopify-section > .full-width { grid-column: 1 / -1; }
 .section-shell { padding-block: var(--section-space); }
-.section-shell--compact { padding-block: clamp(2rem, 5vw, 4rem); }
-.section-heading { max-width: 720px; margin-bottom: clamp(1.75rem, 4vw, 3rem); }
+.section-shell--compact { padding-block: clamp(1.7rem, 4vw, 3.25rem); }
+.section-heading { max-width: 640px; margin-bottom: clamp(1.25rem, 3vw, 2rem); }
 .section-heading--center { margin-inline: auto; text-align: center; }
 .eyebrow { margin: 0 0 .6rem; color: var(--teal-dark); font-size: .77rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
 .rte > *:last-child { margin-bottom: 0; }
@@ -82,13 +82,13 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
 .motion-ready [data-reveal] {
   opacity: 0;
   transition:
-    opacity .52s cubic-bezier(.2,.7,.2,1),
-    transform .52s cubic-bezier(.2,.7,.2,1);
+    opacity .48s cubic-bezier(.2,.7,.2,1),
+    transform .48s cubic-bezier(.2,.7,.2,1);
   transition-delay: var(--reveal-delay, 0ms);
 }
-.motion-ready [data-reveal="up"] { transform: translate3d(0, 18px, 0); }
-.motion-ready [data-reveal="left"] { transform: translate3d(-18px, 0, 0); }
-.motion-ready [data-reveal="scale"] { transform: scale(.97); }
+.motion-ready [data-reveal="up"] { transform: translate3d(0, 14px, 0); }
+.motion-ready [data-reveal="left"] { transform: translate3d(-14px, 0, 0); }
+.motion-ready [data-reveal="scale"] { transform: scale(.985); }
 .motion-ready [data-reveal].is-visible { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 
 .button, button.button, input.button, .shopify-payment-button__button--unbranded {
@@ -169,8 +169,8 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
   h1 { font-size: clamp(2.8rem, 13.5vw, 3.6rem); }
   h2 { font-size: clamp(2rem, 10vw, 2.6rem); }
   h3 { font-size: clamp(1.1rem, 5vw, 1.3rem); }
-  .section-shell--compact { padding-block: 2.5rem; }
-  .section-heading { margin-bottom: 1.4rem; }
+  .section-shell--compact { padding-block: 1.8rem; }
+  .section-heading { margin-bottom: 1.1rem; }
   .product-grid { grid-template-columns: 1fr; }
   .button { min-height: 48px; }
   .motion-ready [data-reveal] { transition-delay: min(var(--reveal-delay, 0ms), 120ms); }

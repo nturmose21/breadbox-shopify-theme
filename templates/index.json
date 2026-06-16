@@ -13,8 +13,8 @@
       "block_order": ["uno", "breadboard", "oled", "joystick", "sensor", "servo"],
       "settings": {
         "eyebrow": "Arduino starter kit",
-        "heading": "Build more. Start here.",
-        "text": "<p>One compact kit. Real components. Guided projects that make Arduino click.</p>",
+        "heading": "Arduino, boxed.",
+        "text": "<p>Real parts. Guided builds. Zero guesswork.</p>",
         "button_label": "Shop BREADBOX",
         "button_link": "shopify://collections/all"
       }
@@ -45,8 +45,8 @@
       "block_order": ["uno", "breadboard", "oled", "joystick", "sensor", "servo", "buttons", "buzzer"],
       "settings": {
         "eyebrow": "Inside the box",
-        "heading": "The parts that make it possible",
-        "text": "<p>A focused set of real components, ready to be rebuilt project after project.</p>"
+        "heading": "Pick a part. Build a project.",
+        "text": "<p>The BREADBOX hardware lineup, packed into one compact kit.</p>"
       }
     },
     "tutorials": {
@@ -58,9 +58,9 @@
       },
       "block_order": ["first", "second", "third"],
       "settings": {
-        "eyebrow": "Guided projects",
-        "heading": "Build something real",
-        "text": "<p>Clear tutorials take you from loose parts to a finished project.</p>"
+        "eyebrow": "Project slots",
+        "heading": "Tutorial previews",
+        "text": "<p>Clean placeholders now. Real project shots later.</p>"
       }
     },
     "steps": {
@@ -76,12 +76,12 @@
     "cta": {
       "type": "final-cta",
       "settings": {
-        "eyebrow": "Your first build starts here",
-        "heading": "Ready to make something?",
-        "text": "Open BREADBOX and turn a handful of parts into a project you built yourself.",
+        "eyebrow": "Start small. Build real.",
+        "heading": "Get the kit.",
+        "text": "One box. Real Arduino projects. Beginner friendly.",
         "button_label": "Get BREADBOX"
       }
     }
   },
-  "order": ["hero", "trust", "components", "tutorials", "steps", "cta"]
+  "order": ["hero", "components", "tutorials", "steps", "cta"]
 }

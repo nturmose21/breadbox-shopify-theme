@@ -21,7 +21,7 @@
       %}
       <div
         class="hero-part hero-part--{{ block.settings.position }}"
-        style="--part-delay: {{ forloop.index0 | times: 0.12 }}s; --float-range: {{ block.settings.float_range }}px; --float-negative: -{{ block.settings.float_range }}px;"
+        style="--part-delay: {{ forloop.index0 | times: 0.12 }}s; --float-range: {{ block.settings.float_range | divided_by: 2 }}px; --float-negative: -{{ block.settings.float_range | divided_by: 2 }}px;"
         data-parallax="{{ block.settings.parallax }}"
         {{ block.shopify_attributes }}
       >
@@ -70,7 +70,7 @@
 
 {% stylesheet %}
   .hero-product {
-    min-height: clamp(660px, 80svh, 780px);
+    min-height: clamp(520px, 70svh, 650px);
     position: relative;
     display: block;
     align-items: center;
@@ -81,12 +81,12 @@
     color: white;
     isolation: isolate;
   }
-  .hero-product__blueprint { position: absolute; inset: 0; opacity: .2; background-image: linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px); background-size: 36px 36px; mask-image: linear-gradient(to right, transparent 4%, black 45%); }
-  .hero-product__content { position: relative; z-index: 5; width: min(600px, 47%); padding-block: clamp(4.75rem, 7vw, 6rem); }
+  .hero-product__blueprint { position: absolute; inset: 0; opacity: .18; background-image: linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(to right, transparent 2%, black 42%); }
+  .hero-product__content { position: relative; z-index: 5; width: min(560px, 45%); padding-block: clamp(3.6rem, 6vw, 4.8rem); }
   .hero-product__eyebrow { width: fit-content; margin-bottom: 1rem; border: 2px solid var(--ink); border-radius: 999px; padding: .35rem .75rem; background: var(--teal); color: var(--ink); box-shadow: 2px 3px 0 var(--ink); font-size: .78rem; font-weight: 900; text-transform: uppercase; }
-  .hero-product h1 { max-width: 9ch; font-size: clamp(4.7rem, 6.8vw, 6.2rem); text-shadow: 4px 5px 0 var(--ink); }
-  .hero-product__copy { max-width: 44ch; font-size: clamp(1rem, 1.25vw, 1.15rem); font-weight: 700; }
-  .hero-product__buy { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1rem; margin-top: 1.45rem; }
+  .hero-product h1 { max-width: 8ch; font-size: clamp(3.85rem, 5.6vw, 5.35rem); text-shadow: 4px 5px 0 var(--ink); }
+  .hero-product__copy { max-width: 34ch; font-size: clamp(.96rem, 1.1vw, 1.08rem); font-weight: 800; }
+  .hero-product__buy { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem .9rem; margin-top: 1.15rem; }
   .hero-product__buy .price { color: white; font-size: 1.7rem; }
   .hero-product__buy form { display: flex; align-items: center; gap: .65rem; }
   .hero-product__buy select { width: auto; min-width: 150px; }
@@ -94,16 +94,16 @@
   .hero-product__promises { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.3rem 0 0; padding: 0; list-style: none; }
   .hero-product__promises li { border: 2px solid rgba(255,255,255,.7); border-radius: 999px; padding: .28rem .62rem; font-size: .7rem; font-weight: 900; text-transform: uppercase; }
 
-  .hero-product__scene { position: absolute; z-index: 2; top: 7%; right: max(var(--page-margin), calc((100% - var(--page-width)) / 2)); width: min(58%, 820px); height: 86%; pointer-events: none; }
-  .hero-product__platform { position: absolute; right: 2%; bottom: 5%; width: 80%; height: 30%; border: 4px solid var(--ink); background: var(--yellow); box-shadow: 9px 10px 0 var(--ink); clip-path: polygon(7% 0, 100% 0, 91% 100%, 0 100%); transform: rotate(-3deg); }
-  .hero-part { position: absolute; z-index: 3; filter: drop-shadow(9px 12px 0 rgba(7,10,13,.78)); transform: translate3d(0, var(--parallax-y, 0), 0); }
-  .hero-part img { width: 100%; height: 100%; object-fit: contain; animation: hero-float 5.8s ease-in-out infinite alternate; animation-delay: var(--part-delay); }
-  .hero-part--uno { right: 10%; bottom: 18%; width: 58%; height: 48%; rotate: -5deg; }
-  .hero-part--breadboard { right: 1%; top: 7%; width: 37%; height: 31%; rotate: 7deg; }
-  .hero-part--oled { left: 5%; top: 8%; width: 28%; height: 29%; rotate: -8deg; }
-  .hero-part--joystick { left: 0; bottom: 6%; width: 34%; height: 34%; rotate: 7deg; }
-  .hero-part--sensor { right: 1%; top: 39%; width: 22%; height: 23%; rotate: 6deg; }
-  .hero-part--servo { left: 32%; top: 0; width: 30%; height: 27%; rotate: -3deg; }
+  .hero-product__scene { position: absolute; z-index: 2; top: 8%; right: max(var(--page-margin), calc((100% - var(--page-width)) / 2)); width: min(57%, 760px); height: 78%; pointer-events: none; }
+  .hero-product__platform { position: absolute; right: 4%; bottom: 10%; width: 78%; height: 28%; border: 4px solid var(--ink); background: var(--yellow); box-shadow: 7px 8px 0 var(--ink); clip-path: polygon(7% 0, 100% 0, 92% 100%, 0 100%); transform: rotate(-2deg); }
+  .hero-part { position: absolute; z-index: 3; filter: drop-shadow(7px 9px 0 rgba(7,10,13,.7)); transform: translate3d(0, var(--parallax-y, 0), 0); }
+  .hero-part img { width: 100%; height: 100%; object-fit: contain; animation: hero-float 6.4s ease-in-out infinite alternate; animation-delay: var(--part-delay); }
+  .hero-part--uno { right: 13%; bottom: 20%; width: 53%; height: 45%; rotate: -3deg; }
+  .hero-part--breadboard { right: 2%; top: 9%; width: 33%; height: 29%; rotate: 4deg; }
+  .hero-part--oled { left: 9%; top: 11%; width: 25%; height: 27%; rotate: -5deg; }
+  .hero-part--joystick { left: 4%; bottom: 12%; width: 29%; height: 30%; rotate: 4deg; }
+  .hero-part--sensor { right: 4%; top: 42%; width: 19%; height: 21%; rotate: 4deg; }
+  .hero-part--servo { left: 35%; top: 0; width: 26%; height: 24%; rotate: -2deg; }
   .hero-product__spark { position: absolute; z-index: 5; color: var(--yellow); font-family: var(--font-display-family); font-size: clamp(2rem, 4vw, 4rem); font-weight: 900; text-shadow: 3px 3px 0 var(--ink); }
   .hero-product__spark--one { left: 43%; top: 32%; transform: rotate(10deg); }
   .hero-product__spark--two { right: 2%; bottom: 5%; }
@@ -111,36 +111,36 @@
   @keyframes hero-float { from { transform: translate3d(0, var(--float-negative), 0); } to { transform: translate3d(0, var(--float-range), 0); } }
 
   @media (max-width: 980px) {
-    .hero-product { min-height: clamp(620px, 72svh, 700px); }
-    .hero-product__content { width: 52%; padding-block: 4.5rem 3rem; }
-    .hero-product h1 { max-width: 7ch; font-size: clamp(3.45rem, 8vw, 4.35rem); }
+    .hero-product { min-height: clamp(500px, 64svh, 620px); }
+    .hero-product__content { width: 50%; padding-block: 3.6rem 2.6rem; }
+    .hero-product h1 { max-width: 7ch; font-size: clamp(3rem, 7vw, 4rem); }
     .hero-product__copy { max-width: 31ch; font-size: 1rem; }
-    .hero-product__scene { top: 4%; right: -2%; width: 57%; height: 76%; opacity: .92; }
+    .hero-product__scene { top: 7%; right: -1%; width: 54%; height: 70%; opacity: .94; }
     .hero-product__platform { opacity: .88; }
     .hero-product__buy form { flex-wrap: wrap; }
   }
   @media (max-width: 680px) {
     .hero-product { min-height: 0; }
-    .hero-product__content { width: 100%; padding: clamp(11.75rem, 48vw, 13.5rem) 0 1.75rem; }
-    .hero-product h1 { max-width: 7ch; font-size: clamp(2.9rem, 13.5vw, 3.55rem); text-shadow: 3px 4px 0 var(--ink); }
-    .hero-product__copy { max-width: 34ch; }
-    .hero-product__scene { top: .25rem; right: 0; width: 100%; height: clamp(11.75rem, 48vw, 13.5rem); }
+    .hero-product__content { width: 100%; padding: clamp(8.6rem, 39vw, 10.4rem) 0 1.25rem; }
+    .hero-product h1 { max-width: 7ch; margin-bottom: .5rem; font-size: clamp(2.55rem, 11.6vw, 3.1rem); text-shadow: 3px 4px 0 var(--ink); }
+    .hero-product__copy { max-width: 29ch; font-size: .86rem; line-height: 1.4; }
+    .hero-product__scene { top: .2rem; right: 0; width: 100%; height: clamp(8.6rem, 39vw, 10.4rem); }
     .hero-product__platform { right: -4%; bottom: 4%; width: 74%; height: 28%; border-width: 3px; box-shadow: 5px 6px 0 var(--ink); }
     .hero-part { filter: drop-shadow(5px 7px 0 rgba(7,10,13,.68)); }
     .hero-product__buy { margin-top: 1rem; gap: .5rem; }
-    .hero-product__buy .price { font-size: 1.45rem; }
+    .hero-product__buy .price { font-size: 1.25rem; }
     .hero-product__buy, .hero-product__buy form { align-items: stretch; flex-direction: column; width: 100%; }
     .hero-product__buy select, .hero-product__buy .button { width: 100%; }
     .hero-product__buy .button { min-height: 44px; }
     .hero-product__details { text-align: center; }
-    .hero-product__promises { gap: .3rem; margin-top: .8rem; }
-    .hero-product__promises li { font-size: .63rem; }
+    .hero-product__promises { gap: .25rem; margin-top: .65rem; }
+    .hero-product__promises li { padding: .22rem .5rem; font-size: .56rem; }
     .hero-product__spark--one { display: none; }
   }
   @media (max-width: 380px) {
-    .hero-product__content { padding-top: 11.8rem; }
-    .hero-product h1 { font-size: 2.85rem; }
-    .hero-product__scene { height: 11.8rem; }
+    .hero-product__content { padding-top: 8.8rem; }
+    .hero-product h1 { font-size: 2.5rem; }
+    .hero-product__scene { height: 8.8rem; }
     .hero-product__promises li { padding-inline: .48rem; font-size: .58rem; }
   }
   @media (hover: none) { .hero-part img { animation-duration: 7s; } }
@@ -152,8 +152,8 @@
   "settings": [
     { "type": "product", "id": "product", "label": "Featured product" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Arduino starter kit" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Build more. Start here." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>One compact kit. Real components. Guided projects that make Arduino click.</p>" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Arduino, boxed." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Real parts. Guided builds. Zero guesswork.</p>" },
     { "type": "text", "id": "button_label", "label": "Fallback button label", "default": "Shop BREADBOX" },
     { "type": "url", "id": "button_link", "label": "Fallback button link" }
   ],
