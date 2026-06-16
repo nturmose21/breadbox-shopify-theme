@@ -33,14 +33,14 @@
     "components": {
       "type": "kit-components",
       "blocks": {
-        "uno": { "type": "component", "settings": { "asset": "component-arduino-uno.png", "symbol": "+", "title": "Arduino UNO R3", "text": "The brain of every build", "parallax": 3 } },
-        "breadboard": { "type": "component", "settings": { "asset": "component-breadboard.png", "symbol": "+", "title": "Mini breadboard", "text": "Build without soldering", "parallax": -3 } },
-        "oled": { "type": "component", "settings": { "asset": "component-oled.png", "symbol": "+", "title": "SSD1306 OLED", "text": "Crisp graphics and games", "parallax": 4 } },
-        "joystick": { "type": "component", "settings": { "asset": "component-joystick.png", "symbol": "+", "title": "Joystick module", "text": "Two-axis control", "parallax": -2 } },
-        "sensor": { "type": "component", "settings": { "asset": "component-mpu6050.png", "symbol": "+", "title": "MPU6050", "text": "Motion and tilt sensing", "parallax": 4 } },
-        "servo": { "type": "component", "settings": { "asset": "component-servo.png", "symbol": "+", "title": "SG90 servo", "text": "Make projects move", "parallax": -4 } },
-        "buttons": { "type": "component", "settings": { "asset": "component-button.svg", "symbol": "●", "title": "Push buttons", "text": "Simple tactile input", "parallax": 2 } },
-        "buzzer": { "type": "component", "settings": { "asset": "component-buzzer.svg", "symbol": "))", "title": "Passive buzzer", "text": "Sound and feedback", "parallax": -2 } }
+        "uno": { "type": "component", "settings": { "asset": "component-arduino-uno.png", "symbol": "+", "title": "Arduino UNO R3", "text": "The brain of every build", "tag": "Core", "parallax": 3 } },
+        "breadboard": { "type": "component", "settings": { "asset": "component-breadboard.png", "symbol": "+", "title": "Mini breadboard", "text": "Build without soldering", "tag": "Build", "parallax": -3 } },
+        "oled": { "type": "component", "settings": { "asset": "component-oled.png", "symbol": "+", "title": "SSD1306 OLED", "text": "Crisp graphics and games", "tag": "Screen", "parallax": 4 } },
+        "joystick": { "type": "component", "settings": { "asset": "component-joystick.png", "symbol": "+", "title": "Joystick module", "text": "Two-axis control", "tag": "Input", "parallax": -2 } },
+        "sensor": { "type": "component", "settings": { "asset": "component-mpu6050.png", "symbol": "+", "title": "MPU6050", "text": "Motion and tilt sensing", "tag": "Motion", "parallax": 4 } },
+        "servo": { "type": "component", "settings": { "asset": "component-servo.png", "symbol": "+", "title": "SG90 servo", "text": "Make projects move", "tag": "Move", "parallax": -4 } },
+        "buttons": { "type": "component", "settings": { "asset": "component-button.svg", "symbol": "●", "title": "Push buttons", "text": "Simple tactile input", "tag": "Tap", "parallax": 2 } },
+        "buzzer": { "type": "component", "settings": { "asset": "component-buzzer.svg", "symbol": "))", "title": "Passive buzzer", "text": "Sound and feedback", "tag": "Sound", "parallax": -2 } }
       },
       "block_order": ["uno", "breadboard", "oled", "joystick", "sensor", "servo", "buttons", "buzzer"],
       "settings": {

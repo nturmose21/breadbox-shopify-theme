@@ -23,5 +23,9 @@
     text-shadow: .045em .055em 0 var(--yellow);
     transform: rotate(-.6deg);
   }
-  .brand-mark--compact { font-size: clamp(1.45rem, 3vw, 2.15rem); box-shadow: 2px 3px 0 var(--ink); }
+  .brand-mark--compact { font-size: clamp(1.25rem, 2.4vw, 1.9rem); box-shadow: 2px 3px 0 var(--ink); transform: rotate(-.3deg); }
+  @media (max-width: 420px) {
+    .brand-mark { border-width: 2px; border-radius: 7px; }
+    .brand-mark--compact { font-size: 1.28rem; padding-inline: .38em; box-shadow: 2px 2px 0 var(--ink); transform: none; }
+  }
 {% endstylesheet %}
