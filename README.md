@@ -6,6 +6,7 @@ A buyer-focused Shopify Online Store 2.0 theme for the BREADBOX Arduino starter 
 
 - Product-first home hero with direct add-to-cart
 - BREADBOX project gallery using real OLED previews
+- Store-native Arduino UNO code uploader page template
 - Kit contents, trust strip, reviews, FAQs and featured collection sections
 - Responsive product gallery, variants, quantity and accelerated checkout
 - Discount-aware cart and responsive collection pages
@@ -21,6 +22,15 @@ A buyer-focused Shopify Online Store 2.0 theme for the BREADBOX Arduino starter 
 5. Select this repository and the `main` branch.
 6. Open the theme editor and select your BREADBOX product in the `Product hero` section.
 7. Select your shop collection in `Featured collection`, then replace placeholder reviews and policy copy before publishing.
+
+## Add the uploader page
+
+1. In Shopify Admin, open `Online Store > Pages`.
+2. Create a page called `Uploader`.
+3. Set the theme template to `uploader`.
+4. Add `/pages/uploader` to your main menu so customers can upload sketches from the same store domain.
+
+The uploader uses Web Serial, so visitors need Chrome or Edge on desktop over HTTPS. A published Shopify domain such as `https://breadbox.fun/pages/uploader` satisfies the HTTPS requirement.
 
 ## Local preview
 

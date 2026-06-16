@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "code-uploader",
+      "settings": {
+        "eyebrow": "Arduino UNO uploader",
+        "heading": "Upload projects from the store.",
+        "text": "<p>Pick a BREADBOX sketch, connect an Arduino UNO over USB, then flash it right from Chrome or Edge.</p>",
+        "project_heading": "Pick a project",
+        "upload_heading": "Flash the UNO",
+        "custom_hex_label": "Custom HEX",
+        "button_label": "Upload to UNO",
+        "note_heading": "Browser note",
+        "note": "Use Chrome or Edge on desktop. Web Serial requires HTTPS, which your Shopify domain provides."
+      }
+    }
+  },
+  "order": ["main"]
+}

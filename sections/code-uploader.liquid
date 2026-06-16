@@ -1,0 +1,689 @@
+<section class="code-uploader section-shell" data-breadbox-uploader>
+  <script type="application/json" id="breadbox-uploader-manifest">
+    {
+      "board": "arduino:avr:uno",
+      "sketches": [
+        {
+          "id": "flappy-bird",
+          "name": "Flappy Bird",
+          "summary": "Three-button OLED game.",
+          "hardware": "UNO, SSD1306 OLED, buttons on D9/D10/D11",
+          "hex": {{ 'uploader-flappy-bird.hex' | asset_url | json }},
+          "screen": {
+            "title": "FLAPPYBIRD",
+            "subtitle": "PRESS TO START",
+            "mode": "bird",
+            "image": {{ 'uploader-oled-flappy-bird.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Boot", "image": {{ 'uploader-oled-flappy-bird.svg' | asset_url | json }} },
+              { "label": "Gameplay", "image": {{ 'uploader-oled-flappy-bird-gameplay.svg' | asset_url | json }} },
+              { "label": "Game over", "image": {{ 'uploader-oled-flappy-bird-game-over.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "tetris",
+          "name": "Tetris",
+          "summary": "OLED blocks and buzzer audio.",
+          "hardware": "UNO, SSD1306 OLED, buttons, buzzer on D12",
+          "hex": {{ 'uploader-tetris.hex' | asset_url | json }},
+          "screen": {
+            "title": "TETRIS",
+            "subtitle": "Korobeiniki ready",
+            "mode": "blocks",
+            "image": {{ 'uploader-oled-tetris.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Boot", "image": {{ 'uploader-oled-tetris.svg' | asset_url | json }} },
+              { "label": "Playfield", "image": {{ 'uploader-oled-tetris-playfield.svg' | asset_url | json }} },
+              { "label": "Game over", "image": {{ 'uploader-oled-tetris-game-over.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "tiny-tetris",
+          "name": "Tiny Tetris",
+          "summary": "Compact vertical OLED Tetris.",
+          "hardware": "UNO and I2C OLED",
+          "hex": {{ 'uploader-tiny-tetris.hex' | asset_url | json }},
+          "screen": {
+            "title": "TINY TETRIS",
+            "subtitle": "Title screen",
+            "mode": "blocks",
+            "orientation": "portrait",
+            "width": 64,
+            "height": 128,
+            "image": {{ 'uploader-oled-tiny-tetris.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Boot final", "image": {{ 'uploader-oled-tiny-tetris.svg' | asset_url | json }} },
+              { "label": "Title", "image": {{ 'uploader-oled-tiny-tetris-title.svg' | asset_url | json }} },
+              { "label": "Gameplay", "image": {{ 'uploader-oled-tiny-tetris-gameplay.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "doom",
+          "name": "Doom Raycaster",
+          "summary": "Tiny raycast game.",
+          "hardware": "UNO, SSD1306 OLED, buttons, optional buzzer",
+          "hex": {{ 'uploader-doom.hex' | asset_url | json }},
+          "screen": {
+            "title": "DOOM",
+            "subtitle": "PRESS FIRE",
+            "mode": "doom",
+            "image": {{ 'uploader-oled-doom.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Boot", "image": {{ 'uploader-oled-doom.svg' | asset_url | json }} },
+              { "label": "Gameplay", "image": {{ 'uploader-oled-doom-gameplay.svg' | asset_url | json }} },
+              { "label": "Fire", "image": {{ 'uploader-oled-doom-fire.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "mini-pc",
+          "name": "Mini PC",
+          "summary": "Pocket tools on OLED.",
+          "hardware": "UNO, SSD1306 OLED, buttons, A0, buzzer on D9",
+          "hex": {{ 'uploader-mini-pc.hex' | asset_url | json }},
+          "screen": {
+            "title": "HACK_UPDT",
+            "subtitle": "Calculator Menu",
+            "mode": "menu",
+            "orientation": "portrait",
+            "width": 64,
+            "height": 128,
+            "image": {{ 'uploader-oled-mini-pc.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Menu", "image": {{ 'uploader-oled-mini-pc.svg' | asset_url | json }} },
+              { "label": "Calculator", "image": {{ 'uploader-oled-mini-pc-calculator.svg' | asset_url | json }} },
+              { "label": "Stopwatch", "image": {{ 'uploader-oled-mini-pc-stopwatch.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "calculator",
+          "name": "Calculator",
+          "summary": "OLED Ardulator.",
+          "hardware": "UNO and SSD1306 OLED",
+          "hex": {{ 'uploader-calculator.hex' | asset_url | json }},
+          "screen": {
+            "title": "ARDULATOR",
+            "subtitle": "Cover screen",
+            "mode": "calc",
+            "image": {{ 'uploader-oled-calculator.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Cover", "image": {{ 'uploader-oled-calculator.svg' | asset_url | json }} },
+              { "label": "Keypad", "image": {{ 'uploader-oled-calculator-keypad.svg' | asset_url | json }} },
+              { "label": "Result", "image": {{ 'uploader-oled-calculator-result.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "multimeter-oscilloscope",
+          "name": "Meter + Scope",
+          "summary": "Signal and measurement tool.",
+          "hardware": "UNO and SSD1306 OLED",
+          "hex": {{ 'uploader-multimeter-oscilloscope.hex' | asset_url | json }},
+          "screen": {
+            "title": "METER",
+            "subtitle": "VOL RES CNT",
+            "mode": "meter",
+            "image": {{ 'uploader-oled-multimeter-oscilloscope.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Meter", "image": {{ 'uploader-oled-multimeter-oscilloscope.svg' | asset_url | json }} },
+              { "label": "Scope", "image": {{ 'uploader-oled-multimeter-oscilloscope-osc.svg' | asset_url | json }} },
+              { "label": "Square", "image": {{ 'uploader-oled-multimeter-oscilloscope-square.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "dino-tamagotchi",
+          "name": "Dino Pet",
+          "summary": "Virtual pet sketch.",
+          "hardware": "UNO and SSD1306 OLED",
+          "hex": {{ 'uploader-dino-tamagotchi.hex' | asset_url | json }},
+          "screen": {
+            "title": "DINO PET",
+            "subtitle": "jakobdesign presents",
+            "mode": "dino",
+            "image": {{ 'uploader-oled-dino-tamagotchi.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Boot", "image": {{ 'uploader-oled-dino-tamagotchi.svg' | asset_url | json }} },
+              { "label": "Play", "image": {{ 'uploader-oled-dino-tamagotchi-play.svg' | asset_url | json }} },
+              { "label": "Game over", "image": {{ 'uploader-oled-dino-tamagotchi-game-over.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "tamagotchi",
+          "name": "Tamagotchi",
+          "summary": "OLED pet with sprites.",
+          "hardware": "UNO, SSD1306 OLED, buzzer",
+          "hex": {{ 'uploader-tamagotchi.hex' | asset_url | json }},
+          "screen": {
+            "title": "ALEGOTCHI",
+            "subtitle": "Home screen",
+            "mode": "pet",
+            "image": {{ 'uploader-oled-tamagotchi.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Home", "image": {{ 'uploader-oled-tamagotchi.svg' | asset_url | json }} },
+              { "label": "Stats", "image": {{ 'uploader-oled-tamagotchi-stats.svg' | asset_url | json }} },
+              { "label": "Sleep", "image": {{ 'uploader-oled-tamagotchi-sleep.svg' | asset_url | json }} }
+            ]
+          }
+        },
+        {
+          "id": "gyro-racer",
+          "name": "Gyro Racer",
+          "summary": "Motion-controlled racing.",
+          "hardware": "UNO, SSD1306 OLED, MPU6050",
+          "hex": {{ 'uploader-gyro-racer.hex' | asset_url | json }},
+          "screen": {
+            "title": "3 fast",
+            "subtitle": "laps...",
+            "mode": "racer",
+            "image": {{ 'uploader-oled-gyro-racer.svg' | asset_url | json }},
+            "frames": [
+              { "label": "Gameplay", "image": {{ 'uploader-oled-gyro-racer.svg' | asset_url | json }} },
+              { "label": "Intro", "image": {{ 'uploader-oled-gyro-racer-intro.svg' | asset_url | json }} },
+              { "label": "Finish", "image": {{ 'uploader-oled-gyro-racer-finish.svg' | asset_url | json }} }
+            ]
+          }
+        }
+      ]
+    }
+  </script>
+
+  <div class="code-uploader__hero" data-reveal="up">
+    <div class="code-uploader__copy">
+      <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1>{{ section.settings.heading | escape }}</h1>
+      <div class="rte">{{ section.settings.text }}</div>
+    </div>
+    <div class="status-row" aria-label="Uploader status">
+      <div class="browser-pill" id="browser-status">Checking browser</div>
+      <div class="count-pill" id="sketch-count">0 sketches</div>
+    </div>
+  </div>
+
+  <div class="uploader-grid">
+    <section class="uploader-panel project-panel" aria-label="Sketch list" data-reveal="up">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">Step 1</p>
+          <h2>{{ section.settings.project_heading | escape }}</h2>
+        </div>
+        <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh firmware list" title="Refresh firmware list">
+          <span aria-hidden="true">↻</span>
+        </button>
+      </div>
+      <div class="sketch-list" id="sketch-list"></div>
+    </section>
+
+    <section class="uploader-panel upload-panel" aria-label="Uploader" data-reveal="up" style="--reveal-delay: 90ms;">
+      <div class="panel-heading upload-heading">
+        <div>
+          <p class="panel-kicker">Step 2</p>
+          <h2>{{ section.settings.upload_heading | escape }}</h2>
+        </div>
+        <label class="file-control">
+          <span>{{ section.settings.custom_hex_label | escape }}</span>
+          <input id="hex-file" type="file" accept=".hex,text/plain">
+        </label>
+      </div>
+
+      <div class="selected">
+        <div class="selected-copy">
+          <p class="panel-kicker">Selected</p>
+          <h3 id="selected-name">No sketch selected</h3>
+          <p id="selected-detail">Choose a BREADBOX sketch.</p>
+          <div class="selected-badges" aria-hidden="true">
+            <span>UNO</span>
+            <span>USB</span>
+            <span>HEX</span>
+          </div>
+        </div>
+        <div id="selected-screen" class="selected-screen" aria-label="Selected project OLED loading screen"></div>
+      </div>
+
+      <button class="primary" id="upload-button" type="button" disabled>
+        <span class="button-icon" aria-hidden="true">&gt;</span>
+        <span id="upload-button-label" data-default-label="{{ section.settings.button_label | escape }}">{{ section.settings.button_label | escape }}</span>
+      </button>
+
+      <div class="progress-wrap" aria-label="Upload progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-meta">
+          <span id="progress-label">Idle</span>
+          <span id="progress-percent">0%</span>
+        </div>
+      </div>
+
+      <div class="console-frame">
+        <div class="console-tabs" aria-hidden="true"><span></span><span></span><span></span></div>
+        <pre class="log" id="log" aria-live="polite"></pre>
+      </div>
+    </section>
+  </div>
+
+  <aside class="uploader-note" data-reveal="up">
+    <strong>{{ section.settings.note_heading | escape }}</strong>
+    <span>{{ section.settings.note | escape }}</span>
+  </aside>
+</section>
+
+<script src="{{ 'breadbox-uploader.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  .code-uploader {
+    --uploader-card: rgba(255,253,246,.94);
+    --uploader-line: rgba(7,10,13,.18);
+    padding-block: clamp(2.4rem, 5vw, 4.5rem);
+  }
+  .code-uploader__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: end;
+    margin-bottom: clamp(1rem, 3vw, 1.6rem);
+  }
+  .code-uploader__copy { max-width: 760px; }
+  .code-uploader h1 {
+    max-width: 10ch;
+    margin-bottom: .65rem;
+    font-size: clamp(2.8rem, 7vw, 6.6rem);
+    line-height: .88;
+    letter-spacing: -.035em;
+  }
+  .code-uploader__copy .rte {
+    max-width: 54ch;
+    color: var(--muted);
+    font-size: clamp(.98rem, 1.7vw, 1.16rem);
+    font-weight: 750;
+  }
+  .status-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: .55rem;
+  }
+  .browser-pill,
+  .count-pill {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: .42rem .7rem;
+    background: white;
+    box-shadow: 3px 4px 0 var(--ink);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .browser-pill.ready { background: var(--teal); }
+  .browser-pill.blocked { background: #ffded5; }
+  .count-pill { background: var(--yellow); }
+  .uploader-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, .76fr) minmax(0, 1.24fr);
+    gap: clamp(.85rem, 2vw, 1.2rem);
+    align-items: start;
+  }
+  .uploader-panel {
+    min-width: 0;
+    border: var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--uploader-card);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .project-panel { position: sticky; top: 96px; }
+  .panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .85rem;
+    padding: 1rem;
+    border-bottom: 3px solid var(--ink);
+    background: white;
+  }
+  .panel-heading h2 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.4vw, 2.3rem);
+    letter-spacing: -.02em;
+  }
+  .panel-kicker {
+    margin: 0 0 .18rem;
+    color: var(--teal-dark);
+    font-size: .66rem;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .icon-button {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 2px 3px 0 var(--ink);
+    font-size: 1.3rem;
+    font-weight: 900;
+    transition: transform .16s ease, box-shadow .16s ease;
+  }
+  .icon-button:hover { transform: translate(-1px, -1px); box-shadow: 4px 5px 0 var(--ink); }
+  .sketch-list {
+    max-height: min(620px, calc(100svh - 160px));
+    display: grid;
+    gap: .65rem;
+    padding: .75rem;
+    overflow: auto;
+  }
+  .sketch-button {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .8rem;
+    align-items: center;
+    border: 2px solid rgba(7,10,13,.18);
+    border-radius: 16px;
+    padding: .7rem;
+    background: white;
+    color: var(--ink);
+    text-align: left;
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+  .sketch-button:hover,
+  .sketch-button.active {
+    border-color: var(--ink);
+    background: #e8fbfa;
+    box-shadow: 3px 4px 0 var(--ink);
+    transform: translate(-1px, -1px);
+  }
+  .sketch-copy { min-width: 0; display: grid; gap: .12rem; }
+  .sketch-copy strong {
+    font-family: var(--font-display-ui);
+    font-size: 1.12rem;
+    line-height: 1;
+  }
+  .sketch-copy span {
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .upload-panel { display: grid; gap: 0; }
+  .upload-heading { align-items: start; }
+  .file-control {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: .48rem .72rem;
+    background: var(--paper);
+    box-shadow: 2px 3px 0 var(--ink);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .file-control input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .selected {
+    display: grid;
+    grid-template-columns: minmax(0, .82fr) minmax(220px, .7fr);
+    gap: clamp(.9rem, 2.5vw, 1.25rem);
+    align-items: center;
+    padding: clamp(.9rem, 2.5vw, 1.35rem);
+    background:
+      radial-gradient(circle at 82% 18%, rgba(34,200,194,.22), transparent 30%),
+      linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,246,220,.76));
+  }
+  .selected h3 {
+    margin-bottom: .42rem;
+    font-size: clamp(2rem, 5vw, 4.6rem);
+    letter-spacing: -.045em;
+  }
+  .selected-copy p:not(.panel-kicker) {
+    max-width: 40ch;
+    color: var(--muted);
+    font-weight: 800;
+  }
+  .selected-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-top: .8rem;
+  }
+  .selected-badges span {
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: .25rem .5rem;
+    background: var(--yellow);
+    font-size: .62rem;
+    font-weight: 900;
+    letter-spacing: .1em;
+  }
+  .selected-screen { min-width: 0; display: grid; justify-items: center; }
+  .oled-frame-viewer { width: 100%; display: grid; justify-items: center; gap: .75rem; }
+  .oled-preview {
+    display: inline-grid;
+    place-items: center;
+    border: 3px solid #020609;
+    border-radius: 14px;
+    background: #05080d;
+    box-shadow: inset 0 0 0 6px #151c24, 0 15px 28px rgba(7,10,13,.32);
+  }
+  .oled-preview--small { width: 76px; min-height: 45px; border-width: 2px; border-radius: 9px; box-shadow: inset 0 0 0 3px #151c24; }
+  .oled-preview--thumb { width: 58px; min-height: 36px; border-width: 2px; border-radius: 8px; box-shadow: inset 0 0 0 3px #151c24; }
+  .oled-preview--large { width: min(100%, 315px); min-height: 172px; }
+  .oled-preview--portrait.oled-preview--large { width: min(100%, 205px); min-height: 250px; }
+  .oled-preview--portrait.oled-preview--small { width: 48px; min-height: 76px; }
+  .oled-preview--portrait.oled-preview--thumb { width: 38px; min-height: 58px; }
+  .oled-glass {
+    width: calc(100% - 18px);
+    aspect-ratio: 128 / 64;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 7px;
+    background: #010409;
+  }
+  .oled-preview--portrait .oled-glass { aspect-ratio: 64 / 128; }
+  .oled-preview--small .oled-glass,
+  .oled-preview--thumb .oled-glass { width: calc(100% - 8px); border-radius: 4px; }
+  .oled-image { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+  .oled-fallback {
+    display: grid;
+    gap: .18rem;
+    color: white;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .68rem;
+    line-height: 1;
+    text-align: center;
+  }
+  .oled-frame-rail {
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    overflow-x: auto;
+    padding: .25rem .1rem .4rem;
+  }
+  .oled-frame-button {
+    flex: 0 0 auto;
+    border: 0;
+    border-radius: 11px;
+    padding: .24rem;
+    background: transparent;
+    transition: transform .16s ease, background .16s ease;
+  }
+  .oled-frame-button.active { background: var(--yellow); }
+  .oled-frame-button:hover { transform: translateY(-2px); }
+  .primary {
+    min-height: 58px;
+    margin: 0 clamp(.9rem, 2.5vw, 1.35rem);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+    border: var(--line);
+    border-radius: 999px;
+    background: var(--teal);
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+  .primary:hover:not([disabled]) { transform: translate(-1px, -1px); box-shadow: 5px 6px 0 var(--ink); background: var(--yellow); }
+  .button-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+  }
+  body.is-uploading .code-uploader .button-icon { animation: uploader-pulse .8s ease-in-out infinite alternate; }
+  .progress-wrap { display: grid; gap: .45rem; padding: 1rem clamp(.9rem, 2.5vw, 1.35rem); }
+  .progress-bar {
+    height: 16px;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background: white;
+  }
+  .progress-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--yellow));
+    transition: width .2s ease;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--muted);
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .console-frame {
+    margin: 0 clamp(.9rem, 2.5vw, 1.35rem) clamp(.9rem, 2.5vw, 1.35rem);
+    overflow: hidden;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: #070a0d;
+    color: #d5fffb;
+  }
+  .console-tabs {
+    display: flex;
+    gap: .35rem;
+    padding: .6rem;
+    border-bottom: 1px solid rgba(255,255,255,.13);
+  }
+  .console-tabs span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--yellow);
+  }
+  .console-tabs span:nth-child(2) { background: var(--teal); }
+  .console-tabs span:nth-child(3) { background: var(--orange); }
+  .log {
+    min-height: 112px;
+    max-height: 160px;
+    margin: 0;
+    overflow: auto;
+    padding: .8rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .78rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+  }
+  .empty { margin: 0; color: var(--muted); font-weight: 800; }
+  .uploader-note {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem .65rem;
+    align-items: center;
+    margin-top: clamp(.85rem, 2vw, 1.1rem);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: .72rem .9rem;
+    background: rgba(255,255,255,.7);
+    color: var(--muted);
+    font-size: .82rem;
+    font-weight: 800;
+  }
+  .uploader-note strong { color: var(--ink); }
+  @keyframes uploader-pulse { to { transform: translateX(3px); } }
+  @media (max-width: 980px) {
+    .code-uploader__hero,
+    .uploader-grid { grid-template-columns: 1fr; }
+    .status-row { justify-content: flex-start; }
+    .project-panel { position: static; }
+    .sketch-list { max-height: none; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 680px) {
+    .code-uploader { padding-block: 2rem; }
+    .code-uploader h1 { max-width: 11ch; font-size: clamp(2.45rem, 11vw, 3.65rem); }
+    .selected { grid-template-columns: 1fr; }
+    .selected-copy { order: 2; }
+    .selected-screen { order: 1; }
+    .sketch-list { grid-template-columns: 1fr; }
+    .panel-heading { padding: .85rem; }
+    .upload-heading { align-items: center; }
+    .file-control { min-height: 40px; padding-inline: .6rem; }
+    .selected h3 { font-size: clamp(2rem, 12vw, 3.2rem); }
+    .oled-preview--large { width: min(100%, 270px); min-height: 152px; }
+    .oled-preview--portrait.oled-preview--large { width: min(100%, 178px); min-height: 224px; }
+    .uploader-note { border-radius: 18px; }
+  }
+  @media (max-width: 420px) {
+    .code-uploader__copy .rte { font-size: .94rem; }
+    .browser-pill,
+    .count-pill { min-height: 36px; font-size: .62rem; }
+    .sketch-button { grid-template-columns: minmax(0, 1fr) auto; gap: .6rem; }
+    .sketch-copy strong { font-size: 1rem; }
+    .sketch-copy span { font-size: .72rem; }
+    .oled-preview--small { width: 64px; min-height: 40px; }
+    .oled-preview--portrait.oled-preview--small { width: 42px; min-height: 66px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body.is-uploading .code-uploader .button-icon { animation: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Code uploader",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Arduino UNO uploader" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Upload projects from the store." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Pick a BREADBOX sketch, connect an Arduino UNO over USB, then flash it right from Chrome or Edge.</p>" },
+    { "type": "text", "id": "project_heading", "label": "Project list heading", "default": "Pick a project" },
+    { "type": "text", "id": "upload_heading", "label": "Upload panel heading", "default": "Flash the UNO" },
+    { "type": "text", "id": "custom_hex_label", "label": "Custom HEX label", "default": "Custom HEX" },
+    { "type": "text", "id": "button_label", "label": "Upload button label", "default": "Upload to UNO" },
+    { "type": "text", "id": "note_heading", "label": "Note heading", "default": "Browser note" },
+    { "type": "text", "id": "note", "label": "Note", "default": "Use Chrome or Edge on desktop. Web Serial requires HTTPS, which your Shopify domain provides." }
+  ],
+  "presets": [
+    { "name": "Code uploader" }
+  ]
+}
+{% endschema %}
