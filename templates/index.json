@@ -1,101 +1,372 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-product",
       "blocks": {
-        "uno": { "type": "component", "settings": { "asset": "component-arduino-uno.png", "label": "Arduino UNO R3", "position": "uno", "float_range": 7, "parallax": 4 } },
-        "breadboard": { "type": "component", "settings": { "asset": "component-breadboard.png", "label": "170 point mini breadboard", "position": "breadboard", "float_range": 9, "parallax": -5 } },
-        "oled": { "type": "component", "settings": { "asset": "component-oled.png", "label": "SSD1306 OLED display", "position": "oled", "float_range": 11, "parallax": 7 } },
-        "joystick": { "type": "component", "settings": { "asset": "component-joystick.png", "label": "Joystick module", "position": "joystick", "float_range": 6, "parallax": -4 } },
-        "sensor": { "type": "component", "settings": { "asset": "component-mpu6050.png", "label": "MPU6050 motion sensor", "position": "sensor", "float_range": 10, "parallax": 8 } },
-        "servo": { "type": "component", "settings": { "asset": "component-servo.png", "label": "SG90 servo", "position": "servo", "float_range": 8, "parallax": -6 } }
+        "uno": {
+          "type": "component",
+          "settings": {
+            "asset": "component-arduino-uno.png",
+            "label": "Arduino UNO R3",
+            "position": "uno",
+            "float_range": 7,
+            "parallax": 4
+          }
+        },
+        "breadboard": {
+          "type": "component",
+          "settings": {
+            "asset": "component-breadboard.png",
+            "label": "170 point mini breadboard",
+            "position": "breadboard",
+            "float_range": 9,
+            "parallax": -5
+          }
+        },
+        "oled": {
+          "type": "component",
+          "settings": {
+            "asset": "component-oled.png",
+            "label": "SSD1306 OLED display",
+            "position": "oled",
+            "float_range": 11,
+            "parallax": 7
+          }
+        },
+        "joystick": {
+          "type": "component",
+          "settings": {
+            "asset": "component-joystick.png",
+            "label": "Joystick module",
+            "position": "joystick",
+            "float_range": 6,
+            "parallax": -4
+          }
+        },
+        "sensor": {
+          "type": "component",
+          "settings": {
+            "asset": "component-mpu6050.png",
+            "label": "MPU6050 motion sensor",
+            "position": "sensor",
+            "float_range": 10,
+            "parallax": 8
+          }
+        },
+        "servo": {
+          "type": "component",
+          "settings": {
+            "asset": "component-servo.png",
+            "label": "SG90 servo",
+            "position": "servo",
+            "float_range": 8,
+            "parallax": -6
+          }
+        }
       },
-      "block_order": ["uno", "breadboard", "oled", "joystick", "sensor", "servo"],
+      "block_order": [
+        "uno",
+        "breadboard",
+        "oled",
+        "joystick",
+        "sensor",
+        "servo"
+      ],
       "settings": {
+        "product": "",
         "eyebrow": "Arduino starter kit",
         "heading": "Build the box.",
-        "text": "<p>A premium Arduino starter kit built around real components, tiny screens, and projects that feel finished.</p>",
+        "text": "<p><strong>A premium Arduino starter kit built around real components, tiny screens, and projects that feel finished.</strong></p>",
         "button_label": "Shop BREADBOX",
         "button_link": "shopify://collections/all"
       }
     },
-    "trust": {
-      "type": "trust-strip",
-      "blocks": {
-        "complete": { "type": "item", "settings": { "icon": "box", "heading": "Everything included", "text": "Open the box and start building" } },
-        "guided": { "type": "item", "settings": { "icon": "book", "heading": "Guided tutorials", "text": "Clear steps for every project" } },
-        "beginner": { "type": "item", "settings": { "icon": "shield", "heading": "Beginner tested", "text": "No experience needed" } },
-        "reusable": { "type": "item", "settings": { "icon": "spark", "heading": "Built to reuse", "text": "One kit, endless experiments" } }
-      },
-      "block_order": ["complete", "guided", "beginner", "reusable"],
-      "settings": { "background": "#22C8C2" }
-    },
-    "components": {
-      "type": "kit-components",
-      "blocks": {
-        "uno": { "type": "component", "settings": { "asset": "component-arduino-uno.png", "symbol": "+", "title": "Arduino UNO R3", "text": "The brain of every build", "tag": "Core", "detail_1_label": "Type", "detail_1_value": "Controller", "detail_2_label": "Use", "detail_2_value": "Logic", "parallax": 3 } },
-        "breadboard": { "type": "component", "settings": { "asset": "component-breadboard.png", "symbol": "+", "title": "Mini breadboard", "text": "Build without soldering", "tag": "Build", "detail_1_label": "Type", "detail_1_value": "Prototyping", "detail_2_label": "Use", "detail_2_value": "Wiring", "parallax": -3 } },
-        "oled": { "type": "component", "settings": { "asset": "component-oled.png", "symbol": "+", "title": "SSD1306 OLED", "text": "Crisp graphics and games", "tag": "Screen", "detail_1_label": "Output", "detail_1_value": "Display", "detail_2_label": "Interface", "detail_2_value": "I2C", "parallax": 4 } },
-        "joystick": { "type": "component", "settings": { "asset": "component-joystick.png", "symbol": "+", "title": "Joystick module", "text": "Two-axis control", "tag": "Input", "detail_1_label": "Input", "detail_1_value": "Analog", "detail_2_label": "Use", "detail_2_value": "Control", "parallax": -2 } },
-        "sensor": { "type": "component", "settings": { "asset": "component-mpu6050.png", "symbol": "+", "title": "MPU6050", "text": "Motion and tilt sensing", "tag": "Motion", "detail_1_label": "Input", "detail_1_value": "IMU", "detail_2_label": "Use", "detail_2_value": "Tilt", "parallax": 4 } },
-        "servo": { "type": "component", "settings": { "asset": "component-servo.png", "symbol": "+", "title": "SG90 servo", "text": "Make projects move", "tag": "Move", "detail_1_label": "Output", "detail_1_value": "Motion", "detail_2_label": "Use", "detail_2_value": "Actuate", "parallax": -4 } },
-        "buttons": { "type": "component", "settings": { "asset": "component-button.svg", "symbol": "●", "title": "Push buttons", "text": "Simple tactile input", "tag": "Tap", "detail_1_label": "Input", "detail_1_value": "Digital", "detail_2_label": "Use", "detail_2_value": "Trigger", "parallax": 2 } },
-        "buzzer": { "type": "component", "settings": { "asset": "component-buzzer.svg", "symbol": "))", "title": "Passive buzzer", "text": "Sound and feedback", "tag": "Sound", "detail_1_label": "Output", "detail_1_value": "Audio", "detail_2_label": "Use", "detail_2_value": "Feedback", "parallax": -2 } }
-      },
-      "block_order": ["uno", "breadboard", "oled", "joystick", "sensor", "servo", "buttons", "buzzer"],
-      "settings": {
-        "eyebrow": "Inside the box",
-        "heading": "The parts menu.",
-        "text": "<p>Everything in the kit, arranged for quick browsing.</p>"
-      }
-    },
-    "story": {
+    "breadbox_story_PYptXR": {
       "type": "breadbox-story",
       "blocks": {
-        "core": { "type": "feature", "settings": { "asset": "component-arduino-uno.png", "kicker": "01 / Core", "heading": "UNO at the center", "text": "Every project starts with the board beginners recognize.", "parallax": 4 } },
-        "display": { "type": "feature", "settings": { "asset": "component-oled.png", "kicker": "02 / Display", "heading": "Boot screens, games, feedback", "text": "OLED visuals make each build feel like a finished device.", "parallax": -5 } },
-        "control": { "type": "feature", "settings": { "asset": "component-joystick.png", "kicker": "03 / Control", "heading": "Inputs that feel like play", "text": "Buttons, joystick, motion, sound, and movement in one small kit.", "parallax": 5 } }
+        "feature_PTWUCf": {
+          "type": "feature",
+          "settings": {
+            "asset": "component-arduino-uno.png",
+            "kicker": "01 / Core",
+            "heading": "UNO at the center",
+            "text": "Every project starts with the board beginners recognize.",
+            "parallax": 4
+          }
+        },
+        "feature_cCtJzM": {
+          "type": "feature",
+          "settings": {
+            "asset": "component-oled.png",
+            "kicker": "02 / Display",
+            "heading": "Projects with screens",
+            "text": "OLED visuals make the builds feel alive from boot.",
+            "parallax": 4
+          }
+        },
+        "feature_zUipHf": {
+          "type": "feature",
+          "settings": {
+            "asset": "component-joystick.png",
+            "kicker": "03 / Control",
+            "heading": "Inputs that feel like play",
+            "text": "Buttons, joystick, motion, sound, and movement in one small kit.",
+            "parallax": 4
+          }
+        }
       },
-      "block_order": ["core", "display", "control"],
+      "block_order": [
+        "feature_PTWUCf",
+        "feature_cCtJzM",
+        "feature_zUipHf"
+      ],
+      "name": "Breadbox story",
       "settings": {
         "eyebrow": "Designed for first builds",
         "heading": "A tiny lab with a real product feel.",
         "text": "<p>BREADBOX turns the Arduino starter kit into a focused, visual build experience: one board, one breadboard, real parts, and projects that feel finished.</p>"
       }
     },
+    "components": {
+      "type": "kit-components",
+      "blocks": {
+        "uno": {
+          "type": "component",
+          "settings": {
+            "asset": "component-arduino-uno.png",
+            "symbol": "+",
+            "title": "Arduino UNO R3",
+            "text": "The brain of every build",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": 3
+          }
+        },
+        "breadboard": {
+          "type": "component",
+          "settings": {
+            "asset": "component-breadboard.png",
+            "symbol": "+",
+            "title": "Mini breadboard",
+            "text": "Build without soldering",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": -3
+          }
+        },
+        "oled": {
+          "type": "component",
+          "settings": {
+            "asset": "component-oled.png",
+            "symbol": "+",
+            "title": "SSD1306 OLED",
+            "text": "Crisp graphics and games",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": 4
+          }
+        },
+        "joystick": {
+          "type": "component",
+          "settings": {
+            "asset": "component-joystick.png",
+            "symbol": "+",
+            "title": "Joystick module",
+            "text": "Two-axis control",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": -2
+          }
+        },
+        "sensor": {
+          "type": "component",
+          "settings": {
+            "asset": "component-mpu6050.png",
+            "symbol": "+",
+            "title": "MPU6050",
+            "text": "Motion and tilt sensing",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": 4
+          }
+        },
+        "servo": {
+          "type": "component",
+          "settings": {
+            "asset": "component-servo.png",
+            "symbol": "+",
+            "title": "SG90 servo",
+            "text": "Make projects move",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": -4
+          }
+        },
+        "buttons": {
+          "type": "component",
+          "settings": {
+            "asset": "component-button.svg",
+            "symbol": "●",
+            "title": "Push buttons",
+            "text": "Simple tactile input",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": 2
+          }
+        },
+        "buzzer": {
+          "type": "component",
+          "settings": {
+            "asset": "component-buzzer.svg",
+            "symbol": "))",
+            "title": "Passive buzzer",
+            "text": "Sound and feedback",
+            "tag": "Core",
+            "detail_1_label": "Type",
+            "detail_1_value": "Controller",
+            "detail_2_label": "Use",
+            "detail_2_value": "Logic",
+            "parallax": -2
+          }
+        }
+      },
+      "block_order": [
+        "uno",
+        "breadboard",
+        "oled",
+        "joystick",
+        "sensor",
+        "servo",
+        "buttons",
+        "buzzer"
+      ],
+      "settings": {
+        "eyebrow": "Inside the box",
+        "heading": "The parts that make it possible",
+        "text": "<p>A focused set of real components, ready to be rebuilt project after project.</p>"
+      }
+    },
     "tutorials": {
       "type": "tutorial-previews",
       "blocks": {
-        "first": { "type": "tutorial", "settings": { "level": "Start here", "title": "Your first OLED game", "text": "Wire it, upload it, play it." } },
-        "second": { "type": "tutorial", "settings": { "level": "Build next", "title": "Motion-controlled racer", "text": "Turn movement into input." } },
-        "third": { "type": "tutorial", "settings": { "level": "Explore more", "title": "Mini measurement tool", "text": "See electronics in action." } }
+        "first": {
+          "type": "tutorial",
+          "settings": {
+            "level": "Start here",
+            "title": "Your first OLED game",
+            "text": "Wire it, upload it, play it."
+          }
+        },
+        "second": {
+          "type": "tutorial",
+          "settings": {
+            "level": "Build next",
+            "title": "Motion-controlled racer",
+            "text": "Turn movement into input."
+          }
+        },
+        "third": {
+          "type": "tutorial",
+          "settings": {
+            "level": "Explore more",
+            "title": "Mini measurement tool",
+            "text": "See electronics in action."
+          }
+        }
       },
-      "block_order": ["first", "second", "third"],
+      "block_order": [
+        "first",
+        "second",
+        "third"
+      ],
       "settings": {
-        "eyebrow": "Project slots",
-        "heading": "Project drops.",
-        "text": "<p>Three polished slots for your Shopify project images.</p>"
+        "eyebrow": "Guided projects",
+        "heading": "Build something real",
+        "text": "<p>Clear tutorials take you from loose parts to a finished project.</p>"
       }
     },
     "steps": {
       "type": "how-it-works",
       "blocks": {
-        "open": { "type": "step", "settings": { "heading": "Open the kit", "text": "Everything starts in one compact box." } },
-        "follow": { "type": "step", "settings": { "heading": "Follow the tutorials", "text": "Clear steps guide every wire and upload." } },
-        "build": { "type": "step", "settings": { "heading": "Build real projects", "text": "Play, learn, then make the code your own." } }
+        "open": {
+          "type": "step",
+          "settings": {
+            "heading": "Open the kit",
+            "text": "Everything starts in one compact box."
+          }
+        },
+        "follow": {
+          "type": "step",
+          "settings": {
+            "heading": "Follow the tutorials",
+            "text": "Clear steps guide every wire and upload."
+          }
+        },
+        "build": {
+          "type": "step",
+          "settings": {
+            "heading": "Build real projects",
+            "text": "Play, learn, then make the code your own."
+          }
+        }
       },
-      "block_order": ["open", "follow", "build"],
-      "settings": { "eyebrow": "No guesswork", "heading": "Open. Follow. Build." }
+      "block_order": [
+        "open",
+        "follow",
+        "build"
+      ],
+      "settings": {
+        "eyebrow": "No guesswork",
+        "heading": "Open. Follow. Build."
+      }
     },
     "cta": {
       "type": "final-cta",
       "settings": {
-        "eyebrow": "Start small. Build real.",
-        "heading": "Open the lab.",
-        "text": "One box, real Arduino projects, and a clean path from first wire to finished build.",
+        "product": "",
+        "eyebrow": "Your first build starts here",
+        "heading": "Ready to make something?",
+        "text": "Open BREADBOX and turn a handful of parts into a project you built yourself.",
         "button_label": "Get BREADBOX"
       }
     }
   },
-  "order": ["hero", "story", "components", "tutorials", "steps", "cta"]
+  "order": [
+    "hero",
+    "breadbox_story_PYptXR",
+    "components",
+    "tutorials",
+    "steps",
+    "cta"
+  ]
 }
