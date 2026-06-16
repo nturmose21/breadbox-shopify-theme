@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "main": {
+      "type": "policy-page",
+      "blocks": {
+        "processing": {
+          "type": "item",
+          "settings": {
+            "heading": "Processing",
+            "text": "<p>Orders are packed carefully before dispatch. Processing times, available shipping methods and delivery estimates are shown at checkout.</p>"
+          }
+        },
+        "tracking": {
+          "type": "item",
+          "settings": {
+            "heading": "Tracking",
+            "text": "<p>Where tracking is available, your tracking details will be sent after the order leaves BREADBOX.</p>"
+          }
+        },
+        "address": {
+          "type": "item",
+          "settings": {
+            "heading": "Address accuracy",
+            "text": "<p>Please check your shipping address before placing an order. If an address needs to be changed, contact us as soon as possible before the order is packed.</p>"
+          }
+        },
+        "delays": {
+          "type": "item",
+          "settings": {
+            "heading": "Delays",
+            "text": "<p>Delivery times can vary during busy periods or because of carrier delays. If your order has not arrived after the estimated window, contact us with your order number.</p>"
+          }
+        }
+      },
+      "block_order": ["processing", "tracking", "address", "delays"],
+      "settings": {
+        "eyebrow": "Shipping policy",
+        "heading": "Packed carefully. Sent clearly.",
+        "intro": "<p>Here is how BREADBOX orders are prepared, shipped and tracked.</p>"
+      }
+    }
+  },
+  "order": ["main"]
+}

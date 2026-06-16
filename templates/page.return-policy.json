@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "main": {
+      "type": "policy-page",
+      "blocks": {
+        "eligibility": {
+          "type": "item",
+          "settings": {
+            "heading": "Return eligibility",
+            "text": "<p>Returns must be approved before being sent back. Items should be unused, complete and in their original condition with all included parts and packaging where possible.</p>"
+          }
+        },
+        "cost": {
+          "type": "item",
+          "settings": {
+            "heading": "Return shipping cost",
+            "text": "<p>Customers are responsible for return shipping costs unless the item is faulty, damaged in transit or incorrect.</p>"
+          }
+        },
+        "faults": {
+          "type": "item",
+          "settings": {
+            "heading": "Faulty or incorrect items",
+            "text": "<p>If your order arrives faulty, damaged or incorrect, contact us with your order number and photos so we can help resolve it.</p>"
+          }
+        },
+        "rights": {
+          "type": "item",
+          "settings": {
+            "heading": "Consumer rights",
+            "text": "<p>This policy does not limit any rights you may have under applicable consumer law.</p>"
+          }
+        }
+      },
+      "block_order": ["eligibility", "cost", "faults", "rights"],
+      "settings": {
+        "eyebrow": "Return policy",
+        "heading": "Returns without confusion.",
+        "intro": "<p>If something is not right, contact us first so we can confirm the next step.</p>"
+      }
+    }
+  },
+  "order": ["main"]
+}

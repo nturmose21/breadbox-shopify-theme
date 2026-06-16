@@ -1,9 +1,146 @@
 {
   "sections": {
-    "main": {"type":"product","settings":{"show_dynamic_checkout":true,"show_rating_placeholder":true,"show_builder_name":false,"includes":"<p>Arduino UNO, mini breadboard, OLED display, controls, connecting parts and access to guided BREADBOX projects.</p>","shipping":"<p>Orders are carefully packed and sent with tracking. Add your exact delivery and return policy here.</p>"}},
-    "trust": {"type":"trust-strip","blocks":{"guided":{"type":"item","settings":{"icon":"book","heading":"Guided builds","text":"Start with clear instructions"}},"reusable":{"type":"item","settings":{"icon":"spark","heading":"Reusable parts","text":"Build it differently tomorrow"}},"shipping":{"type":"item","settings":{"icon":"box","heading":"Tracked shipping","text":"Follow it to your door"}},"support":{"type":"item","settings":{"icon":"shield","heading":"Friendly support","text":"Help when you need it"}}},"block_order":["guided","reusable","shipping","support"],"settings":{"background":"#22C8C2"}},
-    "projects": {"type":"project-gallery","blocks":{"flappy":{"type":"project","settings":{"asset":"project-flappy-bird.svg","category":"Game","title":"Flappy Bird","text":"Build a pocket-sized arcade game with real buttons."}},"tetris":{"type":"project","settings":{"asset":"project-tiny-tetris.svg","category":"Game","title":"Tiny Tetris","text":"Stack blocks on a crisp vertical OLED display."}},"scope":{"type":"project","settings":{"asset":"project-oscilloscope.svg","category":"Tool","title":"Oscilloscope","text":"Visualise signals and explore what circuits are doing."}}},"block_order":["flappy","tetris","scope"],"settings":{"eyebrow":"Included projects","heading":"What your kit can become","text":"<p>Load a new project whenever you want a different challenge.</p>","button_label":"","button_link":""}},
-    "faq": {"type":"faq","blocks":{"experience":{"type":"question","settings":{"question":"Is this beginner friendly?","answer":"<p>Yes. The kit is designed for first-time builders and comes with guided projects and ready-to-upload code.</p>"}},"computer":{"type":"question","settings":{"question":"What computer do I need?","answer":"<p>A laptop or desktop with USB and a Chromium-based browser works best with the web uploader.</p>"}},"returns":{"type":"question","settings":{"question":"What if I need help?","answer":"<p>Use your store contact details here to explain your support and returns process.</p>"}}},"block_order":["experience","computer","returns"],"settings":{"eyebrow":"Product questions","heading":"Know before you build","text":"<p>The practical details, answered.</p>"}}
+    "main": {
+      "type": "product",
+      "settings": {
+        "show_dynamic_checkout": true,
+        "show_rating_placeholder": true,
+        "show_builder_name": false,
+        "includes": "<p>Arduino UNO, mini breadboard, OLED display, controls, connecting parts and access to guided BREADBOX projects.</p>",
+        "shipping": "<p>Orders are carefully packed and sent with tracking where available. Shipping rates and delivery estimates are shown at checkout.</p><p>Returns must be approved before being sent back. Items should be unused, complete and in their original condition. Customers are responsible for return shipping costs unless the item is faulty, damaged in transit or incorrect.</p>"
+      }
+    },
+    "trust": {
+      "type": "trust-strip",
+      "blocks": {
+        "guided": {
+          "type": "item",
+          "settings": {
+            "icon": "book",
+            "heading": "Guided builds",
+            "text": "Start with clear instructions"
+          }
+        },
+        "reusable": {
+          "type": "item",
+          "settings": {
+            "icon": "spark",
+            "heading": "Reusable parts",
+            "text": "Build it differently tomorrow"
+          }
+        },
+        "shipping": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "heading": "Tracked shipping",
+            "text": "Follow it to your door"
+          }
+        },
+        "support": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "heading": "Friendly support",
+            "text": "Help when you need it"
+          }
+        }
+      },
+      "block_order": [
+        "guided",
+        "reusable",
+        "shipping",
+        "support"
+      ],
+      "settings": {
+        "background": "#22C8C2"
+      }
+    },
+    "projects": {
+      "type": "project-gallery",
+      "blocks": {
+        "flappy": {
+          "type": "project",
+          "settings": {
+            "asset": "project-flappy-bird.svg",
+            "category": "Game",
+            "title": "Flappy Bird",
+            "text": "Build a pocket-sized arcade game with real buttons."
+          }
+        },
+        "tetris": {
+          "type": "project",
+          "settings": {
+            "asset": "project-tiny-tetris.svg",
+            "category": "Game",
+            "title": "Tiny Tetris",
+            "text": "Stack blocks on a crisp vertical OLED display."
+          }
+        },
+        "scope": {
+          "type": "project",
+          "settings": {
+            "asset": "project-oscilloscope.svg",
+            "category": "Tool",
+            "title": "Oscilloscope",
+            "text": "Visualise signals and explore what circuits are doing."
+          }
+        }
+      },
+      "block_order": [
+        "flappy",
+        "tetris",
+        "scope"
+      ],
+      "settings": {
+        "eyebrow": "Included projects",
+        "heading": "What your kit can become",
+        "text": "<p>Load a new project whenever you want a different challenge.</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "experience": {
+          "type": "question",
+          "settings": {
+            "question": "Is this beginner friendly?",
+            "answer": "<p>Yes. The kit is designed for first-time builders and comes with guided projects and ready-to-upload code.</p>"
+          }
+        },
+        "computer": {
+          "type": "question",
+          "settings": {
+            "question": "What computer do I need?",
+            "answer": "<p>A laptop or desktop with USB and a Chromium-based browser works best with the web uploader.</p>"
+          }
+        },
+        "returns": {
+          "type": "question",
+          "settings": {
+            "question": "What is your shipping and returns policy?",
+            "answer": "<p>Shipping options and delivery estimates are shown at checkout. Returns must be approved first, and customers are responsible for return shipping costs unless the item is faulty, damaged in transit or incorrect.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "experience",
+        "computer",
+        "returns"
+      ],
+      "settings": {
+        "eyebrow": "Product questions",
+        "heading": "Know before you build",
+        "text": "<p>The practical details, answered.</p>"
+      }
+    }
   },
-  "order": ["main","trust","projects","faq"]
+  "order": [
+    "main",
+    "trust",
+    "projects",
+    "faq"
+  ]
 }

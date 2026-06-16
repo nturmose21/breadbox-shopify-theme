@@ -32,6 +32,15 @@ A buyer-focused Shopify Online Store 2.0 theme for the BREADBOX Arduino starter 
 
 The uploader uses Web Serial, so visitors need Chrome or Edge on desktop over HTTPS. A published Shopify domain such as `https://breadbox.fun/pages/uploader` satisfies the HTTPS requirement.
 
+## Add policy pages
+
+1. In Shopify Admin, open `Online Store > Pages`.
+2. Create a page called `Shipping Policy` and set the theme template to `shipping-policy`.
+3. Create a page called `Return Policy` and set the theme template to `return-policy`.
+4. Add both pages to your footer menu in `Online Store > Navigation`.
+
+The product page also includes a concise shipping and returns accordion. Return shipping is set as the customer's cost unless the item is faulty, damaged in transit or incorrect.
+
 ## Local preview
 
 Install the latest Shopify CLI, authenticate with your store, then run:
