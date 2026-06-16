@@ -27,56 +27,10 @@
         "menu": "main-menu",
         "customer_account_menu": "customer-account-main-menu"
       }
-    },
-    "faq_HidFyP": {
-      "type": "faq",
-      "blocks": {
-        "question_74GGF8": {
-          "type": "question",
-          "settings": {
-            "question": "Do I need any coding experience?",
-            "answer": "<p>No. The projects include ready-to-upload code and step-by-step guidance. You can build first, then explore how the code works when you are ready.</p>"
-          }
-        },
-        "question_CVdH4F": {
-          "type": "question",
-          "settings": {
-            "question": "What computer do I need?",
-            "answer": "<p>A laptop or desktop with a USB port and a modern Chromium-based browser is the simplest setup for the BREADBOX web uploader.</p>"
-          }
-        },
-        "question_iHJmz6": {
-          "type": "question",
-          "settings": {
-            "question": "Can I reuse the parts?",
-            "answer": "<p>Yes. Reuse the same Arduino UNO, OLED, mini breadboard and controls across the included builds, then use them for your own projects.</p>"
-          }
-        },
-        "question_VrKciy": {
-          "type": "question",
-          "settings": {
-            "question": "Is this suitable as a gift?",
-            "answer": "<p>Absolutely. It is designed to feel exciting straight out of the box while still teaching real electronics and programming skills.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_74GGF8",
-        "question_CVdH4F",
-        "question_iHJmz6",
-        "question_VrKciy"
-      ],
-      "name": "FAQ",
-      "settings": {
-        "eyebrow": "Good questions",
-        "heading": "Before your first build",
-        "text": "<p>Still wondering whether BREADBOX is the right first step? Here are the answers builders usually need.</p>"
-      }
     }
   },
   "order": [
     "announcement",
-    "header",
-    "faq_HidFyP"
+    "header"
   ]
 }
