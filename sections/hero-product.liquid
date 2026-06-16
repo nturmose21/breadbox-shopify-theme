@@ -146,14 +146,14 @@
     position: absolute;
     z-index: 6;
     left: 50%;
-    top: 52%;
+    top: 46%;
     width: 145%;
     height: 165%;
     object-fit: contain;
     transform: translate3d(-50%, calc(-50% + var(--parallax-y, 0)), 28px) rotate(-6deg);
     filter:
-      drop-shadow(18px 42px 26px rgba(0, 0, 0, .42))
-      drop-shadow(6px 16px 14px rgba(0, 0, 0, .24));
+      drop-shadow(22px 48px 28px rgba(0, 0, 0, .64))
+      drop-shadow(8px 20px 15px rgba(0, 0, 0, .36));
     pointer-events: none;
   }
   .hero-part { position: absolute; z-index: 3; filter: drop-shadow(0 16px 24px rgba(0,0,0,.42)); transform: translate3d(0, var(--parallax-y, 0), 0); }
@@ -165,7 +165,7 @@
   .hero-part--sensor { right: 7%; bottom: 42%; width: 10%; height: 12%; rotate: 5deg; z-index: 7; }
   .hero-part--servo { left: 41%; top: 8%; width: 13%; height: 13%; rotate: -3deg; z-index: 7; }
   .hero-product__spark { position: absolute; z-index: 8; display: grid; place-items: center; width: clamp(2rem, 4vw, 3.1rem); aspect-ratio: 1; border: 1px solid rgba(255,255,255,.34); border-radius: 50%; background: rgba(255,255,255,.08); color: var(--yellow); font-family: var(--font-display-ui); font-size: clamp(1.1rem, 2vw, 1.7rem); font-weight: 900; backdrop-filter: blur(10px); }
-  .hero-product__spark--one { left: 48%; top: 48%; }
+  .hero-product__spark--one { left: 33%; top: 34%; }
   .hero-product__spark--two { right: 8%; bottom: 10%; }
   .hero-product__spark--three { left: 26%; bottom: 9%; color: var(--teal); }
   @keyframes hero-float { from { transform: translate3d(0, var(--float-negative), 18px); } to { transform: translate3d(0, var(--float-range), 34px); } }
@@ -195,7 +195,7 @@
     .hero-product__spark--one { display: none; }
     .hero-part { filter: drop-shadow(0 10px 14px rgba(0,0,0,.4)); }
     .hero-part--sensor, .hero-part--servo { display: none; }
-    .hero-product__feature { width: 155%; height: 185%; top: 55%; }
+    .hero-product__feature { width: 155%; height: 185%; top: 47%; }
     .hero-part--uno { right: 4%; bottom: 16%; width: 24%; height: 24%; }
     .hero-part--breadboard { left: 6%; top: 15%; width: 23%; height: 21%; }
     .hero-part--oled { right: 6%; top: 15%; width: 17%; height: 20%; }
