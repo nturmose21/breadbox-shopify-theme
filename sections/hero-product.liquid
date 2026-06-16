@@ -6,7 +6,7 @@
   assign current_variant = featured_product.selected_or_first_available_variant
 %}
 
-<section class="hero-product full-width" data-motion-section>
+<section class="hero-product full-width" data-motion-section data-scroll-cinematic>
   <div class="hero-product__blueprint" aria-hidden="true"></div>
   <div class="hero-product__scene" aria-label="BREADBOX kit components">
     <div class="hero-product__platform" aria-hidden="true"></div>
@@ -36,6 +36,7 @@
     <div class="hero-product__spark hero-product__spark--one" aria-hidden="true">+</div>
     <div class="hero-product__spark hero-product__spark--two" aria-hidden="true">✦</div>
     <div class="hero-product__spark hero-product__spark--three" aria-hidden="true">⚡</div>
+    <div class="hero-product__reel" aria-hidden="true"><span></span></div>
   </div>
 
   <div class="hero-product__content" data-reveal="left">
@@ -71,6 +72,7 @@
 
 {% stylesheet %}
   .hero-product {
+    --scroll-progress: 0;
     min-height: clamp(660px, 86svh, 860px);
     position: relative;
     display: grid;
@@ -127,8 +129,13 @@
     box-shadow: 0 40px 120px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.3);
     overflow: hidden;
     pointer-events: none;
-    transform: perspective(1100px) rotateX(4deg) rotateY(-5deg);
+    transform:
+      perspective(1100px)
+      rotateX(calc(4deg - (var(--scroll-progress) * 2deg)))
+      rotateY(calc(-5deg + (var(--scroll-progress) * 6deg)))
+      scale(calc(1 + (var(--scroll-progress) * .025)));
     transform-style: preserve-3d;
+    transition: box-shadow .28s ease;
   }
   .hero-product__scene::before {
     content: "BREADBOX / UNO KIT";
@@ -150,29 +157,73 @@
     width: 145%;
     height: 165%;
     object-fit: contain;
-    transform: translate3d(-50%, calc(-50% + var(--parallax-y, 0)), 28px) rotate(-6deg);
+    transform:
+      translate3d(
+        calc(-50% + (var(--scroll-progress) * 1.6rem)),
+        calc(-50% + var(--parallax-y, 0px) - (var(--scroll-progress) * 2.4rem)),
+        28px
+      )
+      rotate(calc(-6deg + (var(--scroll-progress) * 3deg)))
+      scale(calc(1 + (var(--scroll-progress) * .07)));
     filter:
       drop-shadow(22px 48px 28px rgba(0, 0, 0, .64))
       drop-shadow(8px 20px 15px rgba(0, 0, 0, .36));
     pointer-events: none;
   }
-  .hero-part { position: absolute; z-index: 3; filter: drop-shadow(0 16px 24px rgba(0,0,0,.42)); transform: translate3d(0, var(--parallax-y, 0), 0); }
+  .hero-part {
+    position: absolute;
+    z-index: 3;
+    filter: drop-shadow(0 16px 24px rgba(0,0,0,.42));
+    transform:
+      translate3d(
+        calc(var(--drift-x, 0px) * var(--scroll-progress)),
+        calc(var(--parallax-y, 0px) + (var(--drift-y, 0px) * var(--scroll-progress))),
+        0
+      );
+  }
   .hero-part img { width: 100%; height: 100%; object-fit: contain; animation: hero-float 7.5s cubic-bezier(.45,0,.2,1) infinite alternate; animation-delay: var(--part-delay); }
-  .hero-part--uno { right: 6%; bottom: 15%; width: 25%; height: 24%; rotate: -4deg; z-index: 5; opacity: .86; }
-  .hero-part--breadboard { left: 7%; top: 15%; width: 22%; height: 18%; rotate: -2deg; z-index: 3; opacity: .86; }
-  .hero-part--oled { right: 8%; top: 13%; width: 15%; height: 16%; rotate: 3deg; z-index: 7; }
-  .hero-part--joystick { left: 8%; bottom: 12%; width: 19%; height: 20%; rotate: 2deg; z-index: 7; }
-  .hero-part--sensor { right: 7%; bottom: 42%; width: 10%; height: 12%; rotate: 5deg; z-index: 7; }
-  .hero-part--servo { left: 41%; top: 8%; width: 13%; height: 13%; rotate: -3deg; z-index: 7; }
+  .hero-part--uno { --drift-x: 28px; --drift-y: -12px; right: 6%; bottom: 15%; width: 25%; height: 24%; rotate: -4deg; z-index: 5; opacity: .86; }
+  .hero-part--breadboard { --drift-x: -26px; --drift-y: -14px; left: 7%; top: 15%; width: 22%; height: 18%; rotate: -2deg; z-index: 3; opacity: .86; }
+  .hero-part--oled { --drift-x: 18px; --drift-y: -18px; right: 8%; top: 13%; width: 15%; height: 16%; rotate: 3deg; z-index: 7; }
+  .hero-part--joystick { --drift-x: -22px; --drift-y: 12px; left: 8%; bottom: 12%; width: 19%; height: 20%; rotate: 2deg; z-index: 7; }
+  .hero-part--sensor { --drift-x: 22px; --drift-y: 6px; right: 7%; bottom: 42%; width: 10%; height: 12%; rotate: 5deg; z-index: 7; }
+  .hero-part--servo { --drift-x: 0px; --drift-y: -24px; left: 41%; top: 8%; width: 13%; height: 13%; rotate: -3deg; z-index: 7; }
   .hero-product__spark { position: absolute; z-index: 8; display: grid; place-items: center; width: clamp(2rem, 4vw, 3.1rem); aspect-ratio: 1; border: 1px solid rgba(255,255,255,.34); border-radius: 50%; background: rgba(255,255,255,.08); color: var(--yellow); font-family: var(--font-display-ui); font-size: clamp(1.1rem, 2vw, 1.7rem); font-weight: 900; backdrop-filter: blur(10px); }
   .hero-product__spark--one { left: 33%; top: 34%; }
   .hero-product__spark--two { right: 8%; bottom: 10%; }
   .hero-product__spark--three { left: 26%; bottom: 9%; color: var(--teal); }
+  .hero-product__reel {
+    position: absolute;
+    left: 1.1rem;
+    right: 1.1rem;
+    bottom: 1rem;
+    z-index: 9;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.16);
+    overflow: hidden;
+  }
+  .hero-product__reel span {
+    display: block;
+    width: calc(18% + (var(--scroll-progress) * 82%));
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--teal), var(--yellow));
+    box-shadow: 0 0 18px rgba(34,200,194,.45);
+  }
   @keyframes hero-float { from { transform: translate3d(0, var(--float-negative), 18px); } to { transform: translate3d(0, var(--float-range), 34px); } }
 
   @media (max-width: 760px) {
     .hero-product { min-height: 0; grid-template-columns: 1fr; gap: 1.5rem; padding-block: 1.6rem 3rem; }
-    .hero-product__scene { order: 1; width: min(720px, 100%); aspect-ratio: 1.7 / 1; transform: perspective(1000px) rotateX(3deg); }
+    .hero-product__scene {
+      order: 1;
+      width: min(720px, 100%);
+      aspect-ratio: 1.7 / 1;
+      transform:
+        perspective(1000px)
+        rotateX(calc(3deg - (var(--scroll-progress) * 1.5deg)))
+        scale(calc(1 + (var(--scroll-progress) * .018)));
+    }
     .hero-product__content { order: 2; max-width: 720px; }
     .hero-product h1 { max-width: 9ch; font-size: clamp(4rem, 12vw, 6rem); }
     .hero-product__buy form { flex-wrap: wrap; }
@@ -195,7 +246,7 @@
     .hero-product__spark--one { display: none; }
     .hero-part { filter: drop-shadow(0 10px 14px rgba(0,0,0,.4)); }
     .hero-part--sensor, .hero-part--servo { display: none; }
-    .hero-product__feature { width: 155%; height: 185%; top: 47%; }
+    .hero-product__feature { width: 155%; height: 185%; top: 47%; transform: translate3d(-50%, calc(-50% + var(--parallax-y, 0px) - (var(--scroll-progress) * 1.2rem)), 28px) rotate(calc(-6deg + (var(--scroll-progress) * 2deg))) scale(calc(1 + (var(--scroll-progress) * .045))); }
     .hero-part--uno { right: 4%; bottom: 16%; width: 24%; height: 24%; }
     .hero-part--breadboard { left: 6%; top: 15%; width: 23%; height: 21%; }
     .hero-part--oled { right: 6%; top: 15%; width: 17%; height: 20%; }

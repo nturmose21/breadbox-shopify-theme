@@ -62,6 +62,8 @@ let parallaxElements = [];
 const activeParallaxElements = new Set();
 let parallaxFrame;
 let parallaxObserver;
+let cinematicElements = [];
+let cinematicFrame;
 
 function parallaxEnabled() {
   return !prefersReducedMotion.matches && window.matchMedia('(min-width: 721px)').matches;
@@ -111,22 +113,64 @@ function initParallax(root = document) {
   requestParallax();
 }
 
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function updateCinematics() {
+  cinematicFrame = null;
+  if (prefersReducedMotion.matches || document.visibilityState === 'hidden') return;
+  const viewportHeight = window.innerHeight || 1;
+  cinematicElements = cinematicElements.filter((element) => element.isConnected);
+  cinematicElements.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    const progress = clamp((viewportHeight * 0.12 - rect.top) / Math.max(rect.height * 0.72, 1), 0, 1);
+    element.style.setProperty('--scroll-progress', progress.toFixed(4));
+    element.dataset.scrollFrame = String(Math.round(progress * 7));
+  });
+}
+
+function requestCinematics() {
+  if (prefersReducedMotion.matches || cinematicFrame) return;
+  cinematicFrame = requestAnimationFrame(updateCinematics);
+}
+
+function initCinematics(root = document) {
+  root.querySelectorAll('[data-scroll-cinematic]:not([data-cinematic-bound])').forEach((element) => {
+    element.dataset.cinematicBound = 'true';
+    cinematicElements.push(element);
+  });
+  if (prefersReducedMotion.matches) {
+    cinematicElements.forEach((element) => element.style.setProperty('--scroll-progress', '0'));
+    return;
+  }
+  requestCinematics();
+}
+
 function initTheme(root = document) {
   initProductUI(root);
   initReveals(root);
   initParallax(root);
+  initCinematics(root);
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initTheme());
 else initTheme();
 document.addEventListener('shopify:section:load', (event) => initTheme(event.target));
-window.addEventListener('scroll', requestParallax, { passive: true });
+window.addEventListener('scroll', () => {
+  requestParallax();
+  requestCinematics();
+}, { passive: true });
 window.addEventListener('resize', () => {
   parallaxElements = parallaxElements.filter((element) => element.isConnected);
   if (!parallaxEnabled()) parallaxElements.forEach((element) => element.style.setProperty('--parallax-y', '0px'));
   requestParallax();
+  requestCinematics();
 }, { passive: true });
-document.addEventListener('visibilitychange', requestParallax);
+document.addEventListener('visibilitychange', () => {
+  requestParallax();
+  requestCinematics();
+});
 
 function handleMotionPreferenceChange() {
   if (revealObserver) revealObserver.disconnect();
@@ -135,6 +179,11 @@ function handleMotionPreferenceChange() {
     delete element.dataset.revealBound;
     element.classList.toggle('is-visible', prefersReducedMotion.matches);
   });
+  document.querySelectorAll('[data-scroll-cinematic]').forEach((element) => {
+    delete element.dataset.cinematicBound;
+    element.style.setProperty('--scroll-progress', '0');
+  });
+  cinematicElements = [];
   initTheme();
 }
 
