@@ -19,11 +19,15 @@
           </div>
         </div>
         <div class="component-card__copy">
-          <div>
+          <div class="component-card__top">
             <h3>{{ block.settings.title | escape }}</h3>
-            <p>{{ block.settings.text | escape }}</p>
+            <span class="component-card__tag">{{ block.settings.tag | escape }}</span>
           </div>
-          <span class="component-card__tag">{{ block.settings.tag | escape }}</span>
+          <p>{{ block.settings.text | escape }}</p>
+          <dl class="component-card__details">
+            <div><dt>{{ block.settings.detail_1_label | escape }}</dt><dd>{{ block.settings.detail_1_value | escape }}</dd></div>
+            <div><dt>{{ block.settings.detail_2_label | escape }}</dt><dd>{{ block.settings.detail_2_value | escape }}</dd></div>
+          </dl>
         </div>
       </article>
     {% endfor %}
@@ -32,52 +36,56 @@
 
 {% stylesheet %}
   .kit-components { position: relative; }
-  .kit-components .section-heading { max-width: 760px; margin-bottom: 1rem; }
-  .kit-components .section-heading h2 { max-width: 12ch; }
-  .kit-components__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .62rem; }
-  .component-card { min-width: 0; display: grid; grid-template-rows: auto 1fr; overflow: hidden; border: 3px solid var(--ink); border-radius: var(--radius); background: var(--paper-bright); box-shadow: 3px 4px 0 var(--ink); transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
-  .component-card__visual { min-height: 0; aspect-ratio: 1.18 / 1; display: grid; place-items: center; overflow: hidden; padding: .5rem; border-bottom: 3px solid var(--ink); background: #dff7f6; }
+  .kit-components .section-heading { max-width: 940px; margin-bottom: 1.4rem; }
+  .kit-components .section-heading h2 { max-width: 10ch; letter-spacing: -.04em; }
+  .kit-components .section-heading .rte { max-width: 34ch; color: var(--muted); font-weight: 750; }
+  .kit-components__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+  .component-card { min-width: 0; display: grid; grid-template-rows: auto 1fr; overflow: hidden; border: 1px solid rgba(7,10,13,.16); border-radius: 18px; background: rgba(255,253,246,.9); box-shadow: 0 18px 46px rgba(7,10,13,.09); transition: transform .24s cubic-bezier(.16,1,.3,1), box-shadow .24s cubic-bezier(.16,1,.3,1), border-color .24s ease; }
+  .component-card__visual { min-height: 0; aspect-ratio: 1.18 / 1; display: grid; place-items: center; overflow: hidden; padding: .85rem; border-bottom: 1px solid rgba(7,10,13,.12); background: #dff7f6; }
   .component-card:nth-child(3n + 2) .component-card__visual { background: #fff0b8; }
   .component-card:nth-child(3n) .component-card__visual { background: #dcecff; }
   .component-card__asset { width: 100%; height: 100%; display: grid; place-items: center; transform: translate3d(0, var(--parallax-y, 0), 0); }
-  .component-card__asset img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(3px 5px 0 rgba(7,10,13,.28)); transition: scale .22s ease; }
-  .component-card__copy { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .42rem; align-items: start; min-height: 58px; padding: .58rem .62rem .62rem; }
-  .component-card__copy h3 { margin: 0; font-size: .86rem; line-height: 1.02; }
-  .component-card__copy p { margin: .16rem 0 0; color: var(--muted); font-size: .6rem; font-weight: 800; line-height: 1.15; }
-  .component-card__tag { align-self: start; border: 2px solid var(--ink); border-radius: 999px; padding: .16rem .4rem; background: var(--yellow); font-size: .5rem; font-weight: 950; line-height: 1; text-transform: uppercase; white-space: nowrap; box-shadow: 1px 2px 0 var(--ink); }
-  .component-card__placeholder { width: 78px; height: 78px; display: grid; place-items: center; border: 3px solid var(--ink); border-radius: 50%; background: white; box-shadow: 3px 4px 0 var(--ink); }
-  .component-card__placeholder span { font-family: var(--font-display-family); font-size: 1.7rem; font-weight: 900; }
+  .component-card__asset img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 16px 22px rgba(7,10,13,.24)); transition: scale .28s cubic-bezier(.16,1,.3,1), transform .28s cubic-bezier(.16,1,.3,1); }
+  .component-card__copy { min-width: 0; display: grid; gap: .5rem; padding: .78rem .85rem .9rem; }
+  .component-card__top { display: flex; align-items: start; justify-content: space-between; gap: .5rem; }
+  .component-card__copy h3 { margin: 0; font-size: clamp(1rem, 1.45vw, 1.28rem); line-height: .98; letter-spacing: -.018em; }
+  .component-card__copy p { margin: 0; color: var(--muted); font-size: .72rem; font-weight: 750; line-height: 1.25; }
+  .component-card__tag { align-self: start; border-radius: 999px; padding: .28rem .48rem; background: var(--ink); color: white; font-size: .54rem; font-weight: 950; letter-spacing: .08em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+  .component-card__details { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; margin: .15rem 0 0; }
+  .component-card__details div { min-width: 0; border-radius: 12px; padding: .48rem .5rem; background: rgba(7,10,13,.045); }
+  .component-card__details dt { color: var(--muted); font-size: .54rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+  .component-card__details dd { margin: .08rem 0 0; font-size: .68rem; font-weight: 900; line-height: 1.05; }
+  .component-card__placeholder { width: 78px; height: 78px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50%; background: white; box-shadow: 0 16px 22px rgba(7,10,13,.14); }
+  .component-card__placeholder span { font-family: var(--font-display-ui); font-size: 1.7rem; font-weight: 900; }
   @media (hover: hover) {
-    .component-card:hover { transform: translateY(-4px); box-shadow: 6px 7px 0 var(--ink); }
-    .component-card:hover img { scale: 1.045; }
+    .component-card:hover { transform: translateY(-6px); border-color: rgba(7,10,13,.3); box-shadow: 0 28px 72px rgba(7,10,13,.16); }
+    .component-card:hover img { scale: 1.055; transform: translateY(-3px); }
   }
   @media (min-width: 680px) {
-    .kit-components__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
-    .component-card { min-height: 112px; grid-template-columns: minmax(116px, 32%) minmax(0, 1fr); grid-template-rows: none; }
-    .component-card__visual { aspect-ratio: auto; border-right: 3px solid var(--ink); border-bottom: 0; }
-    .component-card__copy { align-items: center; min-height: 0; padding: .75rem .8rem; }
-    .component-card__copy h3 { font-size: 1rem; }
-    .component-card__copy p { font-size: .72rem; }
-    .component-card__tag { font-size: .58rem; padding: .18rem .46rem; }
+    .kit-components__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .component-card { grid-template-columns: minmax(132px, 34%) minmax(0, 1fr); grid-template-rows: none; }
+    .component-card__visual { aspect-ratio: auto; border-right: 1px solid rgba(7,10,13,.12); border-bottom: 0; }
+    .component-card__copy { align-content: center; }
   }
   @media (min-width: 1040px) {
     .kit-components__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .component-card { min-height: 0; grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-    .component-card__visual { aspect-ratio: 1.25 / 1; border-right: 0; border-bottom: 3px solid var(--ink); padding: .7rem; }
-    .component-card__copy { min-height: 76px; padding: .7rem .8rem .78rem; }
-    .component-card__copy h3 { font-size: .98rem; }
+    .component-card__visual { aspect-ratio: 1.18 / 1; border-right: 0; border-bottom: 1px solid rgba(7,10,13,.12); padding: 1rem; }
+    .component-card__copy { min-height: 148px; align-content: start; }
   }
   @media (max-width: 520px) {
-    .kit-components__grid { gap: .55rem; }
-    .component-card { border-width: 2px; box-shadow: 2px 3px 0 var(--ink); }
-    .component-card__visual { padding: .42rem; border-bottom-width: 2px; }
-    .component-card__copy { min-height: 54px; padding: .5rem .5rem .55rem; gap: .32rem; }
+    .kit-components__grid { gap: .7rem; }
+    .component-card { border-radius: 16px; }
+    .component-card__visual { padding: .55rem; }
+    .component-card__copy { padding: .65rem; gap: .42rem; }
     .component-card__copy p { display: none; }
+    .component-card__details { grid-template-columns: 1fr; gap: .28rem; }
+    .component-card__details div { padding: .38rem .42rem; }
+    .component-card__details div:nth-child(2) { display: none; }
   }
   @media (max-width: 350px) {
-    .component-card__copy { min-height: 50px; }
     .component-card__copy h3 { font-size: .78rem; }
-    .component-card__tag { font-size: .46rem; padding-inline: .32rem; }
+    .component-card__tag { font-size: .46rem; padding-inline: .36rem; }
   }
 {% endstylesheet %}
 
@@ -110,20 +118,24 @@
       { "type": "text", "id": "title", "label": "Name", "default": "Arduino UNO R3" },
       { "type": "text", "id": "text", "label": "Short description", "default": "The brain of every build" },
       { "type": "text", "id": "tag", "label": "Small tag", "default": "Core" },
+      { "type": "text", "id": "detail_1_label", "label": "Detail 1 label", "default": "Type" },
+      { "type": "text", "id": "detail_1_value", "label": "Detail 1 value", "default": "Controller" },
+      { "type": "text", "id": "detail_2_label", "label": "Detail 2 label", "default": "Use" },
+      { "type": "text", "id": "detail_2_value", "label": "Detail 2 value", "default": "Logic" },
       { "type": "range", "id": "parallax", "label": "Scroll movement", "min": -8, "max": 8, "step": 1, "default": 3 }
     ]
   }],
   "presets": [{
     "name": "Kit components",
     "blocks": [
-      { "type": "component", "settings": { "asset": "component-arduino-uno.png", "title": "Arduino UNO R3", "text": "The brain of every build", "tag": "Core", "parallax": 3 } },
-      { "type": "component", "settings": { "asset": "component-breadboard.png", "title": "Mini breadboard", "text": "Build without soldering", "tag": "Build", "parallax": -3 } },
-      { "type": "component", "settings": { "asset": "component-oled.png", "title": "SSD1306 OLED", "text": "Crisp graphics and games", "tag": "Screen", "parallax": 4 } },
-      { "type": "component", "settings": { "asset": "component-joystick.png", "title": "Joystick module", "text": "Two-axis control", "tag": "Input", "parallax": -2 } },
-      { "type": "component", "settings": { "asset": "component-mpu6050.png", "title": "MPU6050", "text": "Motion and tilt sensing", "tag": "Motion", "parallax": 4 } },
-      { "type": "component", "settings": { "asset": "component-servo.png", "title": "SG90 servo", "text": "Make projects move", "tag": "Move", "parallax": -4 } },
-      { "type": "component", "settings": { "asset": "component-button.svg", "symbol": "●", "title": "Push buttons", "text": "Simple tactile input", "tag": "Tap", "parallax": 2 } },
-      { "type": "component", "settings": { "asset": "component-buzzer.svg", "symbol": "))", "title": "Passive buzzer", "text": "Sound and feedback", "tag": "Sound", "parallax": -2 } }
+      { "type": "component", "settings": { "asset": "component-arduino-uno.png", "title": "Arduino UNO R3", "text": "The brain of every build", "tag": "Core", "detail_1_label": "Type", "detail_1_value": "Controller", "detail_2_label": "Use", "detail_2_value": "Logic", "parallax": 3 } },
+      { "type": "component", "settings": { "asset": "component-breadboard.png", "title": "Mini breadboard", "text": "Build without soldering", "tag": "Build", "detail_1_label": "Type", "detail_1_value": "Prototyping", "detail_2_label": "Use", "detail_2_value": "Wiring", "parallax": -3 } },
+      { "type": "component", "settings": { "asset": "component-oled.png", "title": "SSD1306 OLED", "text": "Crisp graphics and games", "tag": "Screen", "detail_1_label": "Output", "detail_1_value": "Display", "detail_2_label": "Interface", "detail_2_value": "I2C", "parallax": 4 } },
+      { "type": "component", "settings": { "asset": "component-joystick.png", "title": "Joystick module", "text": "Two-axis control", "tag": "Input", "detail_1_label": "Input", "detail_1_value": "Analog", "detail_2_label": "Use", "detail_2_value": "Control", "parallax": -2 } },
+      { "type": "component", "settings": { "asset": "component-mpu6050.png", "title": "MPU6050", "text": "Motion and tilt sensing", "tag": "Motion", "detail_1_label": "Input", "detail_1_value": "IMU", "detail_2_label": "Use", "detail_2_value": "Tilt", "parallax": 4 } },
+      { "type": "component", "settings": { "asset": "component-servo.png", "title": "SG90 servo", "text": "Make projects move", "tag": "Move", "detail_1_label": "Output", "detail_1_value": "Motion", "detail_2_label": "Use", "detail_2_value": "Actuate", "parallax": -4 } },
+      { "type": "component", "settings": { "asset": "component-button.svg", "symbol": "●", "title": "Push buttons", "text": "Simple tactile input", "tag": "Tap", "detail_1_label": "Input", "detail_1_value": "Digital", "detail_2_label": "Use", "detail_2_value": "Trigger", "parallax": 2 } },
+      { "type": "component", "settings": { "asset": "component-buzzer.svg", "symbol": "))", "title": "Passive buzzer", "text": "Sound and feedback", "tag": "Sound", "detail_1_label": "Output", "detail_1_value": "Audio", "detail_2_label": "Use", "detail_2_value": "Feedback", "parallax": -2 } }
     ]
   }]
 }
