@@ -232,7 +232,7 @@
         "buttons": {
           "type": "component",
           "settings": {
-            "asset": "component-button.svg",
+            "asset": "component-button.png",
             "symbol": "●",
             "title": "Push buttons",
             "text": "Simple tactile input",
@@ -247,7 +247,7 @@
         "buzzer": {
           "type": "component",
           "settings": {
-            "asset": "component-buzzer.svg",
+            "asset": "component-buzzer.png",
             "symbol": "))",
             "title": "Passive buzzer",
             "text": "Sound and feedback",
