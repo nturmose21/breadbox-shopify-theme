@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">Passive buzzer</title>
+  <desc id="desc">Stylized passive buzzer component for BREADBOX kit.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="145%">
+      <feDropShadow dx="20" dy="22" stdDeviation="0" flood-color="#070a0d" flood-opacity=".38"/>
+    </filter>
+    <radialGradient id="body" cx=".34" cy=".24" r=".8">
+      <stop offset="0" stop-color="#3b424a"/>
+      <stop offset=".55" stop-color="#11161b"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+  </defs>
+  <g filter="url(#shadow)" transform="rotate(8 300 300)">
+    <ellipse cx="300" cy="372" rx="210" ry="68" fill="#087a77" stroke="#070a0d" stroke-width="16"/>
+    <path d="M118 300c0-100 82-181 182-181s182 81 182 181v70c0 61-82 111-182 111s-182-50-182-111Z" fill="url(#body)" stroke="#070a0d" stroke-width="16" stroke-linejoin="round"/>
+    <ellipse cx="300" cy="298" rx="181" ry="118" fill="#171d22" stroke="#070a0d" stroke-width="13"/>
+    <circle cx="300" cy="297" r="56" fill="#050607" stroke="#ffbf18" stroke-width="16"/>
+    <path d="M226 193c44-29 110-32 155-5" fill="none" stroke="#5d6872" stroke-width="13" stroke-linecap="round"/>
+    <g fill="none" stroke="#ffbf18" stroke-width="13" stroke-linecap="round">
+      <path d="M92 189c-24 20-40 49-44 81"/>
+      <path d="M506 189c24 20 40 49 44 81"/>
+      <path d="M63 130c-40 34-66 83-72 137"/>
+      <path d="M537 130c40 34 66 83 72 137"/>
+    </g>
+    <g stroke="#070a0d" stroke-width="13" stroke-linecap="round">
+      <path d="M213 452v73" stroke="#ffbf18"/>
+      <path d="M387 452v73" stroke="#ffbf18"/>
+    </g>
+  </g>
+</svg>

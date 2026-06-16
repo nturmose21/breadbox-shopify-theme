@@ -33,8 +33,10 @@ function initProductUI(root = document) {
 
 let revealObserver;
 function initReveals(root = document) {
-  if (prefersReducedMotion.matches) return;
-  document.documentElement.classList.add('motion-ready');
+  if (prefersReducedMotion.matches) {
+    document.documentElement.classList.remove('motion-ready');
+    return;
+  }
   if (!revealObserver) {
     revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -42,41 +44,70 @@ function initReveals(root = document) {
         entry.target.classList.add('is-visible');
         revealObserver.unobserve(entry.target);
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    }, { rootMargin: '0px 0px 12% 0px', threshold: 0.01 });
   }
   root.querySelectorAll('[data-reveal]:not([data-reveal-bound])').forEach((element) => {
     element.dataset.revealBound = 'true';
-    revealObserver.observe(element);
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.94) {
+      element.classList.add('is-visible');
+    } else {
+      revealObserver.observe(element);
+    }
   });
+  document.documentElement.classList.add('motion-ready');
 }
 
 let parallaxElements = [];
+const activeParallaxElements = new Set();
 let parallaxFrame;
+let parallaxObserver;
+
+function parallaxEnabled() {
+  return !prefersReducedMotion.matches && window.matchMedia('(min-width: 721px)').matches;
+}
+
 function updateParallax() {
   parallaxFrame = null;
+  if (!parallaxEnabled() || document.visibilityState === 'hidden') return;
   const viewportHeight = window.innerHeight;
-  parallaxElements.forEach((element) => {
-    if (!element.isConnected) return;
+  activeParallaxElements.forEach((element) => {
+    if (!element.isConnected) {
+      activeParallaxElements.delete(element);
+      return;
+    }
     const rect = element.getBoundingClientRect();
-    if (rect.bottom < -100 || rect.top > viewportHeight + 100) return;
     const strength = Number(element.dataset.parallax || 0);
     const progress = ((rect.top + rect.height / 2) - viewportHeight / 2) / viewportHeight;
-    const shift = Math.max(-1, Math.min(1, progress)) * strength * -3;
+    const shift = Math.max(-1, Math.min(1, progress)) * strength * -1.6;
     element.style.setProperty('--parallax-y', `${shift.toFixed(2)}px`);
   });
 }
 
 function requestParallax() {
-  if (prefersReducedMotion.matches || parallaxFrame) return;
+  if (!parallaxEnabled() || parallaxFrame) return;
   parallaxFrame = requestAnimationFrame(updateParallax);
 }
 
 function initParallax(root = document) {
-  if (prefersReducedMotion.matches) return;
+  if (!parallaxObserver) {
+    parallaxObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) activeParallaxElements.add(entry.target);
+        else activeParallaxElements.delete(entry.target);
+      });
+      requestParallax();
+    }, { rootMargin: '120px 0px' });
+  }
   root.querySelectorAll('[data-parallax]:not([data-parallax-bound])').forEach((element) => {
     element.dataset.parallaxBound = 'true';
     parallaxElements.push(element);
+    parallaxObserver.observe(element);
   });
+  if (!parallaxEnabled()) {
+    parallaxElements.forEach((element) => element.style.setProperty('--parallax-y', '0px'));
+    return;
+  }
   requestParallax();
 }
 
@@ -86,8 +117,29 @@ function initTheme(root = document) {
   initParallax(root);
 }
 
-document.addEventListener('DOMContentLoaded', () => initTheme());
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initTheme());
+else initTheme();
 document.addEventListener('shopify:section:load', (event) => initTheme(event.target));
 window.addEventListener('scroll', requestParallax, { passive: true });
-window.addEventListener('resize', requestParallax, { passive: true });
-prefersReducedMotion.addEventListener('change', () => window.location.reload());
+window.addEventListener('resize', () => {
+  parallaxElements = parallaxElements.filter((element) => element.isConnected);
+  if (!parallaxEnabled()) parallaxElements.forEach((element) => element.style.setProperty('--parallax-y', '0px'));
+  requestParallax();
+}, { passive: true });
+document.addEventListener('visibilitychange', requestParallax);
+
+function handleMotionPreferenceChange() {
+  if (revealObserver) revealObserver.disconnect();
+  revealObserver = undefined;
+  document.querySelectorAll('[data-reveal]').forEach((element) => {
+    delete element.dataset.revealBound;
+    element.classList.toggle('is-visible', prefersReducedMotion.matches);
+  });
+  initTheme();
+}
+
+if (prefersReducedMotion.addEventListener) {
+  prefersReducedMotion.addEventListener('change', handleMotionPreferenceChange);
+} else {
+  prefersReducedMotion.addListener(handleMotionPreferenceChange);
+}

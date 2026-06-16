@@ -39,8 +39,8 @@
         "joystick": { "type": "component", "settings": { "asset": "component-joystick.png", "symbol": "+", "title": "Joystick module", "text": "Two-axis control", "parallax": -2 } },
         "sensor": { "type": "component", "settings": { "asset": "component-mpu6050.png", "symbol": "+", "title": "MPU6050", "text": "Motion and tilt sensing", "parallax": 4 } },
         "servo": { "type": "component", "settings": { "asset": "component-servo.png", "symbol": "+", "title": "SG90 servo", "text": "Make projects move", "parallax": -4 } },
-        "buttons": { "type": "component", "settings": { "asset": "none", "symbol": "●", "title": "Push buttons", "text": "Simple tactile input", "parallax": 2 } },
-        "buzzer": { "type": "component", "settings": { "asset": "none", "symbol": "))", "title": "Passive buzzer", "text": "Sound and feedback", "parallax": -2 } }
+        "buttons": { "type": "component", "settings": { "asset": "component-button.svg", "symbol": "●", "title": "Push buttons", "text": "Simple tactile input", "parallax": 2 } },
+        "buzzer": { "type": "component", "settings": { "asset": "component-buzzer.svg", "symbol": "))", "title": "Passive buzzer", "text": "Sound and feedback", "parallax": -2 } }
       },
       "block_order": ["uno", "breadboard", "oled", "joystick", "sensor", "servo", "buttons", "buzzer"],
       "settings": {

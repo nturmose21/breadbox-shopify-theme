@@ -19,7 +19,7 @@
   --section-space: clamp(3.5rem, 8vw, 7rem);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   min-width: 320px;
   min-height: 100svh;
@@ -36,9 +36,10 @@ body {
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
   line-height: 1.55;
+  overflow-x: clip;
 }
 
-main { flex: 1; }
+main { flex: 1; min-width: 0; }
 img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
 button, input, textarea, select { font: inherit; }
 button, [role="button"], summary, select, label, a { cursor: pointer; }
@@ -51,8 +52,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
 p { margin: 0 0 1rem; text-wrap: pretty; }
 h1, h2, h3, h4 { margin: 0 0 .75rem; font-family: var(--font-display-family); font-style: var(--font-display-style); font-weight: var(--font-display-weight); line-height: .98; letter-spacing: 0; }
-h1 { font-size: clamp(2.7rem, 7vw, 5.8rem); }
-h2 { font-size: clamp(2rem, 4.5vw, 4rem); }
+h1 { font-size: clamp(3rem, 6.8vw, 6.4rem); }
+h2 { font-size: clamp(2.25rem, 4.6vw, 4.35rem); }
 h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
 
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -63,11 +64,12 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
   --content-width: min(calc(var(--page-width) - var(--page-margin) * 2), calc(100% - var(--page-margin) * 2));
   --content-margin: minmax(var(--page-margin), 1fr);
   display: grid;
-  grid-template-columns: var(--content-margin) var(--content-width) var(--content-margin);
+  grid-template-columns: var(--content-margin) minmax(0, var(--content-width)) var(--content-margin);
+  min-width: 0;
   width: 100%;
   position: relative;
 }
-.shopify-section > * { grid-column: 2; }
+.shopify-section > * { min-width: 0; grid-column: 2; }
 .shopify-section > .full-width { grid-column: 1 / -1; }
 .section-shell { padding-block: var(--section-space); }
 .section-shell--compact { padding-block: clamp(2rem, 5vw, 4rem); }
@@ -80,13 +82,13 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
 .motion-ready [data-reveal] {
   opacity: 0;
   transition:
-    opacity .65s cubic-bezier(.2,.7,.2,1),
-    transform .65s cubic-bezier(.2,.7,.2,1);
+    opacity .52s cubic-bezier(.2,.7,.2,1),
+    transform .52s cubic-bezier(.2,.7,.2,1);
   transition-delay: var(--reveal-delay, 0ms);
 }
-.motion-ready [data-reveal="up"] { transform: translate3d(0, 28px, 0); }
-.motion-ready [data-reveal="left"] { transform: translate3d(-28px, 0, 0); }
-.motion-ready [data-reveal="scale"] { transform: scale(.94); }
+.motion-ready [data-reveal="up"] { transform: translate3d(0, 18px, 0); }
+.motion-ready [data-reveal="left"] { transform: translate3d(-18px, 0, 0); }
+.motion-ready [data-reveal="scale"] { transform: scale(.97); }
 .motion-ready [data-reveal].is-visible { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 
 .button, button.button, input.button, .shopify-payment-button__button--unbranded {
@@ -157,12 +159,25 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
 @media (max-width: 650px) { .customer-table { display: block; overflow-x: auto; } .customer-grid { grid-template-columns: 1fr; } }
 
 @media (max-width: 900px) {
+  h1 { font-size: clamp(3.15rem, 8vw, 4.8rem); }
+  h2 { font-size: clamp(2.15rem, 6vw, 3.3rem); }
+  h3 { font-size: clamp(1.2rem, 3.2vw, 1.5rem); }
   .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
   :root { --page-margin: 14px; --shadow: 4px 5px 0 var(--ink); }
+  h1 { font-size: clamp(2.8rem, 13.5vw, 3.6rem); }
+  h2 { font-size: clamp(2rem, 10vw, 2.6rem); }
+  h3 { font-size: clamp(1.1rem, 5vw, 1.3rem); }
+  .section-shell--compact { padding-block: 2.5rem; }
+  .section-heading { margin-bottom: 1.4rem; }
   .product-grid { grid-template-columns: 1fr; }
   .button { min-height: 48px; }
+  .motion-ready [data-reveal] { transition-delay: min(var(--reveal-delay, 0ms), 120ms); }
+}
+
+@media (hover: none) {
+  .button:hover, button.button:hover, input.button:hover { transform: none; box-shadow: var(--shadow-sm); }
 }
 
 @media (prefers-reduced-motion: reduce) {

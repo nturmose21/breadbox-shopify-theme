@@ -14,6 +14,10 @@
       {% liquid
         assign component_asset = block.settings.asset
         assign component_alt = block.settings.label | default: 'Arduino kit component'
+        assign component_loading = 'lazy'
+        if forloop.index <= 2
+          assign component_loading = 'eager'
+        endif
       %}
       <div
         class="hero-part hero-part--{{ block.settings.position }}"
@@ -22,9 +26,9 @@
         {{ block.shopify_attributes }}
       >
         {% if block.settings.image != blank %}
-          {{ block.settings.image | image_url: width: 900 | image_tag: widths: '240, 360, 540, 720, 900', sizes: '(min-width: 900px) 34vw, 45vw', loading: 'eager', alt: component_alt }}
+          {{ block.settings.image | image_url: width: 900 | image_tag: widths: '240, 360, 540, 720, 900', sizes: '(min-width: 900px) 34vw, 45vw', loading: component_loading, alt: component_alt }}
         {% else %}
-          <img src="{{ component_asset | asset_url }}" alt="{{ component_alt | escape }}" width="700" height="700" loading="eager">
+          <img src="{{ component_asset | asset_url }}" alt="{{ component_alt | escape }}" width="700" height="700" loading="{{ component_loading }}">
         {% endif %}
       </div>
     {% endfor %}
@@ -66,21 +70,22 @@
 
 {% stylesheet %}
   .hero-product {
-    min-height: clamp(640px, 82vh, 820px);
+    min-height: clamp(660px, 80svh, 780px);
     position: relative;
-    display: grid;
-    grid-template-columns: minmax(var(--page-margin), 1fr) minmax(0, calc(var(--page-width) - var(--page-margin) * 2)) minmax(var(--page-margin), 1fr);
+    display: block;
     align-items: center;
-    overflow: hidden;
+    overflow: clip;
+    padding-inline: max(var(--page-margin), calc((100% - var(--page-width)) / 2));
     border-bottom: 4px solid var(--ink);
     background: var(--blue);
     color: white;
+    isolation: isolate;
   }
   .hero-product__blueprint { position: absolute; inset: 0; opacity: .2; background-image: linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px); background-size: 36px 36px; mask-image: linear-gradient(to right, transparent 4%, black 45%); }
-  .hero-product__content { position: relative; z-index: 5; grid-column: 2; width: min(610px, 51%); padding-block: clamp(4rem, 8vw, 7rem); }
+  .hero-product__content { position: relative; z-index: 5; width: min(600px, 47%); padding-block: clamp(4.75rem, 7vw, 6rem); }
   .hero-product__eyebrow { width: fit-content; margin-bottom: 1rem; border: 2px solid var(--ink); border-radius: 999px; padding: .35rem .75rem; background: var(--teal); color: var(--ink); box-shadow: 2px 3px 0 var(--ink); font-size: .78rem; font-weight: 900; text-transform: uppercase; }
-  .hero-product h1 { max-width: 9ch; font-size: clamp(3.4rem, 7vw, 6.6rem); text-shadow: 4px 5px 0 var(--ink); }
-  .hero-product__copy { max-width: 48ch; font-size: clamp(1rem, 1.6vw, 1.22rem); font-weight: 700; }
+  .hero-product h1 { max-width: 9ch; font-size: clamp(4.7rem, 6.8vw, 6.2rem); text-shadow: 4px 5px 0 var(--ink); }
+  .hero-product__copy { max-width: 44ch; font-size: clamp(1rem, 1.25vw, 1.15rem); font-weight: 700; }
   .hero-product__buy { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1rem; margin-top: 1.45rem; }
   .hero-product__buy .price { color: white; font-size: 1.7rem; }
   .hero-product__buy form { display: flex; align-items: center; gap: .65rem; }
@@ -89,10 +94,10 @@
   .hero-product__promises { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.3rem 0 0; padding: 0; list-style: none; }
   .hero-product__promises li { border: 2px solid rgba(255,255,255,.7); border-radius: 999px; padding: .28rem .62rem; font-size: .7rem; font-weight: 900; text-transform: uppercase; }
 
-  .hero-product__scene { position: absolute; z-index: 2; top: 7%; right: max(var(--page-margin), calc((100vw - var(--page-width)) / 2)); width: min(58vw, 820px); height: 86%; pointer-events: none; }
+  .hero-product__scene { position: absolute; z-index: 2; top: 7%; right: max(var(--page-margin), calc((100% - var(--page-width)) / 2)); width: min(58%, 820px); height: 86%; pointer-events: none; }
   .hero-product__platform { position: absolute; right: 2%; bottom: 5%; width: 80%; height: 30%; border: 4px solid var(--ink); background: var(--yellow); box-shadow: 9px 10px 0 var(--ink); clip-path: polygon(7% 0, 100% 0, 91% 100%, 0 100%); transform: rotate(-3deg); }
-  .hero-part { position: absolute; z-index: 3; filter: drop-shadow(9px 12px 0 rgba(7,10,13,.78)); animation: hero-float 5.2s ease-in-out infinite alternate; animation-delay: var(--part-delay); transform: translate3d(0, var(--parallax-y, 0), 0); will-change: transform; }
-  .hero-part img { width: 100%; height: 100%; object-fit: contain; }
+  .hero-part { position: absolute; z-index: 3; filter: drop-shadow(9px 12px 0 rgba(7,10,13,.78)); transform: translate3d(0, var(--parallax-y, 0), 0); }
+  .hero-part img { width: 100%; height: 100%; object-fit: contain; animation: hero-float 5.8s ease-in-out infinite alternate; animation-delay: var(--part-delay); }
   .hero-part--uno { right: 10%; bottom: 18%; width: 58%; height: 48%; rotate: -5deg; }
   .hero-part--breadboard { right: 1%; top: 7%; width: 37%; height: 31%; rotate: 7deg; }
   .hero-part--oled { left: 5%; top: 8%; width: 28%; height: 29%; rotate: -8deg; }
@@ -103,21 +108,25 @@
   .hero-product__spark--one { left: 43%; top: 32%; transform: rotate(10deg); }
   .hero-product__spark--two { right: 2%; bottom: 5%; }
   .hero-product__spark--three { left: 20%; bottom: 0; color: var(--teal); }
-  @keyframes hero-float { from { translate: 0 var(--float-negative); } to { translate: 0 var(--float-range); } }
+  @keyframes hero-float { from { transform: translate3d(0, var(--float-negative), 0); } to { transform: translate3d(0, var(--float-range), 0); } }
 
   @media (max-width: 980px) {
-    .hero-product { min-height: 760px; align-items: end; }
-    .hero-product__content { width: min(660px, 92%); padding-bottom: 3rem; }
-    .hero-product h1 { font-size: clamp(3.3rem, 11vw, 5.4rem); }
-    .hero-product__scene { top: 2%; right: -8%; width: 66vw; height: 54%; opacity: .9; }
+    .hero-product { min-height: clamp(620px, 72svh, 700px); }
+    .hero-product__content { width: 52%; padding-block: 4.5rem 3rem; }
+    .hero-product h1 { max-width: 7ch; font-size: clamp(3.45rem, 8vw, 4.35rem); }
+    .hero-product__copy { max-width: 31ch; font-size: 1rem; }
+    .hero-product__scene { top: 4%; right: -2%; width: 57%; height: 76%; opacity: .92; }
     .hero-product__platform { opacity: .88; }
+    .hero-product__buy form { flex-wrap: wrap; }
   }
   @media (max-width: 680px) {
-    .hero-product { min-height: 700px; }
-    .hero-product__content { width: 100%; padding: 9rem 0 1.5rem; }
-    .hero-product h1 { max-width: 8ch; font-size: clamp(2.85rem, 13vw, 4rem); }
+    .hero-product { min-height: 0; }
+    .hero-product__content { width: 100%; padding: clamp(11.75rem, 48vw, 13.5rem) 0 1.75rem; }
+    .hero-product h1 { max-width: 7ch; font-size: clamp(2.9rem, 13.5vw, 3.55rem); text-shadow: 3px 4px 0 var(--ink); }
     .hero-product__copy { max-width: 34ch; }
-    .hero-product__scene { top: .5rem; right: -14%; width: 100vw; height: 28%; }
+    .hero-product__scene { top: .25rem; right: 0; width: 100%; height: clamp(11.75rem, 48vw, 13.5rem); }
+    .hero-product__platform { right: -4%; bottom: 4%; width: 74%; height: 28%; border-width: 3px; box-shadow: 5px 6px 0 var(--ink); }
+    .hero-part { filter: drop-shadow(5px 7px 0 rgba(7,10,13,.68)); }
     .hero-product__buy { margin-top: 1rem; gap: .5rem; }
     .hero-product__buy .price { font-size: 1.45rem; }
     .hero-product__buy, .hero-product__buy form { align-items: stretch; flex-direction: column; width: 100%; }
@@ -128,6 +137,13 @@
     .hero-product__promises li { font-size: .63rem; }
     .hero-product__spark--one { display: none; }
   }
+  @media (max-width: 380px) {
+    .hero-product__content { padding-top: 11.8rem; }
+    .hero-product h1 { font-size: 2.85rem; }
+    .hero-product__scene { height: 11.8rem; }
+    .hero-product__promises li { padding-inline: .48rem; font-size: .58rem; }
+  }
+  @media (hover: none) { .hero-part img { animation-duration: 7s; } }
 {% endstylesheet %}
 
 {% schema %}
@@ -154,7 +170,9 @@
           { "value": "component-oled.png", "label": "OLED display" },
           { "value": "component-joystick.png", "label": "Joystick" },
           { "value": "component-mpu6050.png", "label": "MPU6050" },
-          { "value": "component-servo.png", "label": "SG90 servo" }
+          { "value": "component-servo.png", "label": "SG90 servo" },
+          { "value": "component-button.svg", "label": "Push button" },
+          { "value": "component-buzzer.svg", "label": "Passive buzzer" }
         ], "default": "component-arduino-uno.png" },
         { "type": "text", "id": "label", "label": "Image alt text", "default": "Arduino component" },
         { "type": "select", "id": "position", "label": "Position", "options": [

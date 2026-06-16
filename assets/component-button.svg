@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">6mm push button</title>
+  <desc id="desc">Stylized tactile push button component for BREADBOX kit.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="22" dy="24" stdDeviation="0" flood-color="#070a0d" flood-opacity=".35"/>
+    </filter>
+    <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f7f3df"/>
+      <stop offset=".52" stop-color="#c9c4b0"/>
+      <stop offset="1" stop-color="#8d897c"/>
+    </linearGradient>
+    <linearGradient id="cap" x1=".18" x2=".86" y1=".06" y2=".9">
+      <stop offset="0" stop-color="#24282d"/>
+      <stop offset=".55" stop-color="#080a0d"/>
+      <stop offset="1" stop-color="#030405"/>
+    </linearGradient>
+  </defs>
+  <g filter="url(#shadow)" transform="rotate(-7 300 300)">
+    <path d="M141 355 90 473h420l-52-118Z" fill="#22c8c2" stroke="#070a0d" stroke-width="16" stroke-linejoin="round"/>
+    <path d="M151 255h298l35 104H116Z" fill="url(#metal)" stroke="#070a0d" stroke-width="16" stroke-linejoin="round"/>
+    <rect x="176" y="183" width="248" height="128" rx="26" fill="#fffdf6" stroke="#070a0d" stroke-width="16"/>
+    <rect x="205" y="116" width="190" height="128" rx="56" fill="url(#cap)" stroke="#070a0d" stroke-width="16"/>
+    <path d="M250 142c28-16 72-14 98 4" fill="none" stroke="#585e66" stroke-width="13" stroke-linecap="round"/>
+    <g fill="#ffbf18" stroke="#070a0d" stroke-width="12">
+      <path d="M119 475v61"/>
+      <path d="M216 475v61"/>
+      <path d="M384 475v61"/>
+      <path d="M481 475v61"/>
+    </g>
+  </g>
+</svg>
