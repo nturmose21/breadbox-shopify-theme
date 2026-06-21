@@ -1,30 +1,27 @@
 {% assign cta_product = section.settings.product | default: collections.all.products.first %}
 <section class="final-cta full-width" data-motion-section>
-  <div class="final-cta__grid" aria-hidden="true"></div>
-  <img class="final-cta__part final-cta__part--left" src="{{ 'component-servo.png' | asset_url }}" alt="" width="600" height="600" loading="lazy" data-parallax="-5">
-  <img class="final-cta__part final-cta__part--right" src="{{ 'component-oled.png' | asset_url }}" alt="" width="600" height="600" loading="lazy" data-parallax="6">
-  <div class="final-cta__content" data-reveal="scale">
-    <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><p>{{ section.settings.text | escape }}</p>
-    <a class="button button--yellow" href="{% if cta_product != blank %}{{ cta_product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">{{ section.settings.button_label | escape }} →</a>
+  <div class="final-cta__content" data-reveal="up">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="final-cta__action">
+      <p>{{ section.settings.text | escape }}</p>
+      <a class="button button--yellow" href="{% if cta_product != blank %}{{ cta_product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">{{ section.settings.button_label | escape }} <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </div>
 </section>
 
 {% stylesheet %}
-  .final-cta { min-height: 360px; position: relative; display: grid; place-items: center; overflow: clip; border-block: 1px solid rgba(7,10,13,.12); background: linear-gradient(135deg, var(--teal), #dff7f6 55%, #fff0b8); isolation: isolate; }
-  .final-cta__grid { position: absolute; inset: 0; opacity: .12; background-image: linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px); background-size: 34px 34px; }
-  .final-cta__content { position: relative; z-index: 3; width: min(720px, calc(100% - 2rem)); padding: 3rem 1rem; text-align: center; }
-  .final-cta .eyebrow { color: var(--blue-dark); }
-  .final-cta h2 { margin-bottom: .7rem; font-size: clamp(3rem, 7vw, 6.5rem); letter-spacing: -.045em; }
-  .final-cta__content > p:not(.eyebrow) { margin-inline: auto; max-width: 34ch; font-weight: 850; line-height: 1.32; }
-  .final-cta__part { position: absolute; z-index: 4; width: min(20vw, 230px); height: 68%; object-fit: contain; opacity: .88; filter: drop-shadow(0 24px 30px rgba(7,10,13,.32)); transform: translate3d(0, var(--parallax-y, 0), 0); pointer-events: none; }
-  .final-cta__part--left { left: 4%; bottom: -11%; rotate: 10deg; }
-  .final-cta__part--right { right: 7%; top: -5%; rotate: -9deg; }
+  .final-cta { border-block: 3px solid var(--ink); background: var(--blue); color: white; }
+  .final-cta__content { width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .42fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: end; padding-block: clamp(3rem, 7vw, 6rem); }
+  .final-cta .eyebrow { color: var(--yellow); }
+  .final-cta h2 { max-width: 9ch; margin: 0; color: white; font-size: clamp(3rem, 7vw, 6.8rem); letter-spacing: 0; }
+  .final-cta__action { border-left: 2px solid rgba(255,255,255,.6); padding-left: 1.2rem; }
+  .final-cta__action p { max-width: 32ch; color: rgba(255,255,255,.82); font-weight: 700; line-height: 1.4; }
   @media (max-width: 680px) {
-    .final-cta { min-height: 320px; }
-    .final-cta__content { padding-block: 2.4rem; }
-    .final-cta__part { width: 34%; height: 34%; opacity: .62; filter: drop-shadow(0 14px 18px rgba(7,10,13,.26)); }
-    .final-cta__part--left { left: -4%; bottom: -4%; }
-    .final-cta__part--right { right: -3%; top: -2%; }
+    .final-cta__content { grid-template-columns: 1fr; gap: 1.4rem; padding-block: 3rem; }
+    .final-cta__action { border-top: 1px solid rgba(255,255,255,.55); border-left: 0; padding: 1rem 0 0; }
   }
 {% endstylesheet %}
 

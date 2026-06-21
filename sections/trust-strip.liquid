@@ -10,13 +10,13 @@
 </section>
 
 {% stylesheet %}
-  .trust-strip { border-bottom: 4px solid var(--ink); background: var(--strip-bg); }
+  .trust-strip { border-bottom: 3px solid var(--ink); background: var(--strip-bg); }
   .trust-strip__inner { width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin: auto; display: grid; grid-template-columns: repeat(4, 1fr); }
-  .trust-strip__item { min-height: 118px; display: flex; align-items: center; gap: .85rem; padding: 1.25rem; border-right: 2px solid var(--ink); }
+  .trust-strip__item { min-height: 112px; display: flex; align-items: center; gap: .85rem; padding: 1.2rem; border-right: 2px solid var(--ink); }
   .trust-strip__item:last-child { border-right: 0; }
-  .trust-strip__item > span { flex: 0 0 42px; width: 42px; height: 42px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50%; background: white; font-size: 1.35rem; font-weight: 900; }
+  .trust-strip__item > span { flex: 0 0 42px; width: 42px; height: 42px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 3px; background: var(--blue); color: white; font-size: 1.1rem; font-weight: 900; }
   .trust-strip strong, .trust-strip small { display: block; }
-  .trust-strip strong { font-size: .9rem; text-transform: uppercase; }
+  .trust-strip strong { font-family: var(--font-display-ui); font-size: .92rem; text-transform: uppercase; }
   .trust-strip small { margin-top: .2rem; font-weight: 700; }
   @media (max-width: 820px) {
     .trust-strip__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }

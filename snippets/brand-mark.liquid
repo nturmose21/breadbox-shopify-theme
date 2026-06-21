@@ -8,23 +8,20 @@
 
 {% stylesheet %}
   .brand-mark {
+    position: relative;
     width: fit-content;
-    border: 1px solid rgba(7,10,13,.18);
-    border-radius: 999px;
-    padding: .24em .58em .18em;
-    background: rgba(255,249,232,.82);
-    color: var(--ink);
-    box-shadow: 0 12px 28px rgba(7,10,13,.12);
+    padding: 0 0 .2em;
+    color: inherit;
     font-family: var(--font-display-ui);
     font-size: clamp(2rem, 4vw, 3.25rem);
     font-weight: 900;
     line-height: .9;
     text-transform: uppercase;
-    letter-spacing: -.02em;
-    text-shadow: .035em .04em 0 var(--yellow);
+    letter-spacing: 0;
   }
+  .brand-mark::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 4px; background: var(--yellow); }
   .brand-mark--compact { font-size: clamp(1.2rem, 2.2vw, 1.7rem); }
   @media (max-width: 420px) {
-    .brand-mark--compact { font-size: 1.18rem; padding-inline: .48em; }
+    .brand-mark--compact { font-size: 1.18rem; }
   }
 {% endstylesheet %}

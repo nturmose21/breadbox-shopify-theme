@@ -14,8 +14,8 @@
             {% else %}
               <div class="tutorial-placeholder" aria-label="Project image placeholder">
                 <span class="tutorial-placeholder__number">0{{ forloop.index }}</span>
-                <div class="tutorial-placeholder__screen"><span></span><span></span><span></span><span></span></div>
-                <small>Add project image</small>
+                <strong>Project image</strong>
+                <small>Replace in Shopify</small>
               </div>
             {% endif %}
           </div>
@@ -27,36 +27,37 @@
 </section>
 
 {% stylesheet %}
-  .tutorial-previews { border-block: 1px solid rgba(255,255,255,.12); background: linear-gradient(135deg, #071018, #092f4c 56%, #071018); color: white; }
+  .tutorial-previews { border-block: 3px solid var(--ink); background: var(--blue); color: white; }
   .tutorial-previews__inner { width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin: auto; }
   .tutorial-previews .eyebrow { color: var(--yellow); }
-  .tutorial-previews .section-heading { max-width: 700px; margin-bottom: 1.35rem; }
-  .tutorial-previews .section-heading h2 { letter-spacing: -.035em; }
-  .tutorial-previews .section-heading .rte { color: rgba(255,255,255,.72); font-weight: 750; }
-  .tutorial-previews__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-  .tutorial-card { min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.16); border-radius: 20px; background: rgba(255,255,255,.06); color: white; box-shadow: 0 24px 70px rgba(0,0,0,.24); transition: transform .24s cubic-bezier(.16,1,.3,1), box-shadow .24s cubic-bezier(.16,1,.3,1), border-color .24s ease; }
-  .tutorial-card__media { aspect-ratio: 16 / 10; border-bottom: 1px solid rgba(255,255,255,.14); background: #0b1116; }
+  .tutorial-previews .section-heading { max-width: 760px; margin-bottom: clamp(1.2rem, 3vw, 2rem); }
+  .tutorial-previews .section-heading h2 { color: white; letter-spacing: 0; }
+  .tutorial-previews .section-heading .rte { max-width: 42ch; color: rgba(255,255,255,.8); font-weight: 700; }
+  .tutorial-previews__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+  .tutorial-card { min-width: 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 6px; background: white; color: var(--ink); transition: transform .2s ease; }
+  .tutorial-card__media { aspect-ratio: 16 / 10; border-bottom: 2px solid var(--ink); background: var(--yellow); }
   .tutorial-card__media > img { width: 100%; height: 100%; object-fit: cover; }
-  .tutorial-placeholder { position: relative; width: 100%; height: 100%; display: grid; place-items: center; overflow: hidden; background-image: radial-gradient(circle at 55% 45%, rgba(34,200,194,.24), transparent 30%), linear-gradient(rgba(34,200,194,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(34,200,194,.16) 1px, transparent 1px); background-size: auto, 18px 18px, 18px 18px; }
-  .tutorial-placeholder__number { position: absolute; top: .75rem; left: .85rem; color: var(--teal); font-family: var(--font-display-ui); font-size: 1.05rem; font-weight: 900; }
-  .tutorial-placeholder__screen { width: 50%; aspect-ratio: 2 / 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; border: 2px solid rgba(255,255,255,.78); border-radius: 10px; padding: 10px; transform: rotate(-2deg); box-shadow: 0 18px 36px rgba(0,0,0,.32); }
-  .tutorial-placeholder__screen span { background: var(--teal); animation: placeholder-pulse 3.2s ease-in-out infinite alternate; }
-  .tutorial-placeholder__screen span:nth-child(2) { animation-delay: .2s; }.tutorial-placeholder__screen span:nth-child(3) { animation-delay: .4s; }.tutorial-placeholder__screen span:nth-child(4) { animation-delay: .6s; }
-  .tutorial-placeholder small { position: absolute; right: .85rem; bottom: .75rem; color: rgba(255,255,255,.72); font-size: .64rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+  .tutorial-placeholder { position: relative; width: 100%; height: 100%; display: grid; align-content: end; overflow: hidden; padding: .8rem; }
+  .tutorial-placeholder::after { content: ""; position: absolute; top: 50%; right: .8rem; left: .8rem; border-top: 2px solid var(--ink); }
+  .tutorial-placeholder__number { position: absolute; top: .35rem; right: .65rem; color: rgba(7,10,13,.16); font-family: var(--font-display-ui); font-size: clamp(4.4rem, 9vw, 8rem); font-weight: 900; line-height: 1; }
+  .tutorial-placeholder strong { position: relative; z-index: 1; font-family: var(--font-display-ui); font-size: 1.15rem; }
+  .tutorial-placeholder small { position: relative; z-index: 1; font-size: .62rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
   .tutorial-card__copy { padding: 1rem; }
-  .tutorial-card__copy > span { color: var(--teal); font-size: .64rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
-  .tutorial-card__copy h3 { margin: .18rem 0 .22rem; font-size: 1.22rem; letter-spacing: -.015em; }
-  .tutorial-card__copy p { margin: 0; color: rgba(255,255,255,.66); font-size: .78rem; font-weight: 700; line-height: 1.3; }
-  @keyframes placeholder-pulse { from { opacity: .3; transform: scaleY(.55); } to { opacity: 1; transform: scaleY(1); } }
-  @media (hover: hover) { .tutorial-card:hover { transform: translateY(-6px); border-color: rgba(34,200,194,.45); box-shadow: 0 34px 80px rgba(0,0,0,.34); } }
+  .tutorial-card__copy > span { color: var(--blue); font-size: .64rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+  .tutorial-card__copy h3 { margin: .18rem 0 .22rem; font-size: 1.32rem; letter-spacing: 0; }
+  .tutorial-card__copy p { margin: 0; color: var(--muted); font-size: .8rem; font-weight: 700; line-height: 1.35; }
+  @media (hover: hover) { .tutorial-card:hover { transform: translateY(-4px); } }
   @media (max-width: 760px) {
     .tutorial-previews__grid { grid-template-columns: 1fr; gap: .7rem; }
-    .tutorial-card { min-height: 138px; display: grid; grid-template-columns: minmax(116px, 36%) minmax(0, 1fr); border-radius: 16px; }
-    .tutorial-card__media { min-height: 128px; aspect-ratio: auto; border-right: 1px solid rgba(255,255,255,.14); border-bottom: 0; }
+    .tutorial-card { min-height: 132px; display: grid; grid-template-columns: minmax(116px, 36%) minmax(0, 1fr); border-radius: 4px; }
+    .tutorial-card__media { min-height: 128px; aspect-ratio: auto; border-right: 2px solid var(--ink); border-bottom: 0; }
     .tutorial-card__copy { align-self: center; padding: .65rem .75rem; }
-    .tutorial-card__copy h3 { font-size: .98rem; }
-    .tutorial-placeholder__screen { width: 58%; gap: 2px; padding: 5px; }
-    .tutorial-placeholder small { right: .5rem; bottom: .45rem; font-size: .58rem; }
+    .tutorial-card__copy h3 { font-size: 1.08rem; }
+    .tutorial-placeholder { padding: .55rem; }
+    .tutorial-placeholder::after { right: .55rem; left: .55rem; }
+    .tutorial-placeholder__number { right: .4rem; font-size: 4rem; }
+    .tutorial-placeholder strong,
+    .tutorial-placeholder small { display: none; }
   }
   @media (max-width: 380px) {
     .tutorial-card { grid-template-columns: 104px minmax(0, 1fr); }
