@@ -12,7 +12,7 @@
       {% if section.settings.image != blank %}
         {{ section.settings.image | image_url: width: 1800 | image_tag: widths: '720, 1000, 1400, 1800', sizes: '(min-width: 900px) 52vw, 94vw', loading: 'eager', alt: section.settings.image_alt }}
       {% else %}
-        <img src="{{ 'hero-breadbox-build.png' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="1124" height="1499" loading="eager">
+        <img src="{{ 'hero-breadbox-build.png' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="1280" height="1024" loading="eager">
       {% endif %}
     </figure>
 
@@ -202,14 +202,14 @@
   @media (max-width: 760px) {
     .hero-product__inner { min-height: 0; grid-template-columns: 1fr; gap: .5rem; padding-block: 2rem 3rem; }
     .hero-product__visual { min-height: min(110vw, 440px); order: 1; }
-    .hero-product__visual img { top: -43%; left: 50%; height: 154%; }
+    .hero-product__visual img { top: -34%; left: 50%; height: 205%; }
     .hero-product__content { max-width: none; order: 2; }
     .hero-product h1 { max-width: 12ch; font-size: clamp(2.8rem, 13vw, 4.5rem); }
   }
   @media (max-width: 420px) {
     .hero-product__inner { width: calc(100% - 28px); }
     .hero-product__visual { min-height: 340px; }
-    .hero-product__visual img { top: -40%; height: 146%; }
+    .hero-product__visual img { top: -34%; height: 205%; }
     .hero-product__purchase-head { align-items: center; }
     .hero-product__stock { font-size: .66rem; }
   }
