@@ -15,7 +15,7 @@
               <div class="tutorial-placeholder" aria-label="Project image placeholder">
                 <span class="tutorial-placeholder__number">0{{ forloop.index }}</span>
                 <strong>Project image</strong>
-                <small>Replace in Shopify</small>
+                <small>Coming soon</small>
               </div>
             {% endif %}
           </div>
@@ -27,36 +27,34 @@
 </section>
 
 {% stylesheet %}
-  .tutorial-previews { border-block: 3px solid var(--ink); background: var(--blue); color: white; }
+  .tutorial-previews { background: white; color: var(--ink); }
   .tutorial-previews__inner { width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin: auto; }
-  .tutorial-previews .eyebrow { color: var(--yellow); }
-  .tutorial-previews .section-heading { max-width: 760px; margin-bottom: clamp(1.2rem, 3vw, 2rem); }
-  .tutorial-previews .section-heading h2 { color: white; letter-spacing: 0; }
-  .tutorial-previews .section-heading .rte { max-width: 42ch; color: rgba(255,255,255,.8); font-weight: 700; }
-  .tutorial-previews__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
-  .tutorial-card { min-width: 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 6px; background: white; color: var(--ink); transition: transform .2s ease; }
-  .tutorial-card__media { aspect-ratio: 16 / 10; border-bottom: 2px solid var(--ink); background: var(--yellow); }
+  .tutorial-previews .eyebrow { color: var(--blue); }
+  .tutorial-previews .section-heading { max-width: 760px; margin: 0 auto clamp(2rem, 4vw, 3rem); text-align: center; }
+  .tutorial-previews .section-heading h2 { color: var(--ink); letter-spacing: 0; }
+  .tutorial-previews .section-heading .rte { max-width: 46ch; margin-inline: auto; color: var(--muted); font-weight: 600; }
+  .tutorial-previews__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+  .tutorial-card { min-width: 0; overflow: hidden; border-radius: 8px; background: #f5f5f7; color: var(--ink); box-shadow: 0 12px 34px rgba(7,10,13,.06); transition: transform .25s ease, box-shadow .25s ease; }
+  .tutorial-card__media { aspect-ratio: 4 / 3; background: #e9f0f7; }
   .tutorial-card__media > img { width: 100%; height: 100%; object-fit: cover; }
-  .tutorial-placeholder { position: relative; width: 100%; height: 100%; display: grid; align-content: end; overflow: hidden; padding: .8rem; }
-  .tutorial-placeholder::after { content: ""; position: absolute; top: 50%; right: .8rem; left: .8rem; border-top: 2px solid var(--ink); }
-  .tutorial-placeholder__number { position: absolute; top: .35rem; right: .65rem; color: rgba(7,10,13,.16); font-family: var(--font-display-ui); font-size: clamp(4.4rem, 9vw, 8rem); font-weight: 900; line-height: 1; }
-  .tutorial-placeholder strong { position: relative; z-index: 1; font-family: var(--font-display-ui); font-size: 1.15rem; }
-  .tutorial-placeholder small { position: relative; z-index: 1; font-size: .62rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-  .tutorial-card__copy { padding: 1rem; }
-  .tutorial-card__copy > span { color: var(--blue); font-size: .64rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
-  .tutorial-card__copy h3 { margin: .18rem 0 .22rem; font-size: 1.32rem; letter-spacing: 0; }
-  .tutorial-card__copy p { margin: 0; color: var(--muted); font-size: .8rem; font-weight: 700; line-height: 1.35; }
-  @media (hover: hover) { .tutorial-card:hover { transform: translateY(-4px); } }
+  .tutorial-placeholder { position: relative; width: 100%; height: 100%; display: grid; place-content: center; justify-items: center; gap: .3rem; overflow: hidden; padding: .8rem; color: var(--blue); }
+  .tutorial-placeholder__number { color: rgba(9,100,165,.14); font-family: var(--font-display-ui); font-size: clamp(4rem, 8vw, 7rem); font-weight: 800; line-height: .9; }
+  .tutorial-placeholder strong { font-family: var(--font-display-ui); font-size: 1rem; }
+  .tutorial-placeholder small { color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .tutorial-card__copy { padding: 1.15rem 1.15rem 1.3rem; }
+  .tutorial-card__copy > span { color: var(--blue); font-size: .64rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .tutorial-card__copy h3 { margin: .25rem 0 .3rem; font-size: 1.28rem; letter-spacing: 0; }
+  .tutorial-card__copy p { margin: 0; color: var(--muted); font-size: .82rem; font-weight: 600; line-height: 1.4; }
+  @media (hover: hover) { .tutorial-card:hover { transform: translateY(-4px); box-shadow: 0 18px 46px rgba(7,10,13,.1); } }
   @media (max-width: 760px) {
     .tutorial-previews__grid { grid-template-columns: 1fr; gap: .7rem; }
-    .tutorial-card { min-height: 132px; display: grid; grid-template-columns: minmax(116px, 36%) minmax(0, 1fr); border-radius: 4px; }
-    .tutorial-card__media { min-height: 128px; aspect-ratio: auto; border-right: 2px solid var(--ink); border-bottom: 0; }
+    .tutorial-card { min-height: 140px; display: grid; grid-template-columns: minmax(126px, 38%) minmax(0, 1fr); border-radius: 8px; }
+    .tutorial-card__media { min-height: 140px; aspect-ratio: auto; }
     .tutorial-card__copy { align-self: center; padding: .65rem .75rem; }
     .tutorial-card__copy h3 { font-size: 1.08rem; }
     .tutorial-placeholder { padding: .55rem; }
-    .tutorial-placeholder::after { right: .55rem; left: .55rem; }
-    .tutorial-placeholder__number { right: .4rem; font-size: 4rem; }
-    .tutorial-placeholder strong,
+    .tutorial-placeholder__number { font-size: 3.6rem; }
+    .tutorial-placeholder strong { font-size: .76rem; }
     .tutorial-placeholder small { display: none; }
   }
   @media (max-width: 380px) {

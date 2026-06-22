@@ -14,12 +14,12 @@
       "settings": {
         "product": "",
         "image_alt": "Completed BREADBOX Arduino project with OLED display",
-        "eyebrow": "Arduino project workshop",
-        "heading": "Build small. Finish something real.",
-        "text": "<p>BREADBOX turns one Arduino UNO into a workshop for compact games, tools and experiments.</p>",
-        "caption": "A finished mini build made with BREADBOX",
-        "promise_heading": "One kit. Many finished builds.",
-        "promise_text": "Hardware, guided projects and browser-based uploads.",
+        "eyebrow": "Arduino project kit",
+        "heading": "BREADBOX Arduino Kit",
+        "text": "<p>Build compact games, tools and experiments with one reusable Arduino workshop.</p>",
+        "purchase_label": "BREADBOX kit",
+        "promise_text": "Hardware, guided projects and browser-based uploads included.",
+        "show_dynamic_checkout": true,
         "button_label": "Shop BREADBOX",
         "button_link": "shopify://collections/all"
       }
@@ -58,9 +58,9 @@
         "third"
       ],
       "settings": {
-        "eyebrow": "What you can build",
-        "heading": "Small projects with a finished feel.",
-        "text": "<p>Games, tools and experiments designed to live on your desk, not disappear into a parts drawer.</p>"
+        "eyebrow": "Projects",
+        "heading": "Build games, tools and tiny devices.",
+        "text": "<p>Each project uses the same kit, with a real finished result at the end.</p>"
       }
     },
     "steps": {
@@ -94,18 +94,18 @@
         "build"
       ],
       "settings": {
-        "eyebrow": "The workshop flow",
-        "heading": "Choose. Build. Use."
+        "eyebrow": "How it works",
+        "heading": "From kit to finished build."
       }
     },
     "cta": {
       "type": "final-cta",
       "settings": {
         "product": "",
-        "eyebrow": "Ready for the workbench",
-        "heading": "Put a workshop on your desk.",
-        "text": "Build compact Arduino projects that feel complete, useful and worth showing.",
-        "button_label": "Get BREADBOX"
+        "eyebrow": "BREADBOX",
+        "heading": "Ready to build?",
+        "text": "One reusable Arduino kit, guided projects and a simple browser uploader.",
+        "button_label": "Buy BREADBOX"
       }
     },
     "trust": {
@@ -151,7 +151,7 @@
         "shipping"
       ],
       "settings": {
-        "background": "#ffbf18"
+        "background": "#eef4f8"
       }
     }
   },

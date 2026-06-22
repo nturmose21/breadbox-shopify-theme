@@ -19,6 +19,7 @@ function initProductUI(root = document) {
     const variant = form.querySelector('[name="id"]');
     const button = form.querySelector('[name="add"]');
     const price = form.closest('[data-product-root]')?.querySelector('[data-product-price]');
+    const stock = form.closest('[data-product-root]')?.querySelector('.hero-product__stock');
     if (!variant || !button) return;
     variant.addEventListener('change', () => {
       const option = variant.options[variant.selectedIndex];
@@ -27,6 +28,10 @@ function initProductUI(root = document) {
       const label = button.querySelector('span');
       if (label) label.textContent = available ? 'Add to cart' : 'Sold out';
       if (price && option.dataset.price) price.textContent = option.dataset.price;
+      if (stock) {
+        stock.textContent = available ? 'Ready to ship' : 'Currently unavailable';
+        stock.classList.toggle('is-unavailable', !available);
+      }
     });
   });
 }
