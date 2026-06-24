@@ -113,7 +113,7 @@ h3 { font-size: clamp(1.25rem, 2.15vw, 2rem); }
 .button:hover, button.button:hover, input.button:hover { transform: translateY(-1px); box-shadow: none; opacity: .92; }
 .button:active, button.button:active, input.button:active { transform: translateY(0); box-shadow: none; }
 .button--yellow, button.button--yellow, input.button--yellow { background: var(--yellow); color: var(--ink); }
-.button--white, button.button--white, input.button--white { background: white; }
+.button--white, button.button--white, input.button--white { background: white; color: var(--ink); }
 .button--blue, button.button--blue, input.button--blue { background: var(--blue); color: white; }
 .button--full { width: 100%; }
 .button[disabled], button[disabled], input[disabled] { opacity: .52; cursor: not-allowed; transform: none; }
