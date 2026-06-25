@@ -16,16 +16,19 @@
       "settings": {
         "text": "Free tracked shipping on launch orders",
         "link_label": "Shop the kit",
-        "link": "shopify://collections/all",
-        "background": "#ffbf18",
-        "text_color": "#070a0d"
+        "link": "shopify://products/breadbox-arduino-starter-kit",
+        "background": "#b6ff3b",
+        "text_color": "#15171a"
       }
     },
     "header": {
       "type": "header",
       "settings": {
-        "menu": "main-menu",
-        "customer_account_menu": "customer-account-main-menu"
+        "product": "breadbox-arduino-starter-kit",
+        "kit_link": "/#kit",
+        "projects_link": "/#projects",
+        "uploader_link": "/pages/uploader",
+        "buy_link": "shopify://products/breadbox-arduino-starter-kit"
       }
     }
   },

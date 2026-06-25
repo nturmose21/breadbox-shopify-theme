@@ -5,10 +5,11 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "tagline": "One small box. A whole shelf of things to build.",
-        "menu": "footer",
-        "support_heading": "Real human support",
-        "support_text": "Questions before or after your build? We are here to help.",
+        "tagline": "One compact Arduino workshop for games, tools and ideas worth taking apart.",
+        "support_email": "support@breadbox.fun",
+        "kit_link": "/#kit",
+        "projects_link": "/#projects",
+        "uploader_link": "/pages/uploader",
         "show_payment_icons": true
       }
     }

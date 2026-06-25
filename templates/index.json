@@ -23,94 +23,213 @@
         "uploader_link": "/pages/uploader"
       }
     },
-    "tutorials": {
-      "type": "tutorial-previews",
-      "blocks": {
-        "first": {
-          "type": "tutorial",
-          "settings": {
-            "asset": "project-build-img_1669.jpg",
-            "image_position": "center center",
-            "level": "OLED game",
-            "title": "Dino Tamagotchi",
-            "text": "Build a handheld virtual pet with real buttons and a crisp OLED display."
-          }
-        },
-        "second": {
-          "type": "tutorial",
-          "settings": {
-            "asset": "project-build-img_1578.jpg",
-            "image_position": "center center",
-            "level": "Useful tool",
-            "title": "Mini multimeter",
-            "text": "Measure voltage, resistance and continuity with a compact bench tool."
-          }
-        },
-        "third": {
-          "type": "tutorial",
-          "settings": {
-            "asset": "project-build-img_3559.jpg",
-            "image_position": "center center",
-            "level": "Pocket utility",
-            "title": "OLED calculator",
-            "text": "Turn the same hardware into a tactile calculator you can hold."
-          }
-        }
-      },
-      "block_order": [
-        "first",
-        "second",
-        "third"
-      ],
-      "settings": {
-        "eyebrow": "Projects",
-        "heading": "Build games, tools and tiny devices.",
-        "text": "<p>Each project uses the same kit, with a real finished result at the end.</p>"
-      }
-    },
-    "steps": {
+    "process": {
       "type": "how-it-works",
       "blocks": {
-        "open": {
-          "type": "step",
-          "settings": {
-            "heading": "Choose a build",
-            "text": "Pick the project that belongs on your workbench next."
-          }
-        },
-        "follow": {
-          "type": "step",
-          "settings": {
-            "heading": "Follow the guide",
-            "text": "Wire the hardware with clear steps and useful component theory."
-          }
-        },
         "build": {
           "type": "step",
           "settings": {
-            "heading": "Upload and use it",
-            "text": "Flash the ready-made code in your browser, then enjoy the result."
+            "visual": "build",
+            "heading": "Build",
+            "text": "Follow the wiring guide and snap the project together on the mini breadboard.",
+            "note": "Real parts / real circuits"
+          }
+        },
+        "flash": {
+          "type": "step",
+          "settings": {
+            "visual": "flash",
+            "heading": "Flash",
+            "text": "Choose a project and upload it straight from your browser. No IDE installation required.",
+            "note": "USB in / instant upload"
+          }
+        },
+        "mod": {
+          "type": "step",
+          "settings": {
+            "visual": "mod",
+            "heading": "Mod",
+            "text": "Open the raw C++ source, change the behavior, and learn by making it your own.",
+            "note": "Full source code included"
           }
         }
       },
-      "block_order": [
-        "open",
-        "follow",
-        "build"
-      ],
+      "block_order": ["build", "flash", "mod"],
       "settings": {
-        "eyebrow": "How it works",
-        "heading": "From kit to finished build."
+        "eyebrow": "Hardware meets software",
+        "heading": "Build it. Flash it. Make it yours.",
+        "text": "<p>Start with a working project, then open the code and see how every part behaves.</p>"
       }
     },
-    "cta": {
-      "type": "final-cta",
+    "kit": {
+      "type": "kit-breakdown",
+      "blocks": {
+        "uno": {
+          "type": "component",
+          "settings": {
+            "asset": "component-arduino-uno.png",
+            "part_number": "MCU-001",
+            "title": "UNO compatible board",
+            "quantity": "Qty 1"
+          }
+        },
+        "breadboard": {
+          "type": "component",
+          "settings": {
+            "asset": "component-breadboard.png",
+            "part_number": "BRD-170",
+            "title": "170-point breadboard",
+            "quantity": "Qty 1"
+          }
+        },
+        "oled": {
+          "type": "component",
+          "settings": {
+            "asset": "component-oled.png",
+            "part_number": "DSP-096",
+            "title": "SSD1306 OLED",
+            "quantity": "Qty 1"
+          }
+        },
+        "buttons": {
+          "type": "component",
+          "settings": {
+            "asset": "component-button.png",
+            "part_number": "BTN-006",
+            "title": "Tactile buttons",
+            "quantity": "Qty 5"
+          }
+        },
+        "joystick": {
+          "type": "component",
+          "settings": {
+            "asset": "component-joystick.png",
+            "part_number": "INP-023",
+            "title": "Joystick module",
+            "quantity": "Qty 1"
+          }
+        },
+        "motion": {
+          "type": "component",
+          "settings": {
+            "asset": "component-mpu6050.png",
+            "part_number": "IMU-6050",
+            "title": "Motion sensor",
+            "quantity": "Qty 1"
+          }
+        },
+        "servo": {
+          "type": "component",
+          "settings": {
+            "asset": "component-servo.png",
+            "part_number": "SRV-090",
+            "title": "SG90 micro servo",
+            "quantity": "Qty 1"
+          }
+        },
+        "buzzer": {
+          "type": "component",
+          "settings": {
+            "asset": "component-buzzer.png",
+            "part_number": "SND-001",
+            "title": "Passive buzzer",
+            "quantity": "Qty 1"
+          }
+        }
+      },
+      "block_order": ["uno", "breadboard", "oled", "buttons", "joystick", "motion", "servo", "buzzer"],
       "settings": {
-        "product": "",
-        "eyebrow": "BREADBOX",
-        "heading": "Ready to build?",
-        "text": "One reusable Arduino kit, guided projects and a simple browser uploader.",
-        "button_label": "Buy BREADBOX"
+        "eyebrow": "What's in the box",
+        "heading": "A complete little workbench.",
+        "text": "<p>The reusable hardware behind every BREADBOX build, arranged and labelled for makers who want to know exactly what they are buying.</p>",
+        "note": "Also includes jumper wires, USB cable and the supporting components required by the guided builds."
+      }
+    },
+    "projects": {
+      "type": "project-gallery",
+      "blocks": {
+        "dino": {
+          "type": "project",
+          "settings": {
+            "asset": "project-build-img_1669.jpg",
+            "category": "OLED game",
+            "level": "Beginner",
+            "title": "Dino Tamagotchi",
+            "text": "Keep a tiny OLED pet alive with real buttons and changing stats.",
+            "show_safety_warning": false,
+            "safety_text": "Measures up to 5V only. Requires a custom voltage divider, not included, for higher voltages."
+          }
+        },
+        "multimeter": {
+          "type": "project",
+          "settings": {
+            "asset": "project-build-img_1578.jpg",
+            "category": "Bench tool",
+            "level": "Intermediate",
+            "title": "Mini Multimeter",
+            "text": "Explore voltage, resistance and continuity on a compact display.",
+            "show_safety_warning": true,
+            "safety_text": "Measures up to 5V only. Requires a custom voltage divider, not included, for higher voltages."
+          }
+        },
+        "calculator": {
+          "type": "project",
+          "settings": {
+            "asset": "project-build-img_3559.jpg",
+            "category": "Pocket utility",
+            "level": "Beginner",
+            "title": "OLED Calculator",
+            "text": "Build a tactile calculator with a screen and real button controls.",
+            "show_safety_warning": false,
+            "safety_text": "Measures up to 5V only. Requires a custom voltage divider, not included, for higher voltages."
+          }
+        },
+        "flappy": {
+          "type": "project",
+          "settings": {
+            "asset": "project-build-img_0532-2.jpg",
+            "category": "Arcade game",
+            "level": "Beginner",
+            "title": "Flappy Bird",
+            "text": "Wire the controls, flash the game and chase a new high score.",
+            "show_safety_warning": false,
+            "safety_text": "Measures up to 5V only. Requires a custom voltage divider, not included, for higher voltages."
+          }
+        },
+        "tetris": {
+          "type": "project",
+          "settings": {
+            "asset": "project-build-img_2103.jpg",
+            "category": "OLED game",
+            "level": "Intermediate",
+            "title": "Tiny Tetris",
+            "text": "Stack blocks on a miniature display using tactile button controls.",
+            "show_safety_warning": false,
+            "safety_text": "Measures up to 5V only. Requires a custom voltage divider, not included, for higher voltages."
+          }
+        },
+        "racer": {
+          "type": "project",
+          "settings": {
+            "asset": "project-build-img_2192.jpg",
+            "category": "Motion game",
+            "level": "Intermediate",
+            "title": "Gyro Racer",
+            "text": "Use the motion sensor to steer by moving the whole controller.",
+            "show_safety_warning": false,
+            "safety_text": "Measures up to 5V only. Requires a custom voltage divider, not included, for higher voltages."
+          }
+        }
+      },
+      "block_order": ["dino", "multimeter", "calculator", "flappy", "tetris", "racer"],
+      "settings": {
+        "eyebrow": "Projects included",
+        "heading": "Small hardware. Proper results.",
+        "text": "<p>Build games, tools and interactive devices with the same compact kit.</p>",
+        "uploader_link": "/pages/uploader",
+        "footer_text": "Every project includes a wiring guide, browser-ready upload and editable C++ source.",
+        "button_label": "Get the kit",
+        "button_link": "shopify://products/breadbox-arduino-starter-kit"
       }
     },
     "trust": {
@@ -120,16 +239,16 @@
           "type": "item",
           "settings": {
             "icon": "box",
-            "heading": "Built around UNO",
-            "text": "Hardware you already understand"
+            "heading": "UNO compatible",
+            "text": "Familiar hardware with room to grow"
           }
         },
-        "guided": {
+        "source": {
           "type": "item",
           "settings": {
             "icon": "book",
-            "heading": "Guided mini builds",
-            "text": "Theory where it actually helps"
+            "heading": "Full source code",
+            "text": "Read, change and break the C++"
           }
         },
         "upload": {
@@ -137,7 +256,7 @@
           "settings": {
             "icon": "spark",
             "heading": "Browser uploader",
-            "text": "Flash projects without coding setup"
+            "text": "Start without installing an IDE"
           }
         },
         "shipping": {
@@ -145,26 +264,25 @@
           "settings": {
             "icon": "shield",
             "heading": "Tracked and supported",
-            "text": "Clear shipping, returns and help"
+            "text": "Clear shipping, returns and human help"
           }
         }
       },
-      "block_order": [
-        "uno",
-        "guided",
-        "upload",
-        "shipping"
-      ],
+      "block_order": ["uno", "source", "upload", "shipping"],
       "settings": {
-        "background": "#eef4f8"
+        "background": "#b6ff3b"
+      }
+    },
+    "cta": {
+      "type": "final-cta",
+      "settings": {
+        "product": "",
+        "eyebrow": "Ready when you are",
+        "heading": "Build the first one tonight.",
+        "text": "One reusable Arduino kit, guided projects and a browser uploader that gets straight to the good part.",
+        "button_label": "Get BREADBOX"
       }
     }
   },
-  "order": [
-    "hero",
-    "tutorials",
-    "steps",
-    "trust",
-    "cta"
-  ]
+  "order": ["hero", "process", "kit", "projects", "trust", "cta"]
 }

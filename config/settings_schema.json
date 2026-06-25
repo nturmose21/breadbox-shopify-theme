@@ -24,12 +24,12 @@
   {
     "name": "BREADBOX colors",
     "settings": [
-      { "type": "color", "id": "color_ink", "default": "#070A0D", "label": "Ink" },
-      { "type": "color", "id": "color_paper", "default": "#FFF6DC", "label": "Paper" },
-      { "type": "color", "id": "color_surface", "default": "#FFFDF6", "label": "Surface" },
-      { "type": "color", "id": "color_teal", "default": "#22C8C2", "label": "Teal" },
-      { "type": "color", "id": "color_yellow", "default": "#FFBF18", "label": "Yellow" },
-      { "type": "color", "id": "color_blue", "default": "#0964A5", "label": "Blue" }
+      { "type": "color", "id": "color_ink", "default": "#15171A", "label": "Ink" },
+      { "type": "color", "id": "color_paper", "default": "#F4F1E8", "label": "Paper" },
+      { "type": "color", "id": "color_surface", "default": "#FFFDF7", "label": "Surface" },
+      { "type": "color", "id": "color_teal", "default": "#B6FF3B", "label": "Neon green" },
+      { "type": "color", "id": "color_yellow", "default": "#B6FF3B", "label": "Secondary accent" },
+      { "type": "color", "id": "color_blue", "default": "#0069FF", "label": "Electric blue" }
     ]
   }
 ]

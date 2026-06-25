@@ -1,19 +1,30 @@
-{% assign cta_product = section.settings.product | default: collections.all.products.first %}
+{% liquid
+  assign cta_product = section.settings.product | default: collections.all.products.first
+  assign cta_variant = cta_product.selected_or_first_available_variant
+%}
 <section class="final-cta full-width" data-motion-section>
   <div class="final-cta__content" data-reveal="up">
     <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
     <h2>{{ section.settings.heading | escape }}</h2>
     <p>{{ section.settings.text | escape }}</p>
-    <a class="button button--yellow" href="{% if cta_product != blank %}{{ cta_product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">{{ section.settings.button_label | escape }}</a>
+    <a class="button button--yellow" href="{% if cta_product != blank %}{{ cta_product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">
+      <span>{{ section.settings.button_label | escape }}</span>
+      {% if cta_variant != blank %}<strong>{{ cta_variant.price | money }}</strong>{% endif %}
+    </a>
+    <small>Secure checkout / tracked shipping / browser uploader included</small>
   </div>
 </section>
 
 {% stylesheet %}
-  .final-cta { background: white; color: var(--ink); }
-  .final-cta__content { width: min(760px, calc(100% - var(--page-margin) * 2)); margin: auto; padding-block: clamp(4rem, 9vw, 7rem); text-align: center; }
+  .final-cta { background: var(--blue); color: white; }
+  .final-cta__content { width: min(840px, calc(100% - var(--page-margin) * 2)); margin: auto; padding-block: clamp(4rem, 8vw, 6.5rem); text-align: center; }
   .final-cta .eyebrow { color: var(--blue); }
-  .final-cta h2 { margin-bottom: .8rem; font-size: clamp(2.8rem, 6vw, 5.6rem); letter-spacing: 0; }
-  .final-cta__content > p:not(.eyebrow) { max-width: 38ch; margin: 0 auto 1.5rem; color: var(--muted); font-weight: 600; line-height: 1.5; }
+  .final-cta .eyebrow { color: var(--teal); }
+  .final-cta h2 { margin-bottom: .8rem; font-size: clamp(3rem, 7vw, 6.5rem); }
+  .final-cta__content > p:not(.eyebrow) { max-width: 42ch; margin: 0 auto 1.6rem; color: rgba(255,255,255,.78); font-size: 1rem; line-height: 1.5; }
+  .final-cta .button { min-width: min(100%, 330px); justify-content: space-between; }
+  .final-cta .button strong { font-family: var(--font-mono-ui); font-size: .75rem; }
+  .final-cta small { display: block; margin-top: 1.2rem; color: rgba(255,255,255,.65); font-family: var(--font-mono-ui); font-size: .56rem; text-transform: uppercase; }
 {% endstylesheet %}
 
 {% schema %}
