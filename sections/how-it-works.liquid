@@ -8,9 +8,22 @@
 
     <div class="how-it-works__steps">
       {% for block in section.blocks %}
+        {% liquid
+          assign step_visual = block.settings.visual
+          if step_visual == blank
+            case forloop.index
+              when 1
+                assign step_visual = 'build'
+              when 2
+                assign step_visual = 'flash'
+              else
+                assign step_visual = 'mod'
+            endcase
+          endif
+        %}
         <article class="build-step" data-reveal="up" style="--reveal-delay: {{ forloop.index0 | times: 90 }}ms;" {{ block.shopify_attributes }}>
-          <div class="build-step__visual build-step__visual--{{ block.settings.visual }}" aria-hidden="true">
-            {% case block.settings.visual %}
+          <div class="build-step__visual build-step__visual--{{ step_visual }}" aria-hidden="true">
+            {% case step_visual %}
               {% when 'build' %}
                 <span class="build-step__part build-step__part--board"><img src="{{ 'component-breadboard.png' | asset_url }}" alt="" width="500" height="500" loading="lazy"></span>
                 <span class="build-step__part build-step__part--screen"><img src="{{ 'component-oled.png' | asset_url }}" alt="" width="1200" height="1200" loading="lazy"></span>
@@ -18,15 +31,21 @@
               {% when 'flash' %}
                 <div class="build-step__browser">
                   <span class="build-step__browser-bar"><i></i><i></i><i></i><b>uploader.breadbox.fun</b></span>
-                  <span class="build-step__port">Arduino UNO <b>connected</b></span>
+                  <span class="build-step__port"><em>USB</em> Arduino UNO <b>Connected</b></span>
+                  <span class="build-step__file">dino_tamagotchi.hex <b>32 KB</b></span>
                   <span class="build-step__progress"><i></i></span>
-                  <strong>FLASH COMPLETE</strong>
+                  <strong><i></i> Flash complete</strong>
                 </div>
               {% else %}
-                <pre class="build-step__code"><span>01</span> <b>void</b> loop() {
-<span>02</span>   pet.hunger++;
+                <div class="build-step__editor">
+                  <span class="build-step__editor-tab">pet.ino <i>×</i></span>
+                  <pre class="build-step__code"><span>01</span> <b>void</b> loop() {
+<span>02</span>   pet.hunger += <mark>1</mark>;
 <span>03</span>   <em>drawPet</em>();
-<span>04</span> }</pre>
+<span>04</span>   delay(<mark>500</mark>);
+<span>05</span> }</pre>
+                  <small>C++ / editable source</small>
+                </div>
             {% endcase %}
           </div>
           <div class="build-step__copy">
@@ -49,7 +68,8 @@
   .how-it-works .section-heading .rte { max-width: 48ch; color: #b9bec4; }
   .how-it-works__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.8rem, 1.6vw, 1.3rem); }
   .build-step { min-width: 0; overflow: hidden; border: 1px solid #41464d; border-radius: var(--radius-lg); background: var(--night-soft); }
-  .build-step__visual { height: clamp(210px, 20vw, 285px); position: relative; overflow: hidden; border-bottom: 1px solid #41464d; background: #1c2025; }
+  .build-step__visual { height: clamp(210px, 20vw, 285px); position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid #41464d; background: #1c2025; }
+  .build-step__visual::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .24; background-image: linear-gradient(#59616a 1px, transparent 1px), linear-gradient(90deg, #59616a 1px, transparent 1px); background-size: 24px 24px; mask-image: linear-gradient(to bottom, black, transparent 88%); }
   .build-step__copy { min-height: 190px; display: grid; align-content: start; padding: 1.2rem; }
   .build-step__number { margin-bottom: 1.2rem; color: var(--teal); font-family: var(--font-mono-ui); font-size: .64rem; font-weight: 700; }
   .build-step h3 { margin-bottom: .5rem; font-size: clamp(1.35rem, 2.1vw, 1.8rem); }
@@ -60,21 +80,31 @@
   .build-step__part--board { width: 62%; left: 17%; bottom: -8%; transform: rotate(-4deg); }
   .build-step__part--screen { width: 34%; right: 8%; top: 6%; transform: rotate(7deg); }
   .build-step__part--button { width: 19%; left: 7%; top: 12%; transform: rotate(-9deg); }
-  .build-step__browser { width: calc(100% - 2rem); max-width: 340px; position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); overflow: hidden; border: 1px solid #59616a; border-radius: var(--radius); background: #101317; box-shadow: 0 18px 36px rgba(0,0,0,.35); font-family: var(--font-mono-ui); }
-  .build-step__browser-bar { min-height: 30px; display: flex; align-items: center; gap: .3rem; padding: .45rem .55rem; border-bottom: 1px solid #41464d; color: #8e969f; font-size: .5rem; }
+  .build-step__browser { width: calc(100% - 2rem); max-width: 350px; position: absolute; z-index: 1; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; border: 1px solid #737b84; border-radius: var(--radius); background: #0d1014; box-shadow: 0 20px 45px rgba(0,0,0,.55), 4px 5px 0 var(--blue); font-family: var(--font-mono-ui); }
+  .build-step__browser-bar { min-height: 34px; display: flex; align-items: center; gap: .3rem; padding: .48rem .6rem; border-bottom: 1px solid #59616a; background: #252a30; color: #c5cad0; font-size: .5rem; }
   .build-step__browser-bar i { width: 7px; height: 7px; border-radius: 50%; background: #59616a; }
   .build-step__browser-bar i:first-child { background: var(--orange); }
   .build-step__browser-bar i:nth-child(2) { background: var(--teal); }
   .build-step__browser-bar b { margin-left: auto; font-weight: 500; }
-  .build-step__port { display: flex; justify-content: space-between; gap: .5rem; margin: .8rem; border: 1px solid #41464d; border-radius: 3px; padding: .55rem; color: #c7ccd1; font-size: .58rem; }
+  .build-step__port, .build-step__file { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-inline: .8rem; color: #e3e6e9; font-size: .58rem; }
+  .build-step__port { margin-top: .8rem; border: 1px solid #59616a; border-radius: 3px; padding: .55rem; background: #181c21; }
+  .build-step__port em { border-radius: 2px; padding: .18rem .28rem; background: var(--blue); color: white; font-size: .45rem; font-style: normal; }
   .build-step__port b { color: var(--teal); }
-  .build-step__progress { height: 7px; display: block; margin: .8rem; overflow: hidden; border-radius: 2px; background: #31363c; }
-  .build-step__progress i { width: 100%; height: 100%; display: block; background: var(--blue); }
-  .build-step__browser > strong { display: block; padding: 0 .8rem .85rem; color: var(--teal); font-size: .6rem; }
-  .build-step__code { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); width: calc(100% - 2rem); max-width: 330px; margin: 0; border-left: 3px solid var(--blue); padding: 1rem; background: #101317; color: #d6d9dd; font-family: var(--font-mono-ui); font-size: clamp(.58rem, 1vw, .72rem); line-height: 1.9; box-shadow: 0 18px 36px rgba(0,0,0,.3); }
+  .build-step__file { margin-top: .65rem; color: #aeb5bc; }
+  .build-step__file b { color: white; }
+  .build-step__progress { height: 8px; display: block; margin: .65rem .8rem; overflow: hidden; border: 1px solid #59616a; border-radius: 2px; background: #252a30; }
+  .build-step__progress i { width: 100%; height: 100%; display: block; background: var(--blue); box-shadow: 0 0 14px rgba(0,105,255,.8); }
+  .build-step__browser > strong { display: flex; align-items: center; gap: .4rem; padding: 0 .8rem .85rem; color: var(--teal); font-size: .6rem; text-transform: uppercase; }
+  .build-step__browser > strong i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 10px rgba(182,255,59,.9); }
+  .build-step__editor { width: calc(100% - 2rem); max-width: 350px; position: absolute; z-index: 1; top: 50%; left: 50%; transform: translate(-50%, -50%); overflow: hidden; border: 1px solid #737b84; border-radius: var(--radius); background: #0d1014; box-shadow: 0 20px 45px rgba(0,0,0,.55), 4px 5px 0 var(--blue); font-family: var(--font-mono-ui); }
+  .build-step__editor-tab { min-height: 34px; display: flex; align-items: center; justify-content: space-between; padding: .45rem .65rem; border-bottom: 1px solid #59616a; background: #252a30; color: white; font-size: .55rem; }
+  .build-step__editor-tab i { color: #9da4ac; font-style: normal; }
+  .build-step__code { margin: 0; padding: .8rem 1rem .65rem; background: #0d1014; color: #e4e7ea; font-family: var(--font-mono-ui); font-size: clamp(.6rem, 1vw, .74rem); line-height: 1.8; }
   .build-step__code span { color: #69717a; }
-  .build-step__code b { color: var(--blue); }
+  .build-step__code b { color: #67a2ff; }
   .build-step__code em { color: var(--teal); font-style: normal; }
+  .build-step__code mark { border-radius: 2px; padding-inline: .12rem; background: rgba(182,255,59,.16); color: var(--teal); }
+  .build-step__editor > small { display: block; border-top: 1px solid #343a40; padding: .45rem .65rem; color: #8e969f; font-size: .48rem; text-transform: uppercase; }
   @media (max-width: 820px) {
     .how-it-works__steps { grid-template-columns: 1fr; }
     .build-step { display: grid; grid-template-columns: minmax(240px, .85fr) minmax(0, 1fr); }
