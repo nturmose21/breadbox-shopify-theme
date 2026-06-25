@@ -30,25 +30,31 @@
         "first": {
           "type": "tutorial",
           "settings": {
-            "level": "Start here",
-            "title": "Your first OLED game",
-            "text": "Wire it, upload it, play it."
+            "asset": "project-build-img_1669.jpg",
+            "image_position": "center center",
+            "level": "OLED game",
+            "title": "Dino Tamagotchi",
+            "text": "Build a handheld virtual pet with real buttons and a crisp OLED display."
           }
         },
         "second": {
           "type": "tutorial",
           "settings": {
-            "level": "Build next",
-            "title": "Motion-controlled racer",
-            "text": "Turn movement into input."
+            "asset": "project-build-img_1578.jpg",
+            "image_position": "center center",
+            "level": "Useful tool",
+            "title": "Mini multimeter",
+            "text": "Measure voltage, resistance and continuity with a compact bench tool."
           }
         },
         "third": {
           "type": "tutorial",
           "settings": {
-            "level": "Explore more",
-            "title": "Mini measurement tool",
-            "text": "See electronics in action."
+            "asset": "project-build-img_3559.jpg",
+            "image_position": "center center",
+            "level": "Pocket utility",
+            "title": "OLED calculator",
+            "text": "Turn the same hardware into a tactile calculator you can hold."
           }
         }
       },

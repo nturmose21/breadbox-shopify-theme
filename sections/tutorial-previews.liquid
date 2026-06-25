@@ -8,9 +8,18 @@
     <div class="tutorial-previews__grid">
       {% for block in section.blocks %}
         <article class="tutorial-card" data-reveal="up" style="--reveal-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
-          <div class="tutorial-card__media">
+          <div class="tutorial-card__media" style="--image-position: {{ block.settings.image_position }};">
             {% if block.settings.image != blank %}
-              {{ block.settings.image | image_url: width: 1000 | image_tag: widths: '360, 600, 800, 1000', sizes: '(min-width: 800px) 31vw, 92vw', loading: 'lazy', alt: block.settings.title }}
+              {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '360, 600, 900, 1200', sizes: '(min-width: 800px) 31vw, 38vw', loading: 'lazy', alt: block.settings.title, class: 'tutorial-card__image' }}
+            {% elsif block.settings.asset != 'none' %}
+              <img
+                class="tutorial-card__image"
+                src="{{ block.settings.asset | asset_url }}"
+                alt="{{ block.settings.title | escape }}"
+                width="1600"
+                height="1200"
+                loading="lazy"
+              >
             {% else %}
               <div class="tutorial-placeholder" aria-label="Project image placeholder">
                 <span class="tutorial-placeholder__number">0{{ forloop.index }}</span>
@@ -34,22 +43,27 @@
   .tutorial-previews .section-heading h2 { color: var(--ink); letter-spacing: 0; }
   .tutorial-previews .section-heading .rte { max-width: 46ch; margin-inline: auto; color: var(--muted); font-weight: 600; }
   .tutorial-previews__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
-  .tutorial-card { min-width: 0; overflow: hidden; border-radius: 8px; background: #f5f5f7; color: var(--ink); box-shadow: 0 12px 34px rgba(7,10,13,.06); transition: transform .25s ease, box-shadow .25s ease; }
-  .tutorial-card__media { aspect-ratio: 4 / 3; background: #e9f0f7; }
-  .tutorial-card__media > img { width: 100%; height: 100%; object-fit: cover; }
+  .tutorial-card { min-width: 0; overflow: hidden; border-radius: 10px; background: #f5f5f7; color: var(--ink); box-shadow: 0 12px 34px rgba(7,10,13,.07); transition: transform .25s ease, box-shadow .25s ease; }
+  .tutorial-card__media { position: relative; aspect-ratio: 5 / 4; overflow: hidden; background: #e9f0f7; }
+  .tutorial-card__media::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 -28px 34px rgba(7,10,13,.08); pointer-events: none; }
+  .tutorial-card__image { width: 100%; height: 100%; object-fit: cover; object-position: var(--image-position, center center); transition: transform .5s cubic-bezier(.16,1,.3,1); }
   .tutorial-placeholder { position: relative; width: 100%; height: 100%; display: grid; place-content: center; justify-items: center; gap: .3rem; overflow: hidden; padding: .8rem; color: var(--blue); }
   .tutorial-placeholder__number { color: rgba(9,100,165,.14); font-family: var(--font-display-ui); font-size: clamp(4rem, 8vw, 7rem); font-weight: 800; line-height: .9; }
   .tutorial-placeholder strong { font-family: var(--font-display-ui); font-size: 1rem; }
   .tutorial-placeholder small { color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-  .tutorial-card__copy { padding: 1.15rem 1.15rem 1.3rem; }
+  .tutorial-card__copy { min-height: 126px; display: grid; align-content: start; padding: 1.15rem 1.15rem 1.3rem; }
   .tutorial-card__copy > span { color: var(--blue); font-size: .64rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
   .tutorial-card__copy h3 { margin: .25rem 0 .3rem; font-size: 1.28rem; letter-spacing: 0; }
   .tutorial-card__copy p { margin: 0; color: var(--muted); font-size: .82rem; font-weight: 600; line-height: 1.4; }
-  @media (hover: hover) { .tutorial-card:hover { transform: translateY(-4px); box-shadow: 0 18px 46px rgba(7,10,13,.1); } }
+  @media (hover: hover) {
+    .tutorial-card:hover { transform: translateY(-4px); box-shadow: 0 18px 46px rgba(7,10,13,.11); }
+    .tutorial-card:hover .tutorial-card__image { transform: scale(1.035); }
+  }
   @media (max-width: 760px) {
     .tutorial-previews__grid { grid-template-columns: 1fr; gap: .7rem; }
     .tutorial-card { min-height: 140px; display: grid; grid-template-columns: minmax(126px, 38%) minmax(0, 1fr); border-radius: 8px; }
     .tutorial-card__media { min-height: 140px; aspect-ratio: auto; }
+    .tutorial-card__copy { min-height: 0; }
     .tutorial-card__copy { align-self: center; padding: .65rem .75rem; }
     .tutorial-card__copy h3 { font-size: 1.08rem; }
     .tutorial-placeholder { padding: .55rem; }
@@ -75,14 +89,36 @@
   ],
   "blocks": [{ "type": "tutorial", "name": "Tutorial", "settings": [
     { "type": "image_picker", "id": "image", "label": "Project image" },
+    { "type": "select", "id": "asset", "label": "Built-in build photo", "options": [
+      { "value": "project-build-img_0028.jpg", "label": "IMG 0028" },
+      { "value": "project-build-img_0066.jpg", "label": "IMG 0066" },
+      { "value": "project-build-img_0105.jpg", "label": "IMG 0105" },
+      { "value": "project-build-img_0164-2.jpg", "label": "IMG 0164" },
+      { "value": "project-build-img_0272.jpg", "label": "IMG 0272" },
+      { "value": "project-build-img_0532-2.jpg", "label": "IMG 0532" },
+      { "value": "project-build-img_0746.jpg", "label": "IMG 0746" },
+      { "value": "project-build-img_1578.jpg", "label": "IMG 1578" },
+      { "value": "project-build-img_1669.jpg", "label": "IMG 1669" },
+      { "value": "project-build-img_2103.jpg", "label": "IMG 2103" },
+      { "value": "project-build-img_2192.jpg", "label": "IMG 2192" },
+      { "value": "project-build-img_3559.jpg", "label": "IMG 3559" },
+      { "value": "none", "label": "No built-in photo" }
+    ], "default": "none" },
+    { "type": "select", "id": "image_position", "label": "Photo focal position", "options": [
+      { "value": "center center", "label": "Center" },
+      { "value": "center top", "label": "Top" },
+      { "value": "center bottom", "label": "Bottom" },
+      { "value": "left center", "label": "Left" },
+      { "value": "right center", "label": "Right" }
+    ], "default": "center center" },
     { "type": "text", "id": "level", "label": "Label", "default": "Start here" },
     { "type": "text", "id": "title", "label": "Title", "default": "Your first OLED game" },
     { "type": "text", "id": "text", "label": "Short description", "default": "Wire it, upload it, play it." }
   ] }],
   "presets": [{ "name": "Tutorial previews", "blocks": [
-    { "type": "tutorial", "settings": { "level": "Start here", "title": "Your first OLED game", "text": "Wire it, upload it, play it." } },
-    { "type": "tutorial", "settings": { "level": "Build next", "title": "Motion-controlled racer", "text": "Turn movement into input." } },
-    { "type": "tutorial", "settings": { "level": "Explore more", "title": "Mini measurement tool", "text": "See electronics in action." } }
+    { "type": "tutorial", "settings": { "asset": "project-build-img_1669.jpg", "level": "OLED game", "title": "Dino Tamagotchi", "text": "Build a handheld virtual pet with real buttons and a crisp OLED display." } },
+    { "type": "tutorial", "settings": { "asset": "project-build-img_1578.jpg", "level": "Useful tool", "title": "Mini multimeter", "text": "Measure voltage, resistance and continuity with a compact bench tool." } },
+    { "type": "tutorial", "settings": { "asset": "project-build-img_3559.jpg", "level": "Pocket utility", "title": "OLED calculator", "text": "Turn the same hardware into a tactile calculator you can hold." } }
   ] }]
 }
 {% endschema %}
