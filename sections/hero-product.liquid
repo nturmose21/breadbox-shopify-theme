@@ -8,46 +8,76 @@
 
 <section class="hero-product full-width" data-motion-section>
   <div class="hero-product__inner">
-    <figure class="hero-product__visual">
-      {% if section.settings.image != blank %}
-        {{ section.settings.image | image_url: width: 1800 | image_tag: widths: '720, 1000, 1400, 1800', sizes: '(min-width: 900px) 52vw, 94vw', loading: 'eager', alt: section.settings.image_alt }}
-      {% else %}
-        <img src="{{ 'hero-breadbox-build.png' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="1124" height="1499" loading="eager">
-      {% endif %}
-    </figure>
+    <div class="hero-product__media" data-reveal="scale">
+      <div class="hero-product__browser-bar" aria-hidden="true">
+        <span class="hero-product__browser-dots"><i></i><i></i><i></i></span>
+        <span class="hero-product__browser-url">breadbox.fun / build-demo</span>
+        <span class="hero-product__browser-live">Live</span>
+      </div>
+
+      <div class="hero-product__media-stage">
+        {% if section.settings.video != blank %}
+          {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, image_size: '1600x', class: 'hero-product__video' }}
+        {% elsif section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1800 | image_tag: widths: '720, 1000, 1400, 1800', sizes: '(min-width: 900px) 52vw, 94vw', loading: 'eager', alt: section.settings.image_alt, class: 'hero-product__image' }}
+        {% else %}
+          <img class="hero-product__image hero-product__image--built-in" src="{{ 'hero-breadbox-build.png' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="1125" height="1500" loading="eager">
+        {% endif %}
+
+        {% if section.settings.show_uploader_overlay %}
+          <div class="hero-product__uploader" aria-hidden="true">
+            <div class="hero-product__uploader-head">
+              <span>BREADBOX UPLOADER</span>
+              <i></i>
+            </div>
+            <div class="hero-product__uploader-log">
+              <span><b>&gt;</b> board detected: arduino uno</span>
+              <span><b>&gt;</b> project: dino_tamagotchi.hex</span>
+              <span><b>&gt;</b> flashing <em>100%</em></span>
+              <strong>✓ READY. NO IDE REQUIRED.</strong>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.video == blank %}
+          <span class="hero-product__media-hint">Build demo / browser upload</span>
+        {% endif %}
+      </div>
+
+      <div class="hero-product__media-footer" aria-hidden="true">
+        <span>01 / Build</span>
+        <span>02 / Plug in</span>
+        <span>03 / Flash</span>
+      </div>
+    </div>
 
     <div class="hero-product__content" data-reveal="up">
       <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
       <h1>{{ section.settings.heading | escape }}</h1>
       <div class="hero-product__copy rte">{{ section.settings.text }}</div>
 
-      <ul class="hero-product__features" role="list">
-        <li>Arduino UNO</li>
-        <li>10+ guided builds</li>
-        <li>Browser uploader</li>
-      </ul>
+      <dl class="hero-product__specs">
+        <div><dt>Board</dt><dd>UNO R3</dd></div>
+        <div><dt>Projects</dt><dd>10+</dd></div>
+        <div><dt>Setup</dt><dd>Browser</dd></div>
+      </dl>
 
       {% if featured_product != blank %}
         <div class="hero-product__purchase" data-product-root>
-          <div class="hero-product__purchase-head">
-            <div>
-              <span class="hero-product__purchase-label">{{ section.settings.purchase_label | escape }}</span>
-              {% render 'price', product: featured_product %}
-            </div>
+          <div class="hero-product__purchase-meta">
             <span class="hero-product__stock{% unless current_variant.available %} is-unavailable{% endunless %}">
-              {% if current_variant.available %}Ready to ship{% else %}Currently unavailable{% endif %}
+              {% if current_variant.available %}In stock / ready to ship{% else %}Currently unavailable{% endif %}
             </span>
+            <span class="hero-product__sku">KIT_001</span>
           </div>
-
-          <p class="hero-product__promise">{{ section.settings.promise_text | escape }}</p>
 
           {% form 'product', featured_product, data-product-form: '' %}
             {% unless featured_product.has_only_default_variant %}
-              <div class="hero-product__field hero-product__field--variant">
+              <div class="hero-product__field">
                 <label for="HeroVariant-{{ section.id }}">Choose your kit</label>
                 <select id="HeroVariant-{{ section.id }}" name="id">
                   {% for variant in featured_product.variants %}
-                    <option value="{{ variant.id }}" data-price="{{ variant.price | money }}" data-available="{{ variant.available }}" {% if variant == current_variant %}selected{% endif %}>{{ variant.title }} - {{ variant.price | money }}</option>
+                    <option value="{{ variant.id }}" data-price="{{ variant.price | money }}" data-available="{{ variant.available }}" {% if variant == current_variant %}selected{% endif %}>{{ variant.title }} — {{ variant.price | money }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -55,29 +85,25 @@
               <input type="hidden" name="id" value="{{ current_variant.id }}">
             {% endunless %}
 
-            <div class="hero-product__actions">
-              <div class="hero-product__field hero-product__field--quantity">
-                <label for="HeroQuantity-{{ section.id }}">Quantity</label>
-                <input id="HeroQuantity-{{ section.id }}" type="number" name="quantity" min="1" value="1">
-              </div>
-              <button class="button button--yellow" type="submit" name="add" {% unless current_variant.available %}disabled{% endunless %}>
-                <span>{% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
-              </button>
-            </div>
-
-            {% if section.settings.show_dynamic_checkout %}
-              <div class="hero-product__dynamic">{{ form | payment_button }}</div>
-            {% endif %}
+            <button class="button hero-product__cta" type="submit" name="add" {% unless current_variant.available %}disabled{% endunless %}>
+              <span>{% if current_variant.available %}{{ section.settings.button_label | escape }}{% else %}Sold out{% endif %}</span>
+              {% if current_variant.available %}
+                <span aria-hidden="true">—</span>
+                <strong data-product-price data-hero-cta-price>{{ current_variant.price | money }}</strong>
+              {% endif %}
+            </button>
           {% endform %}
 
-          <a class="hero-product__details" href="{{ featured_product.url }}">View full kit details</a>
+          <div class="hero-product__links">
+            <a href="{{ featured_product.url }}">View everything included</a>
+            <a href="{{ section.settings.uploader_link | default: '/pages/uploader' }}">Try the uploader</a>
+          </div>
         </div>
       {% else %}
-        <div class="hero-product__purchase hero-product__purchase--fallback">
-          <p>{{ section.settings.promise_text | escape }}</p>
-          <a class="button button--yellow" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
-        </div>
+        <a class="button hero-product__cta" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
       {% endif %}
+
+      <p class="hero-product__trust">Secure checkout · Tracked shipping · Full source code included</p>
     </div>
   </div>
 </section>
@@ -85,133 +111,199 @@
 {% stylesheet %}
   .hero-product {
     overflow: clip;
-    background: #f5f5f7;
+    background: var(--paper);
     color: var(--ink);
   }
   .hero-product__inner {
-    width: min(1280px, calc(100% - var(--page-margin) * 2));
-    min-height: min(820px, calc(100svh - 96px));
+    width: min(1360px, calc(100% - var(--page-margin) * 2));
+    min-height: min(850px, calc(100svh - 92px));
     margin: auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
-    gap: clamp(2rem, 6vw, 6.5rem);
+    grid-template-columns: minmax(0, 1.08fr) minmax(390px, .82fr);
+    gap: clamp(2.2rem, 6vw, 7rem);
     align-items: center;
-    padding-block: clamp(3rem, 6vw, 6.5rem);
+    padding-block: clamp(3rem, 6vw, 6rem);
   }
-  .hero-product__visual {
+  .hero-product__media {
     min-width: 0;
-    min-height: clamp(480px, 52vw, 690px);
-    position: relative;
-    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius-lg);
+    background: var(--paper-bright);
+    box-shadow: 8px 9px 0 rgba(21,23,26,.95);
   }
-  .hero-product__visual img {
-    position: absolute;
-    top: -52%;
-    left: 44%;
-    width: auto;
-    max-width: none;
-    height: 178%;
-    object-fit: contain;
-    filter:
-      drop-shadow(18px 26px 12px rgba(7,10,13,.4))
-      drop-shadow(30px 40px 28px rgba(7,10,13,.28));
-    transform: translate3d(-50%, var(--parallax-y, 0), 0);
-  }
-  .hero-product__content { min-width: 0; max-width: 540px; }
-  .hero-product .eyebrow { color: var(--blue); }
-  .hero-product h1 {
-    max-width: 10ch;
-    margin-bottom: 1rem;
-    font-size: clamp(3.1rem, 5vw, 5.7rem);
-    line-height: .95;
-    letter-spacing: 0;
-  }
-  .hero-product__copy {
-    max-width: 38ch;
-    color: #515154;
-    font-size: clamp(1rem, 1.25vw, 1.15rem);
-    font-weight: 600;
-    line-height: 1.5;
-  }
-  .hero-product__features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .45rem;
-    margin: 1.4rem 0;
-    padding: 0;
-    list-style: none;
-  }
-  .hero-product__features li {
-    border-radius: 999px;
-    padding: .42rem .68rem;
-    background: #e8eef5;
-    color: var(--blue-dark);
-    font-size: .7rem;
-    font-weight: 800;
-  }
-  .hero-product__purchase {
-    border-radius: 8px;
-    padding: clamp(1rem, 2vw, 1.35rem);
-    background: white;
-    box-shadow: 0 18px 55px rgba(7,10,13,.1);
-  }
-  .hero-product__purchase-head {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .hero-product__purchase-label {
-    display: block;
-    margin-bottom: .15rem;
-    color: var(--muted);
-    font-size: .68rem;
-    font-weight: 800;
-    letter-spacing: .08em;
+  .hero-product__browser-bar,
+  .hero-product__media-footer {
+    min-height: 42px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: .8rem;
+    padding: .6rem .8rem;
+    font-family: var(--font-mono-ui);
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .04em;
     text-transform: uppercase;
   }
-  .hero-product__purchase .price { font-size: 1.8rem; }
-  .hero-product__stock {
-    display: inline-flex;
+  .hero-product__browser-bar { border-bottom: 1px solid var(--ink); }
+  .hero-product__browser-dots { display: flex; gap: .32rem; }
+  .hero-product__browser-dots i { width: 8px; height: 8px; border: 1px solid var(--ink); border-radius: 50%; background: var(--paper); }
+  .hero-product__browser-dots i:first-child { background: var(--orange); }
+  .hero-product__browser-dots i:nth-child(2) { background: var(--teal); }
+  .hero-product__browser-url { justify-self: center; color: var(--muted); text-transform: none; }
+  .hero-product__browser-live { justify-self: end; display: inline-flex; align-items: center; gap: .35rem; color: #347700; }
+  .hero-product__browser-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(182,255,59,.22); }
+  .hero-product__media-stage {
+    height: clamp(430px, 44vw, 620px);
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: #e8e5dc;
+  }
+  .hero-product__video,
+  .hero-product__image {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+  }
+  .hero-product__image--built-in {
+    width: 125%;
+    max-width: none;
+    height: 150%;
+    min-height: 0;
+    object-fit: contain;
+    filter: drop-shadow(18px 24px 14px rgba(21,23,26,.32));
+    transform: translateY(-6%);
+  }
+  .hero-product__uploader {
+    position: absolute;
+    right: clamp(.75rem, 3vw, 1.5rem);
+    bottom: clamp(.75rem, 3vw, 1.5rem);
+    width: min(330px, calc(100% - 1.5rem));
+    overflow: hidden;
+    border: 1px solid #343a40;
+    border-radius: var(--radius);
+    background: rgba(21,23,26,.94);
+    color: #f7f7f3;
+    box-shadow: 0 18px 42px rgba(21,23,26,.3);
+    backdrop-filter: blur(12px);
+  }
+  .hero-product__uploader-head {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: .4rem;
-    color: #207a3d;
-    font-size: .72rem;
-    font-weight: 800;
-    white-space: nowrap;
+    padding: .58rem .7rem;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+    color: rgba(255,255,255,.7);
+    font-family: var(--font-mono-ui);
+    font-size: .6rem;
+    letter-spacing: .08em;
   }
-  .hero-product__stock::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-  .hero-product__stock.is-unavailable { color: #a33b32; }
-  .hero-product__promise { margin: .75rem 0 1rem; color: var(--muted); font-size: .82rem; font-weight: 600; }
-  .hero-product__purchase form { display: grid; gap: .7rem; }
-  .hero-product__field { display: grid; gap: .3rem; }
-  .hero-product__field label { color: #515154; font-size: .68rem; font-weight: 800; text-transform: uppercase; }
-  .hero-product__field select,
-  .hero-product__field input { min-height: 46px; border-color: #d2d2d7; }
-  .hero-product__actions { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: .65rem; align-items: end; }
-  .hero-product__actions .button { width: 100%; min-height: 48px; }
-  .hero-product__dynamic { margin-top: -.1rem; }
-  .hero-product__dynamic .shopify-payment-button__button { min-height: 48px; border-radius: 999px; }
-  .hero-product__details { display: inline-block; margin-top: .85rem; color: var(--blue); font-size: .76rem; font-weight: 750; text-decoration: none; }
-  .hero-product__purchase--fallback { display: grid; gap: .7rem; }
-  @media (max-width: 900px) {
-    .hero-product__inner { grid-template-columns: minmax(0, 1fr) minmax(330px, .88fr); gap: 2rem; }
-    .hero-product__visual { min-height: 500px; }
-    .hero-product__visual img { top: -44%; height: 160%; }
+  .hero-product__uploader-head i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 12px rgba(182,255,59,.8); }
+  .hero-product__uploader-log { display: grid; gap: .38rem; padding: .75rem; font-family: var(--font-mono-ui); font-size: clamp(.58rem, .9vw, .7rem); line-height: 1.4; }
+  .hero-product__uploader-log span { color: #c9ced3; }
+  .hero-product__uploader-log b { color: var(--teal); }
+  .hero-product__uploader-log em { color: var(--teal); font-style: normal; }
+  .hero-product__uploader-log strong { margin-top: .25rem; color: var(--teal); font-weight: 700; }
+  .hero-product__media-hint {
+    position: absolute;
+    top: .75rem;
+    left: .75rem;
+    border: 1px solid rgba(21,23,26,.3);
+    border-radius: 999px;
+    padding: .35rem .55rem;
+    background: rgba(255,253,247,.82);
+    color: var(--muted);
+    font-family: var(--font-mono-ui);
+    font-size: .55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
   }
-  @media (max-width: 760px) {
-    .hero-product__inner { min-height: 0; grid-template-columns: 1fr; gap: .5rem; padding-block: 2rem 3rem; }
-    .hero-product__visual { min-height: min(110vw, 440px); order: 1; }
-    .hero-product__visual img { top: -43%; left: 50%; height: 154%; }
-    .hero-product__content { max-width: none; order: 2; }
-    .hero-product h1 { max-width: 12ch; font-size: clamp(2.8rem, 13vw, 4.5rem); }
+  .hero-product__media-footer { grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); color: var(--muted); }
+  .hero-product__media-footer span:nth-child(2) { text-align: center; }
+  .hero-product__media-footer span:last-child { text-align: right; }
+  .hero-product__content { min-width: 0; max-width: 590px; }
+  .hero-product h1 {
+    max-width: 10ch;
+    margin-bottom: 1.1rem;
+    font-size: clamp(3.25rem, 5.6vw, 6.4rem);
   }
-  @media (max-width: 420px) {
+  .hero-product__copy {
+    max-width: 42ch;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 1.3vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.55;
+  }
+  .hero-product__specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1.6rem 0;
+    border-block: 1px solid #cbc8bf;
+  }
+  .hero-product__specs div { padding: .75rem .8rem .75rem 0; border-right: 1px solid #cbc8bf; }
+  .hero-product__specs div:not(:first-child) { padding-left: .8rem; }
+  .hero-product__specs div:last-child { border-right: 0; }
+  .hero-product__specs dt,
+  .hero-product__specs dd { font-family: var(--font-mono-ui); text-transform: uppercase; }
+  .hero-product__specs dt { color: var(--muted); font-size: .58rem; letter-spacing: .06em; }
+  .hero-product__specs dd { margin: .16rem 0 0; font-size: .74rem; font-weight: 700; }
+  .hero-product__purchase { display: grid; gap: .75rem; }
+  .hero-product__purchase-meta { display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
+  .hero-product__stock,
+  .hero-product__sku { font-family: var(--font-mono-ui); font-size: .62rem; font-weight: 700; text-transform: uppercase; }
+  .hero-product__stock { display: inline-flex; align-items: center; gap: .4rem; color: #347700; }
+  .hero-product__stock::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  .hero-product__stock.is-unavailable { color: #a52d2d; }
+  .hero-product__stock.is-unavailable::before { background: var(--orange); }
+  .hero-product__sku { color: var(--muted); }
+  .hero-product__purchase form { display: grid; gap: .65rem; }
+  .hero-product__field { display: grid; gap: .35rem; }
+  .hero-product__field label { font-family: var(--font-mono-ui); font-size: .62rem; font-weight: 700; text-transform: uppercase; }
+  .hero-product__field select { font-family: var(--font-mono-ui); font-size: .78rem; }
+  .hero-product__cta {
+    width: 100%;
+    min-height: 58px;
+    justify-content: space-between;
+    padding-inline: 1.1rem;
+    background: var(--blue);
+    color: white;
+    font-family: var(--font-display-ui);
+    font-size: .95rem;
+    text-transform: none;
+  }
+  .hero-product__cta strong { font-family: var(--font-mono-ui); font-size: .88rem; }
+  .hero-product__links { display: flex; flex-wrap: wrap; gap: .65rem 1.1rem; }
+  .hero-product__links a { color: var(--blue); font-size: .76rem; font-weight: 700; text-decoration: none; }
+  .hero-product__links a:hover { text-decoration: underline; }
+  .hero-product__trust { margin: 1rem 0 0; color: var(--muted); font-family: var(--font-mono-ui); font-size: .58rem; line-height: 1.5; text-transform: uppercase; }
+  @media (max-width: 980px) {
+    .hero-product__inner { grid-template-columns: minmax(0, 1fr) minmax(340px, .8fr); gap: 2rem; }
+    .hero-product__media-stage { min-height: 470px; }
+  }
+  @media (max-width: 820px) {
+    .hero-product__inner { min-height: 0; grid-template-columns: 1fr; gap: 2.2rem; padding-block: 2rem 3.5rem; }
+    .hero-product__media { order: 2; box-shadow: 5px 6px 0 rgba(21,23,26,.95); }
+    .hero-product__content { max-width: none; order: 1; }
+    .hero-product h1 { max-width: 12ch; font-size: clamp(3rem, 14vw, 4.6rem); }
+    .hero-product__media-stage { height: min(112vw, 500px); }
+    .hero-product__image--built-in { width: 138%; height: 158%; }
+  }
+  @media (max-width: 430px) {
     .hero-product__inner { width: calc(100% - 28px); }
-    .hero-product__visual { min-height: 340px; }
-    .hero-product__visual img { top: -40%; height: 146%; }
-    .hero-product__purchase-head { align-items: center; }
-    .hero-product__stock { font-size: .66rem; }
+    .hero-product__browser-url { max-width: 17ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hero-product__media-stage { height: 390px; }
+    .hero-product__uploader { right: .65rem; bottom: .65rem; }
+    .hero-product__media-hint { display: none; }
+    .hero-product__specs div { padding-inline: .5rem; }
+    .hero-product__specs div:first-child { padding-left: 0; }
+    .hero-product__specs dt { font-size: .52rem; }
+    .hero-product__specs dd { font-size: .65rem; }
   }
 {% endstylesheet %}
 
@@ -220,16 +312,16 @@
   "name": "Product hero",
   "settings": [
     { "type": "product", "id": "product", "label": "Product" },
-    { "type": "image_picker", "id": "image", "label": "Finished build image" },
-    { "type": "text", "id": "image_alt", "label": "Image description", "default": "Completed BREADBOX Arduino project with OLED display" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Arduino project kit" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "BREADBOX Arduino Kit" },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Build compact games, tools and experiments with one reusable Arduino workshop.</p>" },
-    { "type": "text", "id": "purchase_label", "label": "Price label", "default": "BREADBOX kit" },
-    { "type": "text", "id": "promise_text", "label": "Purchase note", "default": "Hardware, guided projects and browser-based uploads included." },
-    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show Buy Now button", "default": true },
-    { "type": "text", "id": "button_label", "label": "Fallback button label", "default": "Shop BREADBOX" },
-    { "type": "url", "id": "button_link", "label": "Fallback button link" }
+    { "type": "video", "id": "video", "label": "Looping build demo video" },
+    { "type": "image_picker", "id": "image", "label": "GIF or fallback image" },
+    { "type": "text", "id": "image_alt", "label": "Media description", "default": "Completed BREADBOX Arduino project beside the browser uploader" },
+    { "type": "checkbox", "id": "show_uploader_overlay", "label": "Show uploader status overlay", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hardware + software, one kit" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Hardware without the headache." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Build, plug in, and flash code directly from your browser. No IDE setup, no mystery parts, and full access to the source when you are ready to start modding.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Get the Kit" },
+    { "type": "url", "id": "button_link", "label": "Fallback button link" },
+    { "type": "url", "id": "uploader_link", "label": "Uploader link" }
   ],
   "presets": [{ "name": "Product hero" }]
 }

@@ -13,15 +13,14 @@
       "type": "hero-product",
       "settings": {
         "product": "",
-        "image_alt": "Completed BREADBOX Arduino project with OLED display",
-        "eyebrow": "Arduino project kit",
-        "heading": "BREADBOX Arduino Kit",
-        "text": "<p>Build compact games, tools and experiments with one reusable Arduino workshop.</p>",
-        "purchase_label": "BREADBOX kit",
-        "promise_text": "Hardware, guided projects and browser-based uploads included.",
-        "show_dynamic_checkout": true,
-        "button_label": "Shop BREADBOX",
-        "button_link": "shopify://collections/all"
+        "image_alt": "Completed BREADBOX Arduino project beside the browser uploader",
+        "show_uploader_overlay": true,
+        "eyebrow": "Hardware + software, one kit",
+        "heading": "Hardware without the headache.",
+        "text": "<p>Build, plug in, and flash code directly from your browser. No IDE setup, no mystery parts, and full access to the source when you are ready to start modding.</p>",
+        "button_label": "Get the Kit",
+        "button_link": "shopify://products/breadbox-arduino-starter-kit",
+        "uploader_link": "/pages/uploader"
       }
     },
     "tutorials": {

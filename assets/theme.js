@@ -29,7 +29,7 @@ function initProductUI(root = document) {
       if (label) label.textContent = available ? 'Add to cart' : 'Sold out';
       if (price && option.dataset.price) price.textContent = option.dataset.price;
       if (stock) {
-        stock.textContent = available ? 'Ready to ship' : 'Currently unavailable';
+        stock.textContent = available ? 'In stock / ready to ship' : 'Currently unavailable';
         stock.classList.toggle('is-unavailable', !available);
       }
     });
